@@ -1,0 +1,26 @@
+[
+  {
+    "streak": 1,
+    "points": 10
+  },
+  {
+    "streak": 5,
+    "points": 100
+  },
+  {
+    "streak": 10,
+    "points": 200
+  },
+  {
+    "streak": 15,
+    "points": 300
+  },
+  {
+    "streak": 30,
+    "points": 1000
+  },
+  {
+    "streak": 60,
+    "points": 10000
+  }
+]
