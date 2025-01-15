@@ -1,0 +1,99 @@
+[{
+  "_id": {
+    "$oid": "675b2a4f5efb20ecce6e5066"
+  },
+  "task_id": "x_follow",
+  "task_name": "Follow our X",
+  "task_icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/480px-X_logo.jpg",
+  "url": "https://twitter.com/intent/follow?screen_name=playoutmine",
+  "tg_link": false,
+  "reward": 10
+},
+{
+  "_id": {
+    "$oid": "675b2a4f5efb20ecce6e5067"
+  },
+  "task_id": "x_tweet",
+  "task_name": "Tweet about us",
+  "task_icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/480px-X_logo.jpg",
+  "url": "https://twitter.com/intent/post?text=%F0%9F%8E%AE%20The%20FIRST%20dungeon%20crawler%20game%20on%20telegram%20%F0%9F%8E%AE%0A%F0%9F%92%8E%20Get%20gems%20through%20playing%20and%20inviting%20friends%20%F0%9F%91%A5%0A&url=https%3A%2F%2Ft.me%2FOutmineBot%2Foutmine",
+  "tg_link": false,
+  "reward": 10
+},
+{
+  "_id": {
+    "$oid": "675b2a4f5efb20ecce6e5068"
+  },
+  "task_id": "tg_join",
+  "task_name": "Join Telegram community",
+  "task_icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/480px-Telegram_logo.svg.png",
+  "url": "https://t.me/outmineofficial",
+  "tg_link": true,
+  "reward": 10
+},
+{
+  "_id": {
+    "$oid": "675b2a4f5efb20ecce6e5069"
+  },
+  "task_id": "yt_subscribe",
+  "task_name": "Subscribe to our YouTube channel",
+  "task_icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/YouTube_icon_%282013-2017%29.png/480px-YouTube_icon_%282013-2017%29.png",
+  "url": "https://www.youtube.com/@rogues_studio?sub_confirmation=1",
+  "tg_link": false,
+  "reward": 10
+},
+{
+  "_id": {
+    "$oid": "67702a3a78ed5bda9cf9c8d5"
+  },
+  "task_id": "tg_join_channel",
+  "task_name": "Join Telegram channel",
+  "task_icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/480px-Telegram_logo.svg.png",
+  "url": "https://t.me/playoutmine",
+  "tg_link": true,
+  "reward": 10
+},
+{
+  "_id": {
+    "$oid": "6772570284de8ab09dbb559c"
+  },
+  "task_id": "tg_bagel_finance",
+  "task_name": "Discover Bagel Finance",
+  "task_icon": "https://i.postimg.cc/grbGS85k/Logo-Bg-removed-No-text.png",
+  "url": "https://t.me/bagel_fi_bot/app?startapp=5uYf0PNA",
+  "tg_link": true,
+  "reward": 10
+},
+{
+  "_id": {
+    "$oid": "677f8bb1ffa3f8b87c7a4ae0"
+  },
+  "task_id": "tg_the_path",
+  "task_name": "The Path – A Fantasy MMORPG",
+  "task_icon": "https://i.postimg.cc/fLWhr7DJ/The-Path-nobg.png",
+  "url": "https://t.me/ThePathGameBot/discover?startapp=OUTMINE",
+  "tg_link": true,
+  "reward": 10
+},
+{
+  "_id": {
+    "$oid": "6786a6eecc59c9910aae38aa"
+  },
+  "task_id": "tg_toygers",
+  "task_name": "Join Toygers",
+  "task_icon": "https://i.postimg.cc/0NrLYL06/toygers.jpg",
+  "url": "https://t.me/toygersbot/toygersapp?startapp=r_1814492269-p_home",
+  "tg_link": true,
+  "reward": 10
+},
+{
+  "_id": {
+    "$oid": "6786a830cc59c9910aae38ac"
+  },
+  "task_id": "tg_pixiland",
+  "task_name": "Play Pixiland",
+  "task_icon": "https://i.postimg.cc/P5V75Snd/logo-512.png",
+  "url": "https://t.me/pixiland_bot/play?startapp=NGNPDI2U1Y_OUTMINE",
+  "tg_link": true,
+  "reward": 10
+}]

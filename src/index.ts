@@ -1,15 +1,16 @@
-import Fastify from "fastify";
+import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import cors from "@fastify/cors";
 import fastifyMongo from "@fastify/mongodb";
 import dotenv from "dotenv";
 import { processStreakEvents } from "./events/events";
-import { mintGameItemToAddress } from "./minting/minting";
+import { mintGameItemToAddress } from "./contract/minting";
+import authRoutes from "./routes/auth-routes";
 
 dotenv.config();
 
 const PORT = parseInt(process.env.PORT || "8080", 10);
 
-mintGameItemToAddress("0x2715FCC42eF0c03fc9D9108a48D8a66ae01000e9", 1, 1);
+//mintGameItemToAddress("0x2715FCC42eF0c03fc9D9108a48D8a66ae01000e9", 1, 1);
 
 const fastify = Fastify({ logger: true });
 fastify.register(cors, {
@@ -29,9 +30,7 @@ fastify.after(() => {
   processStreakEvents(fastify);
 });
 
-fastify.get("/ping", async (request, reply) => {
-  return "pong\n";
-});
+fastify.register(authRoutes);
 
 fastify.listen({ port: PORT, host: "0.0.0.0" }, (err, address) => {
   if (err) {

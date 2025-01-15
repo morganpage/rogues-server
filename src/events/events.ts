@@ -1,17 +1,18 @@
 import { FastifyInstance } from "fastify";
 import Web3, { Address, EventLog } from "web3";
-import { DailyStreakSystem } from "../contracts/DailyStreakSystem";
+//import { DailyStreakSystem } from "../contracts/DailyStreakSystem";
 import { getLastBlockNumberProcessed, getStreakToPoints, updateLastBlockNumberProcessed, updateUserPoints } from "../db/db";
 import dotenv from "dotenv";
+import DailyStreakSystem from "../../artifacts/contracts/DailyStreakSystem.sol/DailyStreakSystem.json";
 
 dotenv.config();
 
 const provider = process.env.WEB3_PROVIDER || "https://sepolia.boba.network";
 const web3 = new Web3(provider);
 const abi = DailyStreakSystem.abi;
-const contractAddress: Address = process.env.STREAK_CONTRACT_ADDRESS || ""; //DailyStreakSystem contract address;
+const contractAddress: Address = process.env.DAILYSTREAKSYSTEM_CONTRACT_ADDRESS || ""; //DailyStreakSystem contract address;
 if (contractAddress == "") {
-  throw new Error("STREAK_CONTRACT_ADDRESS is not defined");
+  throw new Error("DAILYSTREAKSYSTEM_CONTRACT_ADDRESS is not defined");
 }
 
 const contract = new web3.eth.Contract(abi, contractAddress);
