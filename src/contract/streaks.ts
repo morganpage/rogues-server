@@ -19,11 +19,6 @@ export async function claimStreakFor(address: Address) {
     const wallet = new ethers.Wallet(privateKey, provider);
     const contract = new ethers.Contract(contractAddress, contractABI.abi, wallet);
     const txResponse = await contract.claimFor(address);
-    const txReceipt = await txResponse.wait();
-    console.log(txReceipt);
-    // const txReceipt = await txResponse.wait();
-    // const streak = (txReceipt?.logs?.[0] as any).args[1]; //Pull the streak from the event
-    // const tokenId = (txReceipt?.logs?.[0] as any).args[2]; //Pull the tokenId from the event
     return { status: "ok", message: "Streak claimed" };
   } catch (e: any) {
     return { status: "error", message: e.shortMessage };
@@ -45,4 +40,43 @@ export async function claimHoursAgo(address: Address, hours: number) {
   } catch (e: any) {
     return { status: "error", message: e.shortMessage };
   }
+}
+
+export async function getStreakStatus(address: Address) {
+  const provider = new JsonRpcProvider(rpcProvider);
+  const privateKey = process.env.MINTER_PRIVATE_KEY;
+  if (!privateKey) {
+    throw new Error("MINTER_PRIVATE_KEY is not defined");
+  }
+  const wallet = new ethers.Wallet(privateKey, provider);
+  const contract = new ethers.Contract(contractAddress, contractABI.abi, wallet);
+  const timeUntilCanClaim = await contract.timeUntilCanClaim(address);
+  const timeUntilStreakReset = await contract.timeUntilStreakReset(address);
+  const streak = await contract.streak(address);
+  return { streak: Number(streak), timeUntilCanClaim: Number(timeUntilCanClaim), timeUntilStreakReset: Number(timeUntilStreakReset) };
+}
+
+export async function getStreakRewardContractAddress() {
+  const provider = new JsonRpcProvider(rpcProvider);
+  const privateKey = process.env.MINTER_PRIVATE_KEY;
+  if (!privateKey) {
+    throw new Error("MINTER_PRIVATE_KEY is not defined");
+  }
+  const wallet = new ethers.Wallet(privateKey, provider);
+  const contract = new ethers.Contract(contractAddress, contractABI.abi, wallet);
+  const streakRewardContractAddress = await contract.externalERC1155();
+  return streakRewardContractAddress;
+}
+
+//streak_milestones_to_tokenIds
+export async function getStreakMilestonesToTokensIds() {
+  const provider = new JsonRpcProvider(rpcProvider);
+  const privateKey = process.env.MINTER_PRIVATE_KEY;
+  if (!privateKey) {
+    throw new Error("MINTER_PRIVATE_KEY is not defined");
+  }
+  const wallet = new ethers.Wallet(privateKey, provider);
+  const contract = new ethers.Contract(contractAddress, contractABI.abi, wallet);
+  const milestones = await contract.getTokenMilestones();
+  return milestones;
 }

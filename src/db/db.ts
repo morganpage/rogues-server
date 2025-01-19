@@ -21,7 +21,20 @@ export async function getLastBlockNumberProcessed(fastify: FastifyInstance, cont
   return 0n;
 }
 
-//Update user points in the DB
+//rogue_users
+
+export async function updateUserLastLogin(fastify: FastifyInstance, address: Address) {
+  if (!fastify.mongo || !fastify.mongo.db) {
+    throw new Error("MongoDB is not configured properly");
+  }
+  const eventName = "User Logged In";
+  address = address.toLowerCase();
+  //add/amend user last login
+  await fastify.mongo.db.collection("rogues_users").updateOne({ address }, { $set: { lastLogin: new Date() } }, { upsert: true });
+  //Add a transaction log entry
+  await fastify.mongo.db.collection("rogues_transactions").insertOne({ address, eventName, createdAt: new Date() });
+}
+
 export async function updateUserPoints(fastify: FastifyInstance, address: Address, points: number, eventName: string) {
   if (!fastify.mongo || !fastify.mongo.db) {
     throw new Error("MongoDB is not configured properly");
@@ -37,9 +50,19 @@ export async function getStreakToPoints(fastify: FastifyInstance, streak: number
   if (!fastify.mongo || !fastify.mongo.db) {
     throw new Error("MongoDB is not configured properly");
   }
-  const rogues_streaks = await fastify.mongo.db.collection("rogues_streaks").findOne({ streak });
+  //return the top 1 streak to points mapping that is less than or equal to the streak
+  const rogues_streaks = await fastify.mongo.db.collection("rogues_streaks").findOne({ streak: { $lte: parseInt(streak as any) } }, { sort: { streak: -1 } });
   if (rogues_streaks) {
     return rogues_streaks.points;
   }
   return 0;
+}
+
+//Get all the streak to points mappings - rogues_streaks order by streak asc
+
+export async function getAllStreakToPoints(fastify: FastifyInstance) {
+  if (!fastify.mongo || !fastify.mongo.db) {
+    throw new Error("MongoDB is not configured properly");
+  }
+  return fastify.mongo.db.collection("rogues_streaks").find().project({ _id: 0, streak: 1, points: 1 }).sort({ streak: 1 }).toArray();
 }

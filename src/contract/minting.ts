@@ -26,3 +26,10 @@ export async function mintGameItemToAddress(address: Address, itemID: number, qu
     return { status: "error", message: e.shortMessage };
   }
 }
+
+export async function getURIFromTokenId(tokenId: number) {
+  const provider = new JsonRpcProvider(rpcProvider);
+  const contract = new ethers.Contract(contractAddress, contractABI.abi, provider);
+  const uri = await contract.uri(tokenId);
+  return uri;
+}
