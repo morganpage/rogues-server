@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/src/index.js",
+    "devstart": "ts-node src/index.ts",
+    "prestart": "npm run build",
+    "build": "tsc",
     "dev": "tsnd --respawn ./src/index.ts"
   },
   "keywords": [],
