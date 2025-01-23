@@ -65,3 +65,15 @@ GET http://localhost:8080/api/gameItemFromTokenId?tokenId=12
 
 ### GET Streak Milestones To TokenIds mapping
 GET http://localhost:8080/api/streak_milestones_to_tokenIds
+
+
+
+### GET Game Item metadata From TokenId
+GET https://walrus-app-goxso.ondigitalocean.app/api/gameItemFromTokenId?tokenId=12
+
+
+
+
+### GET Streak Milestones To TokenIds mapping
+GET https://walrus-app-goxso.ondigitalocean.app/api/streak_milestones_to_tokenIds
+

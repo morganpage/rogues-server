@@ -1,0 +1,62 @@
+[
+  {
+    "mission_name": "Outmine Tutorial Intro",
+    "task_id": "outmine_tutorial_intro_1",
+    "task_description": "Welcome to the mine. We come down here for the gems.",
+    "next_task_id": "outmine_tutorial_intro_2"
+  },
+  {
+    "mission_name": "Outmine Tutorial Intro",
+    "task_id": "outmine_tutorial_intro_2",
+    "task_description": "Bats, lava, bombs will end your run and you will leave with nothing!",
+    "next_task_id": "outmine_tutorial_intro_3"
+  },
+  {
+    "mission_name": "Outmine Tutorial Intro",
+    "task_id": "outmine_tutorial_intro_3",
+    "task_description": "Out mine the competition and survive long enough to leave with your gems.",
+    "next_task_id": "outmine_tutorial_intro_4"
+  },
+  {
+    "mission_name": "Outmine Tutorial Intro",
+    "task_id": "outmine_tutorial_intro_4",
+    "task_description": "Now, go to that gem node and mine 10 gems to continue.",
+    "next_task_id": ""
+  },
+  {
+    "mission_name": "Outmine Tutorial Bombs",
+    "task_id": "outmine_tutorial_bombs_1",
+    "task_description": "Wow, you’re a natural!",
+    "next_task_id": "outmine_tutorial_bombs_2"
+  },
+  {
+    "mission_name": "Outmine Tutorial Bombs",
+    "task_id": "outmine_tutorial_bombs_2",
+    "task_description": "Let’s try something a little dangerous",
+    "next_task_id": "outmine_tutorial_bombs_3"
+  },
+  {
+    "mission_name": "Outmine Tutorial Bombs",
+    "task_id": "outmine_tutorial_bombs_3",
+    "task_description": "Try dropping a bomb, but remember to move away before it explodes!",
+    "next_task_id": ""
+  },
+  {
+    "mission_name": "Outmine Tutorial Finish",
+    "task_id": "outmine_tutorial_finish_1",
+    "task_description": "Boom! Use bombs to deal with bats and other players.",
+    "next_task_id": "outmine_tutorial_finish_2"
+  },
+  {
+    "mission_name": "Outmine Tutorial Finish",
+    "task_id": "outmine_tutorial_finish_2",
+    "task_description": "You need to survive until this timer reaches 0.",
+    "next_task_id": "outmine_tutorial_finish_3"
+  },
+  {
+    "mission_name": "Outmine Tutorial Finish",
+    "task_id": "outmine_tutorial_finish_3",
+    "task_description": "Survive 10 seconds to finish the tutorial.",
+    "next_task_id": ""
+  }
+]

@@ -1,0 +1,14 @@
+
+### GET all missions
+GET http://localhost:8080/api/missions
+
+### GET all missions with specific mission name
+GET http://localhost:8080/api/missions/Outmine%20Tutorial
+
+### GET mission with specific task id
+GET http://localhost:8080/api/missions/tasks/outmine_tutorial_1
+
+
+
+### GET mission with specific task id
+GET https://walrus-app-goxso.ondigitalocean.app/api/missions/tasks/outmine_tutorial_intro_1
