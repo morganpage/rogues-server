@@ -46,6 +46,13 @@ fastify.register(fastifyHttpProxy, {
   upstream: "https://nft.fragment.com",
   prefix: "/api/proxy",
   http2: false,
+  replyOptions: {
+    rewriteHeaders: (headers) => {
+      headers["Access-Control-Allow-Origin"] = "*";
+      console.log("HEADERS", headers);
+      return headers;
+    },
+  },
 });
 
 fastify.listen({ port: PORT, host: "0.0.0.0" }, (err, address) => {
