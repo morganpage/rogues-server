@@ -9,15 +9,15 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     reply.code(200).send(data);
   });
 
-  fastify.get("/api/proxy", async (req: FastifyRequest, reply: FastifyReply) => {
-    //Pass in json url to send request to
-    const url = (req.query as { url: string }).url;
-    const response = await fetch(url);
-    console.log(response);
-    const json = await response.json();
-    console.log(json);
-    reply.code(200).send(json);
-  });
+  // fastify.get("/api/proxy", async (req: FastifyRequest, reply: FastifyReply) => {
+  //   //Pass in json url to send request to
+  //   const url = (req.query as { url: string }).url;
+  //   const response = await fetch(url);
+  //   console.log(response);
+  //   const json = await response.json();
+  //   console.log(json);
+  //   reply.code(200).send(json);
+  // });
 
   // fastify.get("/api/missions/:mission_name", async (request: any, reply) => {
   //   if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");

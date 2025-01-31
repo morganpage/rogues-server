@@ -1,5 +1,6 @@
 import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import cors from "@fastify/cors";
+import fastifyHttpProxy from "@fastify/http-proxy";
 import fastifyMongo from "@fastify/mongodb";
 import dotenv from "dotenv";
 import { processStreakEvents } from "./events/events";
@@ -35,6 +36,17 @@ fastify.after(() => {
 fastify.register(authRoutes);
 fastify.register(missionsRoutes);
 fastify.register(outmineAdminRoutes);
+
+// server.register(require('@fastify/http-proxy'), {
+//   upstream: 'http://my-api.example.com',
+//   prefix: '/api', // optional
+//   http2: false, // optional
+// });
+fastify.register(fastifyHttpProxy, {
+  upstream: "https://nft.fragment.com",
+  prefix: "/api/proxy",
+  http2: false,
+});
 
 fastify.listen({ port: PORT, host: "0.0.0.0" }, (err, address) => {
   if (err) {
