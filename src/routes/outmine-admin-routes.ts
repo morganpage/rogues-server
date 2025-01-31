@@ -13,7 +13,9 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     //Pass in json url to send request to
     const url = (req.query as { url: string }).url;
     const response = await fetch(url);
+    console.log(response);
     const json = await response.json();
+    console.log(json);
     reply.code(200).send(json);
   });
 

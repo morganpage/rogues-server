@@ -14,7 +14,7 @@ const PORT = parseInt(process.env.PORT || "8080", 10);
 
 //mintGameItemToAddress("0x2715FCC42eF0c03fc9D9108a48D8a66ae01000e9", 1, 1);
 
-const fastify = Fastify({ logger: true });
+const fastify = Fastify();
 fastify.register(cors, {
   origin: "*",
 });

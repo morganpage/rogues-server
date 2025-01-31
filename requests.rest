@@ -87,3 +87,17 @@ GET http://localhost:8080/api/proxy?url=https://nft.fragment.com/gift/jellybunny
 ### GET Outmine Proxy
 GET https://walrus-app-goxso.ondigitalocean.app/api/proxy?url=https://nft.fragment.com/gift/jellybunny-247.json
 
+GET https://corsproxy.io/
+
+
+###
+https://corsproxy.io/?url=https://nft.fragment.com/gift/jellybunny-247.json
+
+###
+https://corsproxy.io/?url=https://example.com
+
+###
+https://corsproxy.io/?key=37d001a3&url=https://nft.fragment.com/gift/jellybunny-247.json
+
+###
+https://nft.fragment.com/gift/jellybunny-247.json
