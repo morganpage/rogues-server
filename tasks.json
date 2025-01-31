@@ -153,10 +153,10 @@
   "reward": 10
 },
 {
-  "task_id": "tg_nextus",
-  "task_name": "Join Nextus Mini",
-  "task_icon": "https://i.postimg.cc/cLdr3Vn3/nextus.jpg",
-  "url": "http://t.me/officialnextusbot/nextus?startapp=2126836525",
+  "task_id": "tg_preton",
+  "task_name": "Join Preton Legacy",
+  "task_icon": "https://i.postimg.cc/j2qYFbZm/preton.jpg",
+  "url": "https://t.me/preton_legacy_bot?start=5856364491",
   "tg_link": true,
   "reward": 10,
   "outmine":false

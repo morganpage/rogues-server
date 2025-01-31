@@ -77,3 +77,13 @@ GET https://walrus-app-goxso.ondigitalocean.app/api/gameItemFromTokenId?tokenId=
 ### GET Streak Milestones To TokenIds mapping
 GET https://walrus-app-goxso.ondigitalocean.app/api/streak_milestones_to_tokenIds
 
+
+### GET Outmine Partner counts
+GET http://localhost:8080/api/partners
+
+### GET Outmine Proxy
+GET http://localhost:8080/api/proxy?url=https://nft.fragment.com/gift/jellybunny-247.json
+
+### GET Outmine Proxy
+GET https://walrus-app-goxso.ondigitalocean.app/api/proxy?url=https://nft.fragment.com/gift/jellybunny-247.json
+

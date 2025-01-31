@@ -6,6 +6,7 @@ import { processStreakEvents } from "./events/events";
 import { mintGameItemToAddress } from "./contract/minting";
 import authRoutes from "./routes/auth-routes";
 import missionsRoutes from "./routes/missions-routes";
+import outmineAdminRoutes from "./routes/outmine-admin-routes";
 
 dotenv.config();
 
@@ -33,6 +34,7 @@ fastify.after(() => {
 
 fastify.register(authRoutes);
 fastify.register(missionsRoutes);
+fastify.register(outmineAdminRoutes);
 
 fastify.listen({ port: PORT, host: "0.0.0.0" }, (err, address) => {
   if (err) {
