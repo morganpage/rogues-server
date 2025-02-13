@@ -170,6 +170,16 @@
   "tg_link": true,
   "reward": 10,
   "outmine":false
+},
+
+{
+  "task_id": "tg_lcoin",
+  "task_name": "Get L Coin",
+  "task_icon": "https://i.postimg.cc/XJ89c30N/lcoin.jpg",
+  "url": "https://t.me/TheLCoinbot?start=ytgHq",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
 }
 
 

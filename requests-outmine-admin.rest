@@ -22,3 +22,11 @@ GET https://walrus-app-goxso.ondigitalocean.app/api/tasks_users
 
 ### get invoices
 GET  http://127.0.0.1:8080/api/invoices
+
+### get number of unsent messages
+GET  http://127.0.0.1:8080/api/message_queue_unsent
+
+
+
+### POST Toggle message_send in outmine_settings
+POST http://127.0.0.1:8080/api/message_send_toggle

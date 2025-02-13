@@ -33,6 +33,30 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     reply.code(200).send(data);
   });
 
+  //Count message_queue
+  fastify.get("/api/message_queue_unsent", async (req: FastifyRequest, reply: FastifyReply) => {
+    if (!fastify.mongo || !fastify.mongo.db) {
+      throw new Error("MongoDB is not configured properly");
+    }
+    const data = await fastify.mongo.db.collection("message_queue").countDocuments({ sent: false });
+    reply.code(200).send(data);
+  });
+
+  //Toggle message_send in outmine_settings
+  fastify.post("/api/message_send_toggle", async (req: FastifyRequest, reply: FastifyReply) => {
+    if (!fastify.mongo || !fastify.mongo.db) {
+      throw new Error("MongoDB is not configured properly");
+    }
+    const data = await fastify.mongo.db.collection("outmine_settings").findOne();
+    if (!data) {
+      reply.code(404).send("No data found");
+      return;
+    }
+    const new_value = !data["message_send"];
+    await fastify.mongo.db.collection("outmine_settings").updateOne({}, { $set: { message_send: new_value } });
+    reply.code(200).send(new_value);
+  });
+
   // fastify.get("/api/proxy", async (req: FastifyRequest, reply: FastifyReply) => {
   //   //Pass in json url to send request to
   //   const url = (req.query as { url: string }).url;
