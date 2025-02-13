@@ -1,0 +1,24 @@
+#GET partners
+GET http://127.0.0.1:8080/api/partners
+
+### GET tasks_users
+GET http://127.0.0.1:8080/api/tasks_users
+
+### GET invoices daily summary
+GET http://127.0.0.1:8080/api/invoices_daily_summary
+
+### GET partners
+GET https://walrus-app-goxso.ondigitalocean.app/api/partners
+
+
+### get outmine-settings
+GET https://outmine-server-789kp.ondigitalocean.app/api/outmine-settings
+
+### get tasks
+GET https://outmine-server-789kp.ondigitalocean.app/api/tasks
+
+###
+GET https://walrus-app-goxso.ondigitalocean.app/api/tasks_users
+
+### get invoices
+GET  http://127.0.0.1:8080/api/invoices

@@ -9,6 +9,30 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     reply.code(200).send(data);
   });
 
+  fastify.get("/api/tasks_users", async (req: FastifyRequest, reply: FastifyReply) => {
+    if (!fastify.mongo || !fastify.mongo.db) {
+      throw new Error("MongoDB is not configured properly");
+    }
+    const data = await fastify.mongo.db.collection("GroupedByTaskId").find().toArray();
+    reply.code(200).send(data);
+  });
+
+  fastify.get("/api/invoices_daily_summary", async (req: FastifyRequest, reply: FastifyReply) => {
+    if (!fastify.mongo || !fastify.mongo.db) {
+      throw new Error("MongoDB is not configured properly");
+    }
+    const data = await fastify.mongo.db.collection("InvoicesGroupedByDaySumAmount").find().toArray();
+    reply.code(200).send(data);
+  });
+
+  fastify.get("/api/invoices", async (req: FastifyRequest, reply: FastifyReply) => {
+    if (!fastify.mongo || !fastify.mongo.db) {
+      throw new Error("MongoDB is not configured properly");
+    }
+    const data = await fastify.mongo.db.collection("invoices").find().sort({ _id: -1 }).toArray();
+    reply.code(200).send(data);
+  });
+
   // fastify.get("/api/proxy", async (req: FastifyRequest, reply: FastifyReply) => {
   //   //Pass in json url to send request to
   //   const url = (req.query as { url: string }).url;

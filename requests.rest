@@ -83,13 +83,20 @@ GET http://localhost:8080/api/partners
 
 ### GET Outmine Proxy
 GET http://localhost:8080/api/proxy/gift/scaredcat-3408.json
+Content-Type: application/json
 
 ### GET Outmine Proxy
 GET https://walrus-app-goxso.ondigitalocean.app/api/proxy/gift/scaredcat-3408.json
-
 
 ### GET Outmine Proxy
 GET https://walrus-app-goxso.ondigitalocean.app/api/proxy?url=https://nft.fragment.com/gift/jellybunny-247.json
 
 ###
 https://nft.fragment.com/gift/jellybunny-247.json
+
+###Add origin header
+https://monkfish-app-e6el7.ondigitalocean.app/https://nft.fragment.com/gift/jellybunny-247.json
+Content-Type: application/json
+{
+
+}

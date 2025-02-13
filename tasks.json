@@ -153,10 +153,20 @@
   "reward": 10
 },
 {
-  "task_id": "tg_preton",
-  "task_name": "Join Preton Legacy",
-  "task_icon": "https://i.postimg.cc/j2qYFbZm/preton.jpg",
-  "url": "https://t.me/preton_legacy_bot?start=5856364491",
+  "task_id": "ton_wallet",
+  "task_name": "Connect Wallet",
+  "task_icon": "https://i.postimg.cc/DwJYyjYr/wallet-icon.png",
+  "url": "",
+  "tg_link": false,
+  "reward": 10,
+  "outmine":true,
+  "hide":true
+},
+{
+  "task_id": "tg_appss",
+  "task_name": "Rate Outmine on @appss",
+  "task_icon": "https://i.postimg.cc/FsXRV9tQ/appss.jpg",
+  "url": "https://t.me/appss/store?startapp=MjQxM3w1ODU2MzY0NDkx",
   "tg_link": true,
   "reward": 10,
   "outmine":false
