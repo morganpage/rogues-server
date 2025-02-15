@@ -27,3 +27,14 @@ export const verify = async (req: FastifyRequest, reply: FastifyReply) => {
     return null;
   }
 };
+
+export const compress = async (lottieJSON: any) => {
+  const stream = new Blob([JSON.stringify(lottieJSON)], { type: "application/json" }).stream();
+  const compressedReadableStream = stream.pipeThrough(new CompressionStream("gzip"));
+  const compressedResponse = await new Response(compressedReadableStream);
+  const blob = await compressedResponse.blob();
+  const buffer = await blob.arrayBuffer();
+  // convert ArrayBuffer to base64 encoded string
+  const lottieCompressedBase64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+  return lottieCompressedBase64;
+};

@@ -8,6 +8,7 @@ import { mintGameItemToAddress } from "./contract/minting";
 import authRoutes from "./routes/auth-routes";
 import missionsRoutes from "./routes/missions-routes";
 import outmineAdminRoutes from "./routes/outmine-admin-routes";
+import outmineGiftsRoutes from "./routes/outmine-gifts-routes";
 
 dotenv.config();
 
@@ -36,6 +37,7 @@ fastify.after(() => {
 fastify.register(authRoutes);
 fastify.register(missionsRoutes);
 fastify.register(outmineAdminRoutes);
+fastify.register(outmineGiftsRoutes);
 
 // server.register(require('@fastify/http-proxy'), {
 //   upstream: 'http://my-api.example.com',

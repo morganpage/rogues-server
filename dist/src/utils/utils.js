@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.verify = void 0;
+exports.compress = exports.verify = void 0;
 const zod_1 = __importDefault(require("zod"));
 const jose = __importStar(require("jose"));
 const ethers_1 = require("ethers");
@@ -66,3 +66,14 @@ const verify = async (req, reply) => {
     }
 };
 exports.verify = verify;
+const compress = async (lottieJSON) => {
+    const stream = new Blob([JSON.stringify(lottieJSON)], { type: "application/json" }).stream();
+    const compressedReadableStream = stream.pipeThrough(new CompressionStream("gzip"));
+    const compressedResponse = await new Response(compressedReadableStream);
+    const blob = await compressedResponse.blob();
+    const buffer = await blob.arrayBuffer();
+    // convert ArrayBuffer to base64 encoded string
+    const lottieCompressedBase64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+    return lottieCompressedBase64;
+};
+exports.compress = compress;

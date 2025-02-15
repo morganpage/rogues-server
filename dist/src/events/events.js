@@ -21,7 +21,7 @@ const contract = new web3.eth.Contract(abi, contractAddress);
 async function processStreakEvents(fastify) {
     let lastBlockNumber = await (0, db_1.getLastBlockNumberProcessed)(fastify, contractAddress);
     while (true) {
-        console.log("Processing events, lastBlock:", lastBlockNumber);
+        //console.log("Processing events, lastBlock:", lastBlockNumber);
         try {
             const allEvents = await contract.getPastEvents("ALLEVENTS", { filter: {}, fromBlock: lastBlockNumber + 1n, toBlock: "latest" });
             //Filter out the events that are not Claimed
