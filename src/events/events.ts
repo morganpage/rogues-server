@@ -42,7 +42,11 @@ export async function processStreakEvents(fastify: FastifyInstance) {
         await updateLastBlockNumberProcessed(fastify, lastBlockNumber, contractAddress);
       }
     } catch (e) {
-      console.error("Error processing events", e);
+      if (e instanceof Error) {
+        console.error("Error processing streak events", e.message);
+      } else {
+        console.error("Error processing streak events", e);
+      }
     }
     await new Promise((resolve) => setTimeout(resolve, 5000));
   }
