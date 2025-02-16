@@ -10,6 +10,7 @@ const giftsDataRequest = zod.object({
 async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
   const APIURL_TONCENTER = "https://toncenter.com/api/v3/";
   const lottieSupport = ["scaredcat", "jellybunny", "kissedfrog", "spyagaric"] as string[];
+  const proxyURL = "https://corsproxy.io/?url=";
 
   fastify.post("/api/gifts", async (req: FastifyRequest, reply: FastifyReply) => {
     if (!fastify.mongo || !fastify.mongo.db) {
@@ -55,7 +56,7 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
       const gift = await fastify.mongo.db.collection("telegram_gifts").findOne({ content_uri });
       if (!gift) {
         //console.log("Fetching: ", content_uri);
-        const item = await fetch(content_uri).then((res) => {
+        const item = await fetch(proxyURL + content_uri).then((res) => {
           if (!res.ok) {
             console.error("Failed to fetch", content_uri);
             return;
@@ -72,7 +73,7 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
         //const supported = lottieSupport.some((lottieName) => name.includes(lottieName));
         const new_gift = { content_uri, name, owner_address, username, image, lottie, lottieCompressedBase64: "" };
         if (supported) {
-          const lottieJSON = await fetch(lottie).then((res) => res.json());
+          const lottieJSON = await fetch(proxyURL + lottie).then((res) => res.json());
           if (!lottieJSON) continue;
           const lottieCompressedBase64 = await compress(lottieJSON);
           new_gift.lottieCompressedBase64 = lottieCompressedBase64;

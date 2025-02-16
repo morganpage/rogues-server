@@ -25,6 +25,24 @@ Content-Type: application/json
     "username" : "test456"
 }
 
+###
+POST https://walrus-app-goxso.ondigitalocean.app/api/gifts
+Content-Type: application/json
+
+{
+    "owner_address": "EQDQkzpqk1-o4OaOIr_KFyB9HfPpFNZ7fMT7rP1ybkizSYZa",
+    "username" : "mjp"
+}
+
+###
+POST https://walrus-app-goxso.ondigitalocean.app/api/gifts
+Content-Type: application/json
+
+{
+    "owner_address": "EQDhnTXusaL_Zgn57mw1H-QQ1DdQ78DGJ9pUElBvF0TfhrEJ",
+    "username" : "test"
+}
+
 
 
 ### GET gifts
@@ -41,3 +59,7 @@ GET https://toncenter.com/api/v3/nft/items?owner_address=EQDQkzpqk1-o4OaOIr_KFyB
 
 ### GET gifts
 GET https://toncenter.com/api/v3/nft/items?owner_address=EQAs3yBRXklBI3lHkWA2Y1V7oX_XvhVSfRbAIugY4C7Lx1sY
+
+### GET proxy
+GET https://corsproxy.io/?url=https://nft.fragment.com/gift/scaredcat-3407.json
+
