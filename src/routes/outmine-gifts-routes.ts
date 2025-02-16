@@ -10,7 +10,7 @@ const giftsDataRequest = zod.object({
 async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
   const APIURL_TONCENTER = "https://toncenter.com/api/v3/";
   const lottieSupport = ["scaredcat", "jellybunny", "kissedfrog", "spyagaric"] as string[];
-  const proxyURL = "https://corsproxy.io/?url=";
+  //const proxyURL = "https://corsproxy.io/?url=";
 
   fastify.post("/api/gifts", async (req: FastifyRequest, reply: FastifyReply) => {
     if (!fastify.mongo || !fastify.mongo.db) {
@@ -56,34 +56,35 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
       const gift = await fastify.mongo.db.collection("telegram_gifts").findOne({ content_uri });
       if (!gift) {
         //console.log("Fetching: ", content_uri);
-        const item = await fetch(proxyURL + content_uri).then((res) => {
-          if (!res.ok) {
-            console.error("Failed to fetch", content_uri);
-            console.error(res);
-            return;
-          }
-          return res.json();
-        });
+        // const item = await fetch(proxyURL + content_uri).then((res) => {
+        //   if (!res.ok) {
+        //     console.error("Failed to fetch", content_uri);
+        //     console.error(res);
+        //     return;
+        //   }
+        //   return res.json();
+        // });
 
-        if (!item || !item.name || !item.image || !item.lottie) {
-          continue;
-        }
-        //If we are here, this is a telegram gift nft, look this up in the db
-        const { name, image, lottie } = item;
-        //If we support showing the nft, we need to store the lottie json, check name against supported list
-        //const supported = lottieSupport.some((lottieName) => name.includes(lottieName));
-        const new_gift = { content_uri, name, owner_address, username, image, lottie, lottieCompressedBase64: "" };
-        if (supported) {
-          const lottieJSON = await fetch(proxyURL + lottie).then((res) => res.json());
-          if (!lottieJSON) continue;
-          const lottieCompressedBase64 = await compress(lottieJSON);
-          new_gift.lottieCompressedBase64 = lottieCompressedBase64;
-        }
+        // if (!item || !item.name || !item.image || !item.lottie) {
+        //   continue;
+        // }
+        // //If we are here, this is a telegram gift nft, look this up in the db
+        // const { name, image, lottie } = item;
+        // //If we support showing the nft, we need to store the lottie json, check name against supported list
+        // //const supported = lottieSupport.some((lottieName) => name.includes(lottieName));
+        //const new_gift = { content_uri, name, owner_address, username, image, lottie, lottieCompressedBase64: "" };
+        const new_gift = { content_uri, owner_address, username, supported };
+        // if (supported) {
+        //   const lottieJSON = await fetch(proxyURL + lottie).then((res) => res.json());
+        //   if (!lottieJSON) continue;
+        //   const lottieCompressedBase64 = await compress(lottieJSON);
+        //   new_gift.lottieCompressedBase64 = lottieCompressedBase64;
+        // }
         await fastify.mongo.db.collection("telegram_gifts").insertOne(new_gift);
         gifts.push(new_gift);
       } else {
         //console.log("Found in db: ", content_uri);
-        await fastify.mongo.db.collection("telegram_gifts").updateOne({ content_uri }, { $set: { owner_address, username } });
+        await fastify.mongo.db.collection("telegram_gifts").updateOne({ content_uri }, { $set: { owner_address, username, supported } });
         gifts.push(gift);
       }
     }
