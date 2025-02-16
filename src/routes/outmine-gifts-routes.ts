@@ -59,6 +59,7 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
         const item = await fetch(proxyURL + content_uri).then((res) => {
           if (!res.ok) {
             console.error("Failed to fetch", content_uri);
+            console.error(res);
             return;
           }
           return res.json();
