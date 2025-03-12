@@ -85,7 +85,7 @@ export async function resetCooldown(fastify: FastifyInstance, tgDataRequest: TGD
 
 async function executeCooldownTask(fastify: FastifyInstance, cooldown_id: string, user_id: string, username: string, first_name: string, last_name: string) {
   if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
-  console.log("Executing cooldown task", cooldown_id, user_id);
+  //console.log("Executing cooldown task", cooldown_id, user_id);
   //Do the task associated with the cooldown
   //tg_app_center
   if (cooldown_id === "tg_app_center") {
