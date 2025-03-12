@@ -1,0 +1,15 @@
+### get telegram started
+POST http://localhost:8080/api/cooldowns-users
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}",
+  "cooldown_id" : "tg_app_center",
+  "cooldown_sub_id" : "1"
+}
+
+#### GET /api/cooldowns-users
+GET http://localhost:8080/api/cooldowns-users/1321045031/tg_app_center/1
+
+###Get telegramgems by user_id
+GET https://outmine-server-789kp.ondigitalocean.app/api/telegramgems/1321045031

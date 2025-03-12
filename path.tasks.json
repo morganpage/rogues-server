@@ -1,0 +1,9 @@
+{
+  "task_id": "tg_the_path",
+  "task_name": "The Path – A Fantasy MMORPG",
+  "task_icon": "https://i.postimg.cc/fLWhr7DJ/The-Path-nobg.png",
+  "url": "https://t.me/ThePathGameBot/discover?startapp=WELCOME",
+  "tg_link": true,
+  "reward": 10,
+  "outmine": false
+}

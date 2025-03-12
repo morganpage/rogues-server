@@ -9,6 +9,7 @@ import authRoutes from "./routes/auth-routes";
 import missionsRoutes from "./routes/missions-routes";
 import outmineAdminRoutes from "./routes/outmine-admin-routes";
 import outmineGiftsRoutes from "./routes/outmine-gifts-routes";
+import cooldownsRoutes from "./routes/cooldowns-routes";
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ fastify.register(authRoutes);
 fastify.register(missionsRoutes);
 fastify.register(outmineAdminRoutes);
 fastify.register(outmineGiftsRoutes);
+fastify.register(cooldownsRoutes);
 
 // server.register(require('@fastify/http-proxy'), {
 //   upstream: 'http://my-api.example.com',

@@ -1,0 +1,7 @@
+### get telegram started
+POST http://localhost:5001/api/telegram-user-info
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_local}}"
+}

@@ -1,5 +1,123 @@
 import { FastifyInstance } from "fastify";
-import Web3, { Address, EventLog } from "web3";
+import Web3, { Address } from "web3";
+import { z } from "zod";
+import { processTelegramDataMultiToken } from "../utils/telegram";
+
+export type TelegramGems = {
+  user_id: string;
+  gems: number;
+};
+
+export type EventLog = {
+  event_type: string; //started, played, won, lost, purchased etc
+  user_id: string;
+  username: string;
+  first_name: string;
+  last_name: string;
+  start_param: string;
+  createdAt: Date;
+  extraData?: object;
+};
+
+export type CooldownsUsers = {
+  user_id: string;
+  first_name: string;
+  last_name: string;
+  username: string;
+  cooldown_id: string;
+  cooldown_sub_id: string;
+  cooldown_time: number;
+  lastUpdated: Date;
+};
+
+const TGDataRequest = z.object({
+  tg_data: z.string(),
+  cooldown_id: z.string(),
+  cooldown_sub_id: z.string(),
+});
+
+export type TGDataRequest = z.infer<typeof TGDataRequest>;
+
+//Cooldowns
+export async function resetCooldown(fastify: FastifyInstance, tgDataRequest: TGDataRequest) {
+  if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+  const req = TGDataRequest.parse(tgDataRequest);
+  const { tg_data, cooldown_id, cooldown_sub_id } = req;
+  const telegramData = processTelegramDataMultiToken(tg_data);
+  if (telegramData.ok) {
+    // Look up the cooldown in cooldowns
+    const cooldowns = await fastify.mongo.db.collection("cooldowns").findOne({ cooldown_id });
+    if (!cooldowns) {
+      console.log("Cooldown not found", cooldown_id);
+      return false; //Cooldown not found, should be set up before in the cooldown table
+    }
+    const { max_sub_id, cooldown_time } = cooldowns;
+    //Now check that the cooldown_sub_id is valid, must be less than or equal to the max_sub_id
+    if (parseInt(cooldown_sub_id) > max_sub_id) {
+      console.log("Invalid cooldown_sub_id", cooldown_sub_id, max_sub_id);
+      return false; //Cooldown sub id is invalid
+    }
+
+    const { id, username, first_name, last_name } = JSON.parse(telegramData.data.user);
+    const user_id: string = id.toString();
+    const cooldowns_users = await fastify.mongo.db.collection("cooldowns_users").findOne({ user_id, cooldown_id, cooldown_sub_id });
+    if (cooldowns_users) {
+      //Cooldown already exists, has it expired?
+      const secondsLeft = Math.floor((cooldowns_users.lastUpdated.getTime() + cooldowns_users.cooldown_time * 1000 - new Date().getTime()) / 1000);
+      if (secondsLeft > 0) {
+        console.log("Cooldown still in effect", secondsLeft);
+        return false; //Cooldown is still in effect
+      }
+      //update the cooldown and return true
+      await fastify.mongo.db.collection("cooldowns_users").updateOne({ user_id, cooldown_id, cooldown_sub_id }, { $set: { lastUpdated: new Date(), cooldown_time: cooldown_time } });
+      await executeCooldownTask(fastify, cooldown_id, user_id, username, first_name, last_name); //Now do the task associated with this cooldown
+      return true;
+    } else {
+      // Cooldown does not exist, create it
+      const cooldownsUsers: CooldownsUsers = { user_id, first_name, last_name, username, cooldown_id, cooldown_sub_id, cooldown_time, lastUpdated: new Date() };
+      await fastify.mongo.db.collection("cooldowns_users").insertOne(cooldownsUsers);
+      await executeCooldownTask(fastify, cooldown_id, user_id, username, first_name, last_name); //Now do the task associated with this cooldown
+      return true;
+    }
+  }
+  return false;
+}
+
+async function executeCooldownTask(fastify: FastifyInstance, cooldown_id: string, user_id: string, username: string, first_name: string, last_name: string) {
+  if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+  console.log("Executing cooldown task", cooldown_id, user_id);
+  //Do the task associated with the cooldown
+  //tg_app_center
+  if (cooldown_id === "tg_app_center") {
+    const gems = 30;
+    await updateTelegramGems(fastify, { user_id, gems }); //Add 30 gems
+    const eventLog: EventLog = { user_id, event_type: cooldown_id, username, first_name, last_name, start_param: "", createdAt: new Date(), extraData: { gems } };
+    await fastify.mongo.db.collection("events").insertOne(eventLog);
+  }
+}
+
+//End of cooldowns
+
+//Outmine
+
+async function updateTelegramGems(fastify: FastifyInstance, telegramGems: TelegramGems) {
+  if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+  try {
+    //Get existing telegramgems so we can log the change
+    const telegramgem = await fastify.mongo.db.collection("telegramgems").updateOne(
+      {
+        user_id: telegramGems.user_id,
+      },
+      {
+        $inc: { gems: telegramGems.gems },
+      },
+      { upsert: true }
+    );
+    return telegramgem;
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 // Useful to track the last block number processed when processing events, do this per contract address as we may have multiple contracts
 export async function updateLastBlockNumberProcessed(fastify: FastifyInstance, lastBlockNumber: bigint, contractAddress: Address) {
