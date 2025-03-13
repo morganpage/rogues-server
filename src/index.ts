@@ -10,6 +10,7 @@ import missionsRoutes from "./routes/missions-routes";
 import outmineAdminRoutes from "./routes/outmine-admin-routes";
 import outmineGiftsRoutes from "./routes/outmine-gifts-routes";
 import cooldownsRoutes from "./routes/cooldowns-routes";
+import tgRoutes from "./routes/tg-routes";
 
 dotenv.config();
 
@@ -40,6 +41,7 @@ fastify.register(missionsRoutes);
 fastify.register(outmineAdminRoutes);
 fastify.register(outmineGiftsRoutes);
 fastify.register(cooldownsRoutes);
+fastify.register(tgRoutes);
 
 // server.register(require('@fastify/http-proxy'), {
 //   upstream: 'http://my-api.example.com',

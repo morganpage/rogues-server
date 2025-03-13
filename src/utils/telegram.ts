@@ -28,5 +28,8 @@ export function processTelegramDataMultiToken(qs: string): { ok: false } | { ok:
   if (p1.ok) return p1;
   if (!process.env.TELEGRAM_BOT_TOKEN_2) return p1;
   let p2 = processTelegramData(qs, process.env.TELEGRAM_BOT_TOKEN_2!);
-  return p2;
+  if (p2.ok) return p2;
+  if (!process.env.TELEGRAM_BOT_TOKEN_3) return p2;
+  let p3 = processTelegramData(qs, process.env.TELEGRAM_BOT_TOKEN_3!);
+  return p3;
 }

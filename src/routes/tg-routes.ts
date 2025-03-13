@@ -25,3 +25,5 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     }
   });
 }
+
+export default routes;
