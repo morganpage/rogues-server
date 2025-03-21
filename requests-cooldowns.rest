@@ -4,6 +4,44 @@ Content-Type: application/json
 
 {
   "tg_data":"{{$dotenv tg_data_live}}",
+  "cooldown_id" : "tree",
+  "cooldown_sub_id" : "2"
+}
+
+### POST cooldown
+POST http://localhost:8080/api/cooldowns-users
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}",
+  "cooldown_id" : "tree",
+  "cooldown_sub_id" : "1"
+}
+
+### POST cooldown
+POST http://localhost:8080/api/cooldowns-users
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}",
+  "cooldown_id" : "rock",
+  "cooldown_sub_id" : "1"
+}
+
+
+#### GET /api/cooldowns-users - get all cooldowns for user
+GET http://localhost:8080/api/cooldowns-users/1321045031
+
+#### GET /api/cooldowns-users
+GET http://localhost:8080/api/cooldowns-users/1321045031/tree/1
+
+
+### POST cooldown
+POST http://localhost:8080/api/cooldowns-users
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}",
   "cooldown_id" : "tg_app_center",
   "cooldown_sub_id" : "1"
 }
@@ -27,3 +65,10 @@ Content-Type: application/json
   "cooldown_id" : "tg_app_center",
   "cooldown_sub_id" : "1"
 }
+
+
+#### GET /api/cooldowns-users - get all cooldowns for user
+GET http://localhost:8080/api/items-users/1321045031/wood/1
+
+#### GET /api/cooldowns-users - get all cooldowns for user
+GET http://localhost:8080/api/items-users/1321045031/stone/-1

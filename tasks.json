@@ -56,6 +56,99 @@
 }
 
 
+]
+https://www.twitch.tv/rogues_studio
 
+[
+{
+  "task_id": "x_retweet_rogues",
+  "task_name": "RT World of Rogues",
+  "task_icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/480px-X_logo.jpg",
+  "url": "https://x.com/intent/retweet?tweet_id=1841485487933927625",
+  "tg_link": false,
+  "reward": 10,
+  "outmine":true
+},
+{
+  "task_id": "x_follow_rogues",
+  "task_name": "Follow World of Rogues on X",
+  "task_icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/X_logo.jpg/480px-X_logo.jpg",
+  "url": "https://twitter.com/intent/follow?screen_name=rogues_studio",
+  "tg_link": false,
+  "reward": 10,
+  "outmine":true
+},
+{
+  "task_id": "twitch_follow_rogues",
+  "task_name": "Follow World of Rogues on Twitch",
+  "task_icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Twitch_logo_2019.svg/320px-Twitch_logo_2019.svg.png",
+  "url": "https://www.twitch.tv/rogues_studio",
+  "tg_link": false,
+  "reward": 10,
+  "outmine":true
+}
 
 ]
+
+[
+
+{
+  "task_id": "tg_donkeyhunt",
+  "task_name": "Play Donkey Hunt",
+  "task_icon": "https://i.postimg.cc/QxFLwZCN/Donkey-Hunt.png",
+  "url": "https://t.me/DonkeyHuntBot/gameapp?startapp=10000688",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_candydream",
+  "task_name": "Play Candy Dream",
+  "task_icon": "https://i.postimg.cc/G3W0WSyk/candydream.png",
+  "url": "https://t.me/CandyDreamBot/gameapp?startapp=share_3747",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_majyotreasure",
+  "task_name": "Play Majyo Treasure",
+  "task_icon": "https://i.postimg.cc/G2T7zdz6/MJ-logo.png",
+  "url": "https://t.me/MajyoTreasureBot/gameapp?startapp=10081955",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_wildwestshooting",
+  "task_name": "Play Wild West Shooting",
+  "task_icon": "https://i.postimg.cc/qMNRLYdy/wild.png",
+  "url": "https://t.me/WildWestShootingBot/gameapp",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+]
+
+
+
+{
+  "task_id": "tg_burnghostgames",
+  "task_name": "Burn Ghost Games",
+  "task_icon": "https://i.postimg.cc/Wb5BxW6n/burnghost.jpg",
+  "url": "https://t.me/burnghostgames_bot/burnghostgames?startapp=ref_7030212130",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+{
+  "task_id": "tg_galaxyminer",
+  "task_name": "Play Miner to win $300",
+  "task_icon": "https://i.postimg.cc/6qr7NbBY/galaxyminer.jpg",
+  "url": "https://t.me/BitGame_Online_bot/MINER_Play2Earn?startapp=adj_share_invite_xEgZhkGw0OHgSoax",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}

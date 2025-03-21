@@ -1,0 +1,32 @@
+### POST eth_auth
+POST http://localhost:8080/api/eth_auth
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}"
+}
+
+### POST eth_auth
+POST https://outmine-server-789kp.ondigitalocean.app/api/eth_auth
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}"
+}
+
+### POST telegram user info - LOCAL
+POST http://localhost:5001/api/telegram-user-info
+Content-Type: application/json
+
+{
+    "tg_data": "{{$dotenv tg_data_local}}"
+}
+
+###
+GET http://localhost:5001/.well-known/jwks.json
+
+
+https://rnlhj-92-247-229-248.a.free.pinggy.link
+
+###
+GET https://outmine-server-789kp.ondigitalocean.app/.well-known/jwks.json

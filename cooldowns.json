@@ -2,21 +2,61 @@
   {
     "cooldown_id": "tg_app_center",
     "max_sub_id": 1,
-    "cooldown_time": 86400
+    "cooldown_time": 28800
   },
   {
-    "cooldown_id": "tree",
+    "cooldown_id": "Tree",
     "max_sub_id": 10,
-    "cooldown_time": 30
+    "cooldown_time": 30,
+    "cooldown_extras": [
+      {
+        "item_id": "Wood",
+        "quantity": 1
+      },
+      {
+        "skill_id": "Lumberjack",
+        "xp": 1
+      }
+    ]
   },
   {
-    "cooldown_id": "flax",
+    "cooldown_id": "Flax",
     "max_sub_id": 10,
-    "cooldown_time": 30
+    "cooldown_time": 30,
+    "cooldown_extras": [
+      {
+        "item_id": "Flax",
+        "quantity": 1
+      },
+      {
+        "skill_id": "Harvester",
+        "xp": 1
+      }
+    ]
   },
   {
-    "cooldown_id": "rock",
+    "cooldown_id": "Rock",
     "max_sub_id": 10,
-    "cooldown_time": 30
+    "cooldown_time": 30,
+    "cooldown_extras": [
+      {
+        "item_id": "Stone",
+        "quantity": 1
+      },
+      {
+        "skill_id": "Miner",
+        "xp": 1
+      }
+    ]
+  },
+  {
+    "cooldown_id": "DailyMission",
+    "max_sub_id": 1,
+    "cooldown_time": 30,
+    "cooldown_extras": [
+      {
+        "mission_id": "daily_1"
+      }
+    ]
   }
 ]

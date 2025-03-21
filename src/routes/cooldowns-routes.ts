@@ -38,6 +38,19 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     const secondsLeft = Math.floor((cooldowns_users.lastUpdated.getTime() + cooldowns_users.cooldown_time * 1000 - new Date().getTime()) / 1000);
     reply.code(200).send({ ...cooldowns_users, secondsLeft });
   });
+
+  fastify.get("/api/cooldowns-users/:user_id", async (request: any, reply) => {
+    if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+    const { user_id } = request.params;
+    const cooldowns_users = await fastify.mongo.db.collection("cooldowns_users").find({ user_id }).toArray();
+    //Add secondsLeft to each cooldown
+    const now = new Date().getTime();
+    cooldowns_users.forEach((cooldown) => {
+      const secondsLeft = Math.floor((cooldown.lastUpdated.getTime() + cooldown.cooldown_time * 1000 - now) / 1000);
+      cooldown.secondsLeft = secondsLeft;
+    });
+    reply.code(200).send(cooldowns_users);
+  });
 } // end of routes function
 
 export default routes;

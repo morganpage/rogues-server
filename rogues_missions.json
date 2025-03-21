@@ -1,0 +1,200 @@
+[
+  {
+    "mission_id": "tutorial",
+    "mission_name": "World of Rogues Tutorial",
+    "npc_name": "The Mayor",
+    "pending": {
+      "description": [
+        "Welcome to Vulpguard! So good to see a fresh new face. I hope you are less lazy than the last folks that came through here?",
+        "My hot tub ahem I mean the town's fountain is still not finished! Its a disgrace, no sense of civic duty!",
+        "Why dont you visit Jack, the lumber… guy. He'll sort you out with an axe so you can start to make yourself useful."
+      ],
+      "add_missions": [
+        "tutorial_axe"
+      ]
+    },
+    "accepted": {
+      "description": [
+        "You're back! Did you get the axe from Jack?"
+      ],
+      "has_items": [
+        {
+          "item_id": "Wooden axe of crappiness",
+          "quantity": 1
+        }
+      ]
+    },
+    "ready": {
+      "description": [
+        "Nice axe... now get to work!"
+      ]
+    }
+  },
+  {
+    "mission_id": "tutorial_axe",
+    "mission_name": "Careful with that axe",
+    "npc_name": "Jack",
+    "pending": {
+      "description": [
+        "You must be the new guy. I'm Jack, the lumber guy. I heard you need an axe?",
+        "You can use this axe to chop down trees and gather wood. Just be careful with it, it's sharp!",
+        "You can find trees to chop down all around the town. Just walk up to a tree to chop it down.",
+        "This is a basic axe, so it won't cut down the bigger trees. You'll need a better axe for that.",
+        "Oh this axe isn't free, you know. You can pay me back by chopping down some trees for me. I need some wood for a new project."
+      ],
+      "add_items": [
+        {
+          "item_id": "Wooden axe of crappiness",
+          "quantity": 1
+        }
+      ]
+    },
+    "accepted": {
+      "description": [
+        "Where's my wood? I need that wood to finish my project!"
+      ],
+      "remove_items": [
+        {
+          "item_id": "Wood",
+          "quantity": 10
+        }
+      ],
+      "add_missions": [
+        "tutorial_scythe"
+      ]
+    },
+    "ready": {
+      "description": [
+        "Oh good, you're back, and with wood... nice work!",
+        "You can keep the axe, it's like the worst axe I've ever made. But it's yours now.",
+        "Why don't you visit Milly? She gets kinda lonely and is a little shy",
+        "but I think she's super cool so say hi from me."
+      ]
+    }
+  },
+  {
+    "mission_id": "tutorial_scythe",
+    "mission_name": "Tutorial Scythe",
+    "npc_name": "Milly",
+    "pending": {
+      "description": [
+        "Do you ever get the feeling that the world is spinning really fast?",
+        "Maybe it is... or maybe I should just stop watching this windmill turn...",
+        "Sorry, how dizzy of me, I'm Milly, could I ask you for a massive favour?",
+        "Would you use this Scythe to cut me some flax, it's so pretty!"
+      ],
+      "add_items": [
+        {
+          "item_id": "Wooden scythe of sucking",
+          "quantity": 1
+        }
+      ]
+    },
+    "accepted": {
+      "description": [
+        "Where's my lovely flax?"
+      ],
+      "remove_items": [
+        {
+          "item_id": "Flax",
+          "quantity": 10
+        }
+      ],
+      "add_missions": [
+        "tutorial_pickaxe"
+      ]
+    },
+    "ready": {
+      "description": [
+        "Oh how lovely! Beautiful flax!"
+      ]
+    }
+  },
+  {
+    "mission_id": "tutorial_pickaxe",
+    "mission_name": "Tutorial Pickaxe",
+    "npc_name": "Rocky",
+    "pending": {
+      "description": [
+        "I've found that I prefer punching rocks nowadays.",
+        "It's so much more carcinogenic, mmm that's not right,",
+        "Cartharticogenic, that's the word I was looking for.",
+        "So lucky for you I don't need this pickaxe any more",
+        "However I do need some stone, so off you go!"
+      ],
+      "add_items": [
+        {
+          "item_id": "Wooden pickaxe of picking",
+          "quantity": 1
+        }
+      ]
+    },
+    "accepted": {
+      "description": [
+        "Where's my stone, or do you want a punch?"
+      ],
+      "remove_items": [
+        {
+          "item_id": "Stone",
+          "quantity": 10
+        }
+      ]
+    },
+    "ready": {
+      "description": [
+        "Stones! Bah they're just small rocks, no good for punching!"
+      ]
+    }
+  },
+  {
+    "mission_id": "daily_1",
+    "mission_name": "Love letter",
+    "npc_name": "Jack",
+    "pending": {
+      "description": [
+        "Would you take this letter to Milly?",
+        "It's not what you think... I just don't like her feeling lonely",
+        "I wrote down some funny jokes, it might cheer her up",
+        "Anyway, non of your business is it? Sorry, just a bit nervous!"
+      ],
+      "add_items": [
+        {
+          "item_id": "Love letter",
+          "quantity": 1
+        }
+      ],
+      "add_missions": [
+        "daily_1_end"
+      ]
+    },
+    "accepted": {
+      "description": [
+        "Delivered the letter to Milly yet?"
+      ]
+    },
+    "ready": {
+      "description": [
+        "Did she laugh? Erm in a good way?"
+      ]
+    }
+  },
+  {
+    "mission_id": "daily_1_end",
+    "mission_name": "Love letter",
+    "npc_name": "Milly",
+    "pending": {
+      "description": [
+        "Oh how exciting a letter! Who's it from?",
+        "Is if from Jack? I bet it's from Jack!",
+        "Oh this joke is so funny! This joke is a bit rude!",
+        "Tell him to send me more!"
+      ],
+      "remove_items": [
+        {
+          "item_id": "Love letter",
+          "quantity": 1
+        }
+      ]
+    }
+  }
+]
