@@ -1,10 +1,31 @@
+### get telegram started
+POST https://walrus-app-goxso.ondigitalocean.app/api/telegram-user-info
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_local}}"
+}
+#### GET /api/cooldowns-users
+GET https://walrus-app-goxso.ondigitalocean.app/api/cooldowns-users/1321045031/Tree/2
+
+### POST cooldown
+POST https://walrus-app-goxso.ondigitalocean.app/api/cooldowns-users
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}",
+  "cooldown_id" : "Tree",
+  "cooldown_sub_id" : "2"
+}
+
+
 ### POST cooldown
 POST http://localhost:8080/api/cooldowns-users
 Content-Type: application/json
 
 {
   "tg_data":"{{$dotenv tg_data_live}}",
-  "cooldown_id" : "tree",
+  "cooldown_id" : "Tree",
   "cooldown_sub_id" : "2"
 }
 
@@ -14,7 +35,7 @@ Content-Type: application/json
 
 {
   "tg_data":"{{$dotenv tg_data_live}}",
-  "cooldown_id" : "tree",
+  "cooldown_id" : "Tree",
   "cooldown_sub_id" : "1"
 }
 
@@ -24,7 +45,7 @@ Content-Type: application/json
 
 {
   "tg_data":"{{$dotenv tg_data_live}}",
-  "cooldown_id" : "rock",
+  "cooldown_id" : "Rock",
   "cooldown_sub_id" : "1"
 }
 

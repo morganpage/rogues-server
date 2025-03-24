@@ -6,6 +6,18 @@ Content-Type: application/json
   "tg_data":"{{$dotenv tg_data_live}}"
 }
 
+
+
+### POST eth_auth
+POST https://walrus-app-goxso.ondigitalocean.app/api/eth_auth
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}"
+}
+
+
+
 ### POST eth_auth
 POST https://outmine-server-789kp.ondigitalocean.app/api/eth_auth
 Content-Type: application/json

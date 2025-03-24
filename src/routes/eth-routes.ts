@@ -34,7 +34,9 @@ export async function ethRoutes(fastify: FastifyInstance, options: FastifyPlugin
         const user_id = id.toString();
         const user = JSON.parse(telegramData.data.user);
         const JWTtoken = await generateJwtToken(user);
+        //console.log("JWTtoken", JWTtoken);
         const ethData = await getPrivateKey(JWTtoken, user_id);
+        //console.log("ethData", ethData);
         if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
         const eth_address = (ethData as { ethPublicAddress: string[] }).ethPublicAddress[0];
         await fastify.mongo.db.collection("telegram_users").updateOne({ user_id }, { $set: { eth_address, first_name, last_name, username } }, { upsert: true });

@@ -10,9 +10,21 @@ const JWT_KEY_ID = process.env.JWT_KEY_ID || "default";
 const clientId = process.env.WEB3AUTH_CLIENT_ID; // Get your Client ID from Web3Auth Dashboard
 if (!clientId) throw new Error("WEB3AUTH_CLIENT_ID is not set");
 
-const W3A_VERIFIER_NAME = "web3auth-tg-verifier";
+const W3A_VERIFIER_NAME = "web3auth-tg-verifier_1742824075";
 
 const chainConfig = {
+  chainId: "0x120",
+  displayName: "Boba Ethereum",
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  tickerName: "Ethereum",
+  ticker: "ETH",
+  decimals: 18,
+  rpcTarget: "https://boba-ethereum.gateway.tenderly.co/6GmVGqQaF2nf60rJWfObWI",
+  blockExplorerUrl: "https://bobascan.com/",
+  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+};
+
+const chainConfig2 = {
   chainId: "0x70d2",
   displayName: "Boba Sepolia Testnet",
   chainNamespace: CHAIN_NAMESPACES.EIP155,
@@ -63,7 +75,7 @@ export const generateJwtToken = async (userData: any) => {
 export const getPrivateKey = async (idToken: any, verifierId: any) => {
   const web3auth = new Web3Auth({
     clientId, // Get your Client ID from Web3Auth Dashboard
-    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
+    web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_MAINNET,
     privateKeyProvider,
     mode: SDK_MODE.NODE,
   });
