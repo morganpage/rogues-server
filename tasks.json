@@ -144,10 +144,33 @@ https://www.twitch.tv/rogues_studio
 }
 
 {
-  "task_id": "tg_galaxyminer",
-  "task_name": "Play Miner to win $300",
-  "task_icon": "https://i.postimg.cc/6qr7NbBY/galaxyminer.jpg",
-  "url": "https://t.me/BitGame_Online_bot/MINER_Play2Earn?startapp=adj_share_invite_xEgZhkGw0OHgSoax",
+  "task_id": "tg_jetton",
+  "task_name": "Play JetTon",
+  "task_icon": "https://i.postimg.cc/Y9SjzJBR/photo-2024-04-29-19-48-42.jpg",
+  "url": "https://t.me/JettonFarmingBot?start=promo105",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+{
+  "task_id": "tg_vipercoin",
+  "task_name": "Join Vipercoin",
+  "task_icon": "https://i.postimg.cc/jdh5Bxqc/5897608736363629250-121.jpg",
+  "url": "https://t.me/vipercoins_shadow_bot/vipercoins?startapp=FQgBhq4cPD",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+
+
+{
+  "task_id": "tg_whitebasics",
+  "task_name": "White Basics",
+  "task_icon": "https://i.postimg.cc/QCm266Lq/2025-03-25-17-15-28.jpg",
+  "url": "https://t.me/WhiteBasicsbot/app?startapp=u_m6TProm4l1io-g_I6hBj0niJG",
   "tg_link": true,
   "reward": 10,
   "outmine":false

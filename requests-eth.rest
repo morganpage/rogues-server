@@ -42,3 +42,37 @@ https://rnlhj-92-247-229-248.a.free.pinggy.link
 
 ###
 GET https://outmine-server-789kp.ondigitalocean.app/.well-known/jwks.json
+
+### STREAK
+POST http://localhost:8080/api/tg/streak
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}"
+}
+
+
+### GET Streak Info
+GET http://localhost:8080/api/streak_info?address=0xe52B3ACB63b07599db29Ca24ed8d9C5f1a191da7
+
+### GET Streak Info
+GET http://localhost:8080/api/streak_info?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8de
+
+### GET Streak Info
+https://walrus-app-goxso.ondigitalocean.app/api/streak_info?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8de
+
+### STREAK
+POST https://walrus-app-goxso.ondigitalocean.app/api/streak_info/api/tg/streak
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}"
+}
+
+
+
+### STREAK TO POINTS - ALL
+GET https://walrus-app-goxso.ondigitalocean.app/api/streak_to_points
+
+### STREAK TO POINTS - ALL
+GET https://walrus-app-goxso.ondigitalocean.app/api/streak_to_points?streak=10

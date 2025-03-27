@@ -91,10 +91,12 @@ export const getPrivateKey = async (idToken: any, verifierId: any) => {
   }
   // The private key returned here is the CoreKitKey
   const ethPrivateKey = await web3auth.provider.request({ method: "eth_private_key" });
+  const ethPublicKey = await web3auth.provider.request({ method: "eth_public_key" });
   const ethPublicAddress = await web3auth.provider.request({ method: "eth_accounts" });
   const ethData = {
     ethPrivateKey,
     ethPublicAddress,
+    ethPublicKey,
   };
   return ethData;
 };
