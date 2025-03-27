@@ -69,10 +69,20 @@ Content-Type: application/json
   "tg_data":"{{$dotenv tg_data_live}}"
 }
 
-
-
 ### STREAK TO POINTS - ALL
 GET https://walrus-app-goxso.ondigitalocean.app/api/streak_to_points
 
 ### STREAK TO POINTS - ALL
 GET https://walrus-app-goxso.ondigitalocean.app/api/streak_to_points?streak=10
+
+
+### GET Streak Info
+https://walrus-app-goxso.ondigitalocean.app/api/streak_info?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8df
+
+
+
+///api/rogues_users/:address
+
+### GET Streak Info
+GET http://localhost:8080/api/rogues_users?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8df
+

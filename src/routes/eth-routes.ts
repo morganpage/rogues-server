@@ -38,6 +38,8 @@ export async function ethRoutes(fastify: FastifyInstance, options: FastifyPlugin
         if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
         const telegram_user = await fastify.mongo.db.collection("telegram_users").findOne({ user_id });
         if (telegram_user && telegram_user.eth_address) {
+          //User exists and has eth address, let's update rogues users with the new data if it exists
+          await fastify.mongo.db.collection("rogues_users").updateOne({ address: telegram_user.eth_address }, { $set: { first_name, last_name, username, user_id, lastLogin: new Date() } });
           reply.send({ result: "success", user, ethData: { ethPublicAddress: [telegram_user.eth_address] } });
         } else {
           const JWTtoken = await generateJwtToken(user);
@@ -82,6 +84,21 @@ export async function ethRoutes(fastify: FastifyInstance, options: FastifyPlugin
       }
     } catch (e: any) {
       reply.code(400).send({ status: "error", message: e.message });
+    }
+  });
+
+  fastify.get("/api/rogues_users", async (request: any, reply) => {
+    if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+    const address = (request.query as { address?: string }).address as string;
+    if (address) {
+      const rogues_user = await fastify.mongo.db.collection("rogues_users").findOne({ address });
+      if (!rogues_user) {
+        reply.code(404).send({ status: "error", message: "User not found" });
+      }
+      reply.code(200).send(rogues_user);
+    } else {
+      const rogues_users = await fastify.mongo.db.collection("rogues_users").find({}).toArray();
+      reply.code(200).send(rogues_users);
     }
   });
 }

@@ -7,7 +7,8 @@
     "devstart": "ts-node src/index.ts",
     "prestart": "npm run build",
     "build": "tsc",
-    "dev": "tsnd --respawn ./src/index.ts"
+    "dev": "tsnd --respawn ./src/index.ts",
+    "resetstreak": "ts-node src/resetstreak.ts"
   },
   "keywords": [],
   "author": "",

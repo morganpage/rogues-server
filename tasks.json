@@ -175,3 +175,54 @@ https://www.twitch.tv/rogues_studio
   "reward": 10,
   "outmine":false
 }
+
+[
+{
+  "task_id": "tg_zeusnet",
+  "task_name": "Zeus Net",
+  "task_icon": "https://i.postimg.cc/kgqxfzTy/ZEUSNET-Transparant-2.png",
+  "url": "https://t.me/zeusnet_app_bot/zeusnet?startapp=CKOZQLZL39",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_memex",
+  "task_name": "Memex",
+  "task_icon": "https://i.postimg.cc/7h15zYrr/memex.jpg",
+  "url": "https://t.me/MemeXGlobalBot?start=r5953766951",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_riverland",
+  "task_name": "Play RiverLand",
+  "task_icon": "https://i.postimg.cc/t4sXQCvR/riverland.jpg",
+  "url": "https://t.me/RiverLandGameBot/game?startapp=xq1x561s",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+[
+{
+  "task_id": "tg_happyboxes",
+  "task_name": "Happy Boxes",
+  "task_icon": "https://i.postimg.cc/tggvmYBD/AVATAR-1.png",
+  "url": "https://t.me/happyboxes_bot/app?startapp=r_fd478d52da",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_clarnium",
+  "task_name": "Play Clarnium",
+  "task_icon": "https://i.postimg.cc/Df166r2n/clarnium.jpg",
+  "url": "https://t.me/ClarniumGame_bot/start?startapp=70Z3HU",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+]
