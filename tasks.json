@@ -226,3 +226,32 @@ https://www.twitch.tv/rogues_studio
 }
 
 ]
+[
+{
+  "task_id": "tg_minigame",
+  "task_name": "Play MiniGame",
+  "task_icon": "https://i.postimg.cc/1z1CS6ZF/icon-1.png",
+  "url": "https://t.me/minigame/idle?startapp=MjhmYmM4",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_blockdagtapminer",
+  "task_name": "Play BlockDAG Tap Miner",
+  "task_icon": "https://i.postimg.cc/Jn4Q75Ys/2025-03-28-11-30-26.jpg",
+  "url": "https://t.me/BlockDAG_Tap_Miner_bot/app?startapp=appid_7042364387",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_gridby",
+  "task_name": "Gridby Trading Bot",
+  "task_icon": "https://i.postimg.cc/pdkDSnVR/Gridby-Logo.png",
+  "url": "https://t.me/Gridbybot/start?startapp=YnRhZz1DU0ZQVUo=",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+]

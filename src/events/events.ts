@@ -48,6 +48,6 @@ export async function processStreakEvents(fastify: FastifyInstance) {
         console.error("Error processing streak events", e);
       }
     }
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 10000)); //changed from 5 seconds to 10 seconds
   }
 }
