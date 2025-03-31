@@ -255,3 +255,35 @@ https://www.twitch.tv/rogues_studio
   "outmine":false
 }
 ]
+[
+  {
+    "task_id": "tg_tonique",
+    "task_name": "Tonique: win telegram gifts!",
+    "task_icon": "https://i.postimg.cc/x8Sc153t/IMG-20250328-173226-704.jpg",
+    "url": "https://t.me/tonique_bot/signup?startapp=clyzyaeu800015xu6bk8cavbn",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_dogies",
+    "task_name": "Play Dogies",
+    "task_icon": "https://i.postimg.cc/YCy0WMx4/2025-03-29-10-29-49.jpg",
+    "url": "https://t.me/Dogies_gamebot/launch?startapp=O2UNGGDXMW",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  }
+
+]
+
+
+{
+  "task_id": "tg_exiles",
+  "task_name": "The Exiles",
+  "task_icon": "https://i.postimg.cc/XN8V5njV/2025-03-29-10-33-38.jpg",
+  "url": "https://t.me/TheExilesBot/play?startapp=_Mine",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}

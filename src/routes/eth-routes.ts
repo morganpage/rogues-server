@@ -101,4 +101,32 @@ export async function ethRoutes(fastify: FastifyInstance, options: FastifyPlugin
       reply.code(200).send(rogues_users);
     }
   });
+
+  fastify.get("/api/recentlogin", async (request: any, reply) => {
+    if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+    const user_id = (request.query as { user_id?: string }).user_id as string;
+    if (!user_id) {
+      reply.code(400).send({ status: "error", message: "user_id is required", recent: false });
+      return;
+    }
+    const telegram_user = await fastify.mongo.db.collection("telegram_users").findOne({ user_id });
+    if (!telegram_user) {
+      reply.code(404).send({ status: "error", message: "Telegram User not found", recent: false });
+      return;
+    }
+    const rogues_user = await fastify.mongo.db.collection("rogues_users").findOne({ address: telegram_user.eth_address });
+    if (!rogues_user) {
+      reply.code(404).send({ status: "error", message: "Rogues User not found", recent: false });
+      return;
+    }
+    //Check if lastLogin exists
+    if (!rogues_user.lastLogin) {
+      reply.code(404).send({ status: "error", message: "lastLogin not found", recent: false });
+      return;
+    }
+    const lastLogin = rogues_user.lastLogin;
+    const now = new Date();
+    const diffInSeconds = Math.floor((now.getTime() - new Date(lastLogin).getTime()) / 1000);
+    reply.code(200).send({ status: "ok", lastLogin: rogues_user.lastLogin, diffInSeconds, recent: diffInSeconds < 60 * 60 ? true : false });
+  });
 }
