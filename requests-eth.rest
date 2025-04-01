@@ -89,7 +89,7 @@ GET http://localhost:8080/api/rogues_users?address=0x7990ec7597e6215958c9bbef7d5
 ### GET Streak Info
 GET https://walrus-app-goxso.ondigitalocean.app/api/rogues_users?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8df
 
-###GET Recent Login
+###GET Recent Login - used for verifying tg_wor claim in outmine
 GET http://localhost:8080/api/recentlogin?user_id=1321045031
 
 ###GET Recent Login

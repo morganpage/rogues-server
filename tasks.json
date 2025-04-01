@@ -287,3 +287,48 @@ https://www.twitch.tv/rogues_studio
   "reward": 10,
   "outmine":false
 }
+
+
+[
+  {
+    "task_id": "tg_chrono",
+    "task_name": "Chrono Streak",
+    "task_icon": "https://i.postimg.cc/NMzGzqgx/2025-04-01-14-54-44.jpg",
+    "url": "https://t.me/chronosstreaksbot?start=5437238373",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_addup",
+    "task_name": "Addup",
+    "task_icon": "https://i.postimg.cc/3xkw2wYx/2025-04-01-14-57-23.jpg",
+    "url": "https://t.me/AddUp_crypto_bot/addUp?startapp=ref-1592936909",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_megamine",
+    "task_name": "Play Megamine",
+    "task_icon": "https://i.postimg.cc/cHPJ9yhN/Logo-MEGAMINE-Square.png",
+    "url": "https://t.me/megaminetg_bot/megamine?startapp=gameOutmine",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_happyfarmer",
+    "task_name": "Play Happy Farmer",
+    "task_icon": "https://i.postimg.cc/k5XF9Kmg/2025-04-01-14-59-56.jpg",
+    "url": "https://t.me/CropAndRob_bot/app?startapp=r7913885852",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  }
+
+
+
+
+
+]

@@ -96,7 +96,7 @@ async function executeCooldownTask(fastify: FastifyInstance, cooldown_id: string
   //Do the task associated with the cooldown
   //tg_app_center
   if (cooldown_id === "tg_wor") {
-    const gems = 35;
+    const gems = 40;
     await updateTelegramGems(fastify, { user_id, gems }); //Add 30 gems
     const eventLog: EventLog = { user_id, event_type: cooldown_id, username, first_name, last_name, start_param: "", createdAt: new Date(), extraData: { gems } };
     await fastify.mongo.db.collection("events").insertOne(eventLog);
