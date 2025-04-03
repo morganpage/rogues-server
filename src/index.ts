@@ -18,6 +18,10 @@ import itemsRoutes from "./routes/items-routes";
 dotenv.config();
 
 const PORT = parseInt(process.env.PORT || "8080", 10);
+const RUNNING_LOCAL = process.env.RUNNING_LOCAL === "true" ? true : false;
+if (RUNNING_LOCAL) {
+  console.log("Running locally");
+}
 
 //mintGameItemToAddress("0x2715FCC42eF0c03fc9D9108a48D8a66ae01000e9", 1, 1);
 
@@ -36,7 +40,7 @@ fastify.after(() => {
     throw new Error("MongoDB is not configured properly");
   }
   console.log("Connected to MongoDB");
-  processStreakEvents(fastify);
+  if (!RUNNING_LOCAL) processStreakEvents(fastify);
 });
 
 fastify.register(authRoutes);

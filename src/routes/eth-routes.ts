@@ -129,4 +129,15 @@ export async function ethRoutes(fastify: FastifyInstance, options: FastifyPlugin
     const diffInSeconds = Math.floor((now.getTime() - new Date(lastLogin).getTime()) / 1000);
     reply.code(200).send({ status: "ok", lastLogin: rogues_user.lastLogin, diffInSeconds, recent: diffInSeconds < 60 * 60 ? true : false });
   });
+
+  fastify.get("/api/rank", async (request: any, reply) => {
+    if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+    //Order by points desc, ignore 0 points, username must exist but can be null
+    const rogues_users = await fastify.mongo.db
+      .collection("rogues_users")
+      .find({ points: { $gt: 0 }, username: { $exists: true } })
+      .sort({ points: -1 })
+      .toArray();
+    reply.code(200).send(rogues_users);
+  });
 }

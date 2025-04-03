@@ -326,9 +326,60 @@ https://www.twitch.tv/rogues_studio
     "reward": 10,
     "outmine":false
   }
+]
+
+[
+  {
+    "task_id": "tg_realityrush",
+    "task_name": "Play Reality Rush",
+    "task_icon": "https://i.postimg.cc/qMYTYHQB/2025-04-02-17-08-53.jpg",
+    "url": "https://t.me/realityrush_bot/play?startapp=refererID268030131",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_poycoins",
+    "task_name": "Play PoYCoins",
+    "task_icon": "https://i.postimg.cc/Jz25ZP12/2025-04-02-17-11-27.jpg",
+    "url": "https://t.me/PoYCoins_Bot/PoYCoins?startapp=ref_rL9qiMArW",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_kokomo",
+    "task_name": "Join Koko's Community",
+    "task_icon": "https://i.postimg.cc/DyFSpsjy/2025-04-02-17-13-06.jpg",
+    "url": "https://t.me/kokomo_games",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  }
 
 
+]
 
+[
+
+  {
+    "task_id": "tg_rock",
+    "task_name": "Rock",
+    "task_icon": "https://i.postimg.cc/d1fc6ghS/2025-04-03-14-55-41.jpg",
+    "url": "https://t.me/memerockBot/playrock",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_bluewolf",
+    "task_name": "Bluewolf",
+    "task_icon": "https://i.postimg.cc/NfzbMYWn/2025-04-03-14-56-29.jpg",
+    "url": "https://t.me/Blue_Wolf_xbot?start=7068685427",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  }
 
 
 ]

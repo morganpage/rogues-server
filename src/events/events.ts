@@ -18,6 +18,7 @@ if (contractAddress == "") {
 const contract = new web3.eth.Contract(abi, contractAddress);
 
 export async function processStreakEvents(fastify: FastifyInstance) {
+  console.log("Processing streak events");
   let lastBlockNumber: bigint = await getLastBlockNumberProcessed(fastify, contractAddress);
   while (true) {
     //console.log("Processing events, lastBlock:", lastBlockNumber);

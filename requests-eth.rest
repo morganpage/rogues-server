@@ -94,3 +94,10 @@ GET http://localhost:8080/api/recentlogin?user_id=1321045031
 
 ###GET Recent Login
 GET https://walrus-app-goxso.ondigitalocean.app/api/recentlogin?user_id=1321045031
+
+### GET All Rogues Users
+GET https://walrus-app-goxso.ondigitalocean.app/api/rogues_users
+
+###GET Recent Login - used for verifying tg_wor claim in outmine
+GET http://localhost:8080/api/rank
+
