@@ -101,3 +101,27 @@ GET https://walrus-app-goxso.ondigitalocean.app/api/rogues_users
 ###GET Recent Login - used for verifying tg_wor claim in outmine
 GET http://localhost:8080/api/rank
 
+### GET All Rogues Users
+GET https://walrus-app-goxso.ondigitalocean.app/api/rank
+
+
+
+# ### POST cooldown NOT NEEDED!!!
+# POST http://localhost:8080/api/tg/cooldown
+# Content-Type: application/json
+
+# {
+#   "tg_data":"{{$dotenv tg_data_live}}",
+#   "cooldown_type" : "Tree",
+#   "cooldown_index" : 0
+# }
+
+# ### POST cooldown
+# POST http://localhost:8080/api/tg/cooldown
+# Content-Type: application/json
+
+# {
+#   "tg_data":"{{$dotenv tg_data_live}}",
+#   "cooldown_type" : "Tree",
+#   "cooldown_index" : 0
+# }

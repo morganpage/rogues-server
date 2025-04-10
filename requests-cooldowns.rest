@@ -93,3 +93,33 @@ GET http://localhost:8080/api/items-users/1321045031/wood/1
 
 #### GET /api/cooldowns-users - get all cooldowns for user
 GET http://localhost:8080/api/items-users/1321045031/stone/-1
+
+
+#### GET /api/cooldowns-users - get all cooldowns for user
+GET https://walrus-app-goxso.ondigitalocean.app/api/cooldowns-users/1321045031
+
+#### GET /api/cooldowns-users
+GET https://walrus-app-goxso.ondigitalocean.app/api/cooldowns-users/1321045031/Flax/1
+
+#### GET /api/cooldowns-users
+GET http://localhost:8080/api/cooldowns-users/1321045031/Tree/0
+
+### POST cooldown
+POST http://localhost:8080/api/cooldowns-users
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}",
+  "cooldown_id" : "Tree",
+  "cooldown_sub_id" : "0"
+}
+
+### POST cooldown
+POST http://localhost:8080/api/cooldowns-users
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}",
+  "cooldown_id" : "tg_wor",
+  "cooldown_sub_id" : "0"
+}

@@ -383,3 +383,136 @@ https://www.twitch.tv/rogues_studio
 
 
 ]
+
+{
+  "task_id": "tg_gifton",
+  "task_name": "GiftON",
+  "task_icon": "https://i.postimg.cc/fbHvD4DZ/Gifton-logo.png",
+  "url": "https://t.me/gifton_market_bot?startapp=portfolio_Savir681",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+{
+  "task_id": "tg_redcoin",
+  "task_name": "Play Red Coin",
+  "task_icon": "https://i.postimg.cc/k4sZ8YQg/IMG-20250330-011627-615.jpg",
+  "url": "https://t.me/RedXiobot/Red?startapp=hbNLz8em0zH5",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+{
+  "task_id": "tg_kumajump",
+  "task_name": "Play Kuma Jump",
+  "task_icon": "https://i.postimg.cc/zvh4JGwv/2025-04-05-22-57-56.jpg",
+  "url": "https://t.me/KumaJumpBot/KumaJump?startapp=CTEDAUINE",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+{
+  "task_id": "tg_kumajump",
+  "task_name": "Play Kuma Jump",
+  "task_icon": "https://i.postimg.cc/zvh4JGwv/2025-04-05-22-57-56.jpg",
+  "url": "https://t.me/KumaJumpBot/KumaJump?startapp=CTEDAUINE",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+
+{
+  "task_id": "tg_valorquest",
+  "task_name": "Play Valor Quest",
+  "task_icon": "https://i.postimg.cc/XYkDzfs3/2025-04-07-15-52-40.jpg",
+  "url": "https://t.me/ValorQuestBot/valor_quest?startapp=039ebc2e22394506bd4fd118a806c0b3",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+[
+  {
+    "task_id": "tg_questly",
+    "task_name": "Questly",
+    "task_icon": "https://i.postimg.cc/0Nv3K34Y/2025-04-07-22-53-28.jpg",
+    "url": "https://t.me/questlythebot/app?startapp=r1592936909",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_dice",
+    "task_name": "1000 Dice",
+    "task_icon": "https://i.postimg.cc/0jC3fCJ6/DefDice8.png",
+    "url": "https://t.me/THSdice_bot?startapp=OUTMINE",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_shutgame",
+    "task_name": "Play Сards and earn NFT",
+    "task_icon": "https://i.postimg.cc/Vk3J19d0/2025-04-07-22-59-18.jpg",
+    "url": "https://t.me/shut_game_bot/startapp?startapp=69BBS9IUPWAN",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_handbugs",
+    "task_name": "Play Handbugs",
+    "task_icon": "https://i.postimg.cc/VN2sXzjS/photo-2025-04-07-12-54-24.jpg",
+    "url": "https://t.me/handbugsbot/game?startapp=p4477",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  }
+]
+
+[
+
+  {
+    "task_id": "tg_cdari",
+    "task_name": "Enter CDARI Space",
+    "task_icon": "https://i.postimg.cc/HLCctgmX/CDARI-Ticker-200-200.png",
+    "url": "https://t.me/cdaribot/cdarispace/start?startapp=ebd48591c557df3001d8332dd2090d0e",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_unijump",
+    "task_name": "Play Uni Jump",
+    "task_icon": "https://i.postimg.cc/MK5tf98W/logo-uni.jpg",
+    "url": "https://t.me/unijump_bot/game?startapp=ref4709861332713359012",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_validator",
+    "task_name": "Play Validator",
+    "task_icon": "https://i.postimg.cc/25L5gjdV/23tS2Up.png",
+    "url": "https://t.me/BlockValidatorBot/Validator",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_beecoin",
+    "task_name": "Join BeeCoin",
+    "task_icon": "https://i.postimg.cc/02rr7C6Y/2025-04-10-12-04-44.jpg",
+    "url": "https://t.me/Bee_CoinBot/app?startapp=896503",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  }
+]

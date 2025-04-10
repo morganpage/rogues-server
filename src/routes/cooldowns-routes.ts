@@ -1,7 +1,6 @@
 import { FastifyRequest, FastifyReply, FastifyInstance, FastifyPluginOptions } from "fastify";
-import { processTelegramDataMultiToken } from "../utils/telegram";
-import { z } from "zod";
-import { CooldownsUsers, resetCooldown, TGDataRequest } from "../db/db";
+import { resetCooldown, TGDataRequest } from "../db/db";
+import { resetCooldownContract } from "../contract/cooldowns";
 
 async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
   fastify.post("/api/cooldowns-users", async (request: FastifyRequest<{ Params: { event_type: string } }>, reply: FastifyReply) => {
@@ -9,6 +8,10 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     try {
       const tgDataRequest: TGDataRequest = request.body as TGDataRequest;
       const wasReset = await resetCooldown(fastify, tgDataRequest);
+      if (wasReset) {
+        //Only try the contract cooldown if the db cooldown was a success
+        const wasResetContract = await resetCooldownContract(fastify, tgDataRequest);
+      }
       reply.code(200).send(wasReset);
     } catch (e) {
       reply.send({ result: "error", error: e });

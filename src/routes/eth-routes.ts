@@ -3,9 +3,17 @@ import { z } from "zod";
 import { processTelegramDataMultiToken } from "../utils/telegram";
 import { generateJwtToken, getPrivateKey } from "../utils/eth-web3auth";
 import { claimStreakFor } from "../contract/streaks";
+import { startCooldown, startCooldownFor } from "../contract/cooldowns";
 
 const tgDataRequest = z.object({
   tg_data: z.string(),
+});
+
+const tgDataCooldownRequest = z.object({
+  tg_data: z.string(),
+  cooldown_type: z.string(),
+  cooldown_index: z.number(),
+  cooldownFor: z.boolean().optional(),
 });
 
 export async function ethRoutes(fastify: FastifyInstance, options: FastifyPluginOptions) {
@@ -86,6 +94,50 @@ export async function ethRoutes(fastify: FastifyInstance, options: FastifyPlugin
       reply.code(400).send({ status: "error", message: e.message });
     }
   });
+
+  // fastify.post("/api/tg/cooldown", async (request: FastifyRequest, reply: FastifyReply) => {
+  //   try {
+  //     const req = tgDataCooldownRequest.parse(request.body);
+  //     const cooldownType = req.cooldown_type; // ie Tree
+  //     const cooldownIndex = req.cooldown_index; // ie 0
+  //     const cooldownFor = req.cooldownFor; // ie true
+  //     const telegramData = processTelegramDataMultiToken(req.tg_data);
+  //     if (telegramData.ok) {
+  //       const user = JSON.parse(telegramData.data.user);
+  //       if (cooldownFor) {
+  //         console.log("cooldownFor", cooldownFor);
+  //         const user_id = user.id.toString();
+  //         if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+  //         const telegram_user = await fastify.mongo.db.collection("telegram_users").findOne({ user_id });
+  //         if (!telegram_user || !telegram_user.eth_address) {
+  //           reply.code(401).send({ status: "error", message: "User not found or eth address not set" });
+  //         } else {
+  //           const address = telegram_user.eth_address;
+  //           console.log("address", address);
+  //           if (address) {
+  //             let cooldown = await startCooldownFor(address, cooldownType, cooldownIndex);
+  //             if (cooldown.status === "ok") {
+  //               reply.code(200).send(cooldown);
+  //             } else {
+  //               reply.code(400).send(cooldown);
+  //             }
+  //           }
+  //         }
+  //       } else {
+  //         console.log("cooldownFor", cooldownFor);
+  //         const cooldown = await startCooldown(user, cooldownType, cooldownIndex);
+  //         if (cooldown.status === "ok") {
+  //           reply.code(200).send(cooldown);
+  //         } else {
+  //           reply.code(400).send(cooldown);
+  //         }
+  //       }
+  //     }
+  //     reply.send({ result: "success" });
+  //   } catch (e) {
+  //     reply.send({ result: "error", error: e });
+  //   }
+  // });
 
   fastify.get("/api/rogues_users", async (request: any, reply) => {
     if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");

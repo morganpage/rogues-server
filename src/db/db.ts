@@ -38,7 +38,7 @@ export type CooldownExtra = {
   mission_id: string;
 };
 
-const TGDataRequest = z.object({
+export const TGDataRequest = z.object({
   tg_data: z.string(),
   cooldown_id: z.string(),
   cooldown_sub_id: z.string(),
@@ -248,4 +248,11 @@ export async function getAllStreakToPoints(fastify: FastifyInstance) {
     throw new Error("MongoDB is not configured properly");
   }
   return fastify.mongo.db.collection("rogues_streaks").find().project({ _id: 0, streak: 1, points: 1 }).sort({ streak: 1 }).toArray();
+}
+
+//Get first record from outmine_settings collection
+export async function getOutmineSettings(fastify: FastifyInstance) {
+  if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+  const settings = await fastify.mongo.db.collection("outmine_settings").findOne();
+  return settings;
 }
