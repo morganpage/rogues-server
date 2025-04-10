@@ -82,7 +82,7 @@ export async function startCooldownFor(address: Address, cooldownType: string, c
     await txResponse.wait(); //Wait for transaction to be mined
     return { status: "ok", message: "Cooldown started", txResponse };
   } catch (e: any) {
-    return { status: "error", message: e.shortMessage };
+    return { status: "error", message: e.message };
   }
 }
 
@@ -112,7 +112,7 @@ export async function startCooldown(user: any, cooldownType: string, cooldownInd
     const txResponse = await contract.startCooldown(cooldownType, cooldownIndex);
     return { status: "ok", message: "Cooldown started", txResponse };
   } catch (e: any) {
-    return { status: "error", message: e.shortMessage };
+    return { status: "error", message: e.message };
   }
 }
 
@@ -131,7 +131,7 @@ async function sendEthToAddress(address: Address, amount: string) {
     await txResponse.wait(); //Wait for transaction to be mined
     return { status: "ok", message: "Eth sent", txResponse };
   } catch (e: any) {
-    return { status: "error", message: e.shortMessage };
+    return { status: "error", message: e.message };
   }
 }
 
@@ -142,6 +142,6 @@ async function isOnCooldown(address: Address, cooldownType: string, cooldownInde
     const isOnCooldown = await contract.isOnCooldown(cooldownType, address, cooldownIndex);
     return { status: "ok", message: "isOnCooldown", isOnCooldown };
   } catch (e: any) {
-    return { status: "error", message: e.shortMessage };
+    return { status: "error", message: e.message };
   }
 }

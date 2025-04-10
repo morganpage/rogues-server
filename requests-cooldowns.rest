@@ -123,3 +123,23 @@ Content-Type: application/json
   "cooldown_id" : "tg_wor",
   "cooldown_sub_id" : "0"
 }
+
+### POST cooldown
+POST https://walrus-app-goxso.ondigitalocean.app/api/cooldowns-users
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}",
+  "cooldown_id" : "tg_wor",
+  "cooldown_sub_id" : "1"
+}
+
+### POST cooldown
+POST https://walrus-app-goxso.ondigitalocean.app/api/cooldowns-users
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}",
+  "cooldown_id" : "Tree",
+  "cooldown_sub_id" : "1"
+}
