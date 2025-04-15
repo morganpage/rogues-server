@@ -516,3 +516,44 @@ https://www.twitch.tv/rogues_studio
     "outmine":false
   }
 ]
+
+[
+  {
+    "task_id": "tg_infinityblocks",
+    "task_name": "Break some BLOCKS!",
+    "task_icon": "https://i.postimg.cc/JhFDsntZ/logo-infinity-blocks-2.png",
+    "url": "https://t.me/infinityblocksbot/game?startapp=xpzzsortjs",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_throwbattle",
+    "task_name": "Play Throw Battle",
+    "task_icon": "https://i.postimg.cc/3NB2412c/5280517554329119692-1109.jpg",
+    "url": "https://t.me/throwbattle_bot/start?startapp=163",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_kingdomdice",
+    "task_name": "Play Kingdom Dice",
+    "task_icon": "https://i.postimg.cc/63y9GLFp/logo-kingdom-dice.png",
+    "url": "https://t.me/kingdomdicebot/game?startapp=xpzzsortjt",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  }
+]
+
+
+{
+  "task_id": "tg_artitap",
+  "task_name": "Play ArtiTap",
+  "task_icon": "https://i.postimg.cc/br8P9d3F/Frame-482070-1.png",
+  "url": "https://t.me/ArtiTapBot/start?startapp=referrerId848171592",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}

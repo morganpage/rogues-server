@@ -9,7 +9,7 @@
     "build": "tsc",
     "dev": "tsnd --respawn ./src/index.ts",
     "resetstreak": "ts-node src/resetstreak.ts",
-    "testcooldown": "ts-node src/testcooldown.ts"
+    "testcooldown": "node dist/src/testcooldown.js"
   },
   "keywords": [],
   "author": "",

@@ -108,7 +108,7 @@ export async function startCooldown(user: any, cooldownType: string, cooldownInd
       return { status: "error", message: isOnCooldownResponse.message };
     }
     //Send eth to eth_address from
-    await sendEthToAddress(eth_address, "0.000002");
+    await sendEthToAddress(eth_address, "0.000005");
     const txResponse = await contract.startCooldown(cooldownType, cooldownIndex);
     return { status: "ok", message: "Cooldown started", txResponse };
   } catch (e: any) {

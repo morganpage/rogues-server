@@ -19,6 +19,7 @@ if (contractAddress == "") {
 }
 const contract = new web3.eth.Contract(abi, contractAddress);
 async function processStreakEvents(fastify) {
+    console.log("Processing streak events");
     let lastBlockNumber = await (0, db_1.getLastBlockNumberProcessed)(fastify, contractAddress);
     while (true) {
         //console.log("Processing events, lastBlock:", lastBlockNumber);
@@ -44,8 +45,13 @@ async function processStreakEvents(fastify) {
             }
         }
         catch (e) {
-            console.error("Error processing events", e);
+            if (e instanceof Error) {
+                console.error("Error processing streak events", e.message);
+            }
+            else {
+                console.error("Error processing streak events", e);
+            }
         }
-        await new Promise((resolve) => setTimeout(resolve, 5000));
+        await new Promise((resolve) => setTimeout(resolve, 10000)); //changed from 5 seconds to 10 seconds
     }
 }

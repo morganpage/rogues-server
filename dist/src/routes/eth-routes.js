@@ -1,0 +1,199 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ethRoutes = ethRoutes;
+const zod_1 = require("zod");
+const telegram_1 = require("../utils/telegram");
+const eth_web3auth_1 = require("../utils/eth-web3auth");
+const streaks_1 = require("../contract/streaks");
+const tgDataRequest = zod_1.z.object({
+    tg_data: zod_1.z.string(),
+});
+const tgDataCooldownRequest = zod_1.z.object({
+    tg_data: zod_1.z.string(),
+    cooldown_type: zod_1.z.string(),
+    cooldown_index: zod_1.z.number(),
+    cooldownFor: zod_1.z.boolean().optional(),
+});
+async function ethRoutes(fastify, options) {
+    fastify.get("/.well-known/jwks.json", (req, res) => {
+        res.send({
+            keys: [
+                {
+                    kty: "RSA",
+                    n: "2d4simxtIQ-XQ-OJbto8aR528PotjPbzsE5PPliZBCs3exU8M52bwkhKi33tt6j5As6PWl6Q6K-gP3f18pYEMnmSkxficjvCpLyfC-nvtAfkPoMRNUzWcecsXYLLV0WLK1wpgBcP5PXs4FeU5NcvszKZvtIpwAjkJUE09Ym3GYvGijhXudEv5Y792j7AIMJwnSUTzKOu5Ssx4sIFbz0YuJunvztvSivKD-6OpW0q74omDbVxpR2he9Ta9OTXydiYAtVgyb4xnbr85qMyIngCDI5X38FSr_cI8r-2ud-MKP5eh5yA9uYiPLhtslOn8LrXNYYpaT2K5eR1eAvoiXKhRw",
+                    e: "AQAB",
+                    ext: true,
+                    kid: process.env.JWT_KEY_ID,
+                    alg: "RS256",
+                    use: "sig",
+                },
+            ],
+        });
+    });
+    // eth - we3auth - returns the eth address if exists, otherwise generates one
+    fastify.post("/api/eth_auth", async (request, reply) => {
+        try {
+            const req = tgDataRequest.parse(request.body);
+            const telegramData = (0, telegram_1.processTelegramDataMultiToken)(req.tg_data);
+            if (telegramData.ok) {
+                const { id, first_name, last_name, username } = JSON.parse(telegramData.data.user);
+                const user_id = id.toString();
+                const user = JSON.parse(telegramData.data.user);
+                //Now lookup user in db
+                if (!fastify.mongo || !fastify.mongo.db)
+                    throw new Error("MongoDB is not configured properly");
+                const telegram_user = await fastify.mongo.db.collection("telegram_users").findOne({ user_id });
+                if (telegram_user && telegram_user.eth_address) {
+                    //User exists and has eth address, let's update rogues users with the new data if it exists
+                    await fastify.mongo.db.collection("rogues_users").updateOne({ address: telegram_user.eth_address }, { $set: { first_name, last_name, username, user_id, lastLogin: new Date() } });
+                    reply.send({ result: "success", user, ethData: { ethPublicAddress: [telegram_user.eth_address] } });
+                }
+                else {
+                    const JWTtoken = await (0, eth_web3auth_1.generateJwtToken)(user);
+                    //console.log("JWTtoken", JWTtoken);
+                    const ethData = await (0, eth_web3auth_1.getPrivateKey)(JWTtoken, user_id);
+                    //console.log("ethData", ethData);
+                    const eth_address = ethData.ethPublicAddress[0];
+                    await fastify.mongo.db.collection("telegram_users").updateOne({ user_id }, { $set: { eth_address, first_name, last_name, username } }, { upsert: true });
+                    reply.send({ result: "success", user, JWTtoken, ethData });
+                }
+            }
+        }
+        catch (e) {
+            reply.send({ result: "error", error: e });
+        }
+    });
+    fastify.post("/api/tg/streak", async (request, reply) => {
+        try {
+            const req = tgDataRequest.parse(request.body);
+            const telegramData = (0, telegram_1.processTelegramDataMultiToken)(req.tg_data);
+            if (telegramData.ok) {
+                const { id, first_name, last_name, username } = JSON.parse(telegramData.data.user);
+                const user_id = id.toString();
+                //Lookup user eth address from db
+                if (!fastify.mongo || !fastify.mongo.db)
+                    throw new Error("MongoDB is not configured properly");
+                const user = await fastify.mongo.db.collection("telegram_users").findOne({ user_id });
+                if (!user || !user.eth_address) {
+                    reply.code(401).send({ status: "error", message: "User not found or eth address not set" });
+                }
+                else {
+                    const address = user.eth_address;
+                    if (address) {
+                        let claimedReply = await (0, streaks_1.claimStreakFor)(address);
+                        if (claimedReply.status === "ok") {
+                            reply.code(200).send(claimedReply);
+                        }
+                        else {
+                            reply.code(400).send(claimedReply);
+                        }
+                    }
+                    else {
+                        reply.code(401).send({ status: "error", message: "Validation Failed" });
+                    }
+                }
+            }
+        }
+        catch (e) {
+            reply.code(400).send({ status: "error", message: e.message });
+        }
+    });
+    // fastify.post("/api/tg/cooldown", async (request: FastifyRequest, reply: FastifyReply) => {
+    //   try {
+    //     const req = tgDataCooldownRequest.parse(request.body);
+    //     const cooldownType = req.cooldown_type; // ie Tree
+    //     const cooldownIndex = req.cooldown_index; // ie 0
+    //     const cooldownFor = req.cooldownFor; // ie true
+    //     const telegramData = processTelegramDataMultiToken(req.tg_data);
+    //     if (telegramData.ok) {
+    //       const user = JSON.parse(telegramData.data.user);
+    //       if (cooldownFor) {
+    //         console.log("cooldownFor", cooldownFor);
+    //         const user_id = user.id.toString();
+    //         if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+    //         const telegram_user = await fastify.mongo.db.collection("telegram_users").findOne({ user_id });
+    //         if (!telegram_user || !telegram_user.eth_address) {
+    //           reply.code(401).send({ status: "error", message: "User not found or eth address not set" });
+    //         } else {
+    //           const address = telegram_user.eth_address;
+    //           console.log("address", address);
+    //           if (address) {
+    //             let cooldown = await startCooldownFor(address, cooldownType, cooldownIndex);
+    //             if (cooldown.status === "ok") {
+    //               reply.code(200).send(cooldown);
+    //             } else {
+    //               reply.code(400).send(cooldown);
+    //             }
+    //           }
+    //         }
+    //       } else {
+    //         console.log("cooldownFor", cooldownFor);
+    //         const cooldown = await startCooldown(user, cooldownType, cooldownIndex);
+    //         if (cooldown.status === "ok") {
+    //           reply.code(200).send(cooldown);
+    //         } else {
+    //           reply.code(400).send(cooldown);
+    //         }
+    //       }
+    //     }
+    //     reply.send({ result: "success" });
+    //   } catch (e) {
+    //     reply.send({ result: "error", error: e });
+    //   }
+    // });
+    fastify.get("/api/rogues_users", async (request, reply) => {
+        if (!fastify.mongo || !fastify.mongo.db)
+            throw new Error("MongoDB is not configured properly");
+        const address = request.query.address;
+        if (address) {
+            const rogues_user = await fastify.mongo.db.collection("rogues_users").findOne({ address });
+            if (!rogues_user) {
+                reply.code(404).send({ status: "error", message: "User not found" });
+            }
+            reply.code(200).send(rogues_user);
+        }
+        else {
+            const rogues_users = await fastify.mongo.db.collection("rogues_users").find({}).toArray();
+            reply.code(200).send(rogues_users);
+        }
+    });
+    fastify.get("/api/recentlogin", async (request, reply) => {
+        if (!fastify.mongo || !fastify.mongo.db)
+            throw new Error("MongoDB is not configured properly");
+        const user_id = request.query.user_id;
+        if (!user_id) {
+            reply.code(400).send({ status: "error", message: "user_id is required", recent: false });
+            return;
+        }
+        const telegram_user = await fastify.mongo.db.collection("telegram_users").findOne({ user_id });
+        if (!telegram_user) {
+            reply.code(404).send({ status: "error", message: "Telegram User not found", recent: false });
+            return;
+        }
+        const rogues_user = await fastify.mongo.db.collection("rogues_users").findOne({ address: telegram_user.eth_address });
+        if (!rogues_user) {
+            reply.code(404).send({ status: "error", message: "Rogues User not found", recent: false });
+            return;
+        }
+        //Check if lastLogin exists
+        if (!rogues_user.lastLogin) {
+            reply.code(404).send({ status: "error", message: "lastLogin not found", recent: false });
+            return;
+        }
+        const lastLogin = rogues_user.lastLogin;
+        const now = new Date();
+        const diffInSeconds = Math.floor((now.getTime() - new Date(lastLogin).getTime()) / 1000);
+        reply.code(200).send({ status: "ok", lastLogin: rogues_user.lastLogin, diffInSeconds, recent: diffInSeconds < 60 * 60 ? true : false });
+    });
+    fastify.get("/api/rank", async (request, reply) => {
+        if (!fastify.mongo || !fastify.mongo.db)
+            throw new Error("MongoDB is not configured properly");
+        //Order by points desc, ignore 0 points, username must exist but can be null
+        const rogues_users = await fastify.mongo.db
+            .collection("rogues_users")
+            .find({ points: { $gt: 0 }, username: { $exists: true } })
+            .sort({ points: -1 })
+            .toArray();
+        reply.code(200).send(rogues_users);
+    });
+}
