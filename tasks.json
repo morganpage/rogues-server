@@ -557,3 +557,589 @@ https://www.twitch.tv/rogues_studio
   "reward": 10,
   "outmine":false
 }
+
+{
+  "task_id": "tg_stoopidcats",
+  "task_name": "Join and Earn $STOCAT",
+  "task_icon": "https://i.postimg.cc/Z597smV1/2025-04-15-21-59-01.jpg",
+  "url": "https://t.me/StoopidCatsBot/stoopid_cats?startapp=309053105",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+{
+  "task_id": "tg_marscapital",
+  "task_name": "Play Mars Capital",
+  "task_icon": "https://i.postimg.cc/xd6RjXM1/2025-04-16-12-48-53.jpg",
+  "url": "https://t.me/MarsCapitalBot/MarsCapital?startdata=7931082282&startapp=7931082282",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+
+{
+  "task_id": "tg_veteranairdrops",
+  "task_name": "Join Veteran Airdrops",
+  "task_icon": "https://i.postimg.cc/cCwKLcPp/2025-04-17-11-46-29.jpg",
+  "url": "https://t.me/+-5H8y9FvAy44OTll",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+{
+  "task_id": "tg_aixflap",
+  "task_name": "Play AIxFlap",
+  "task_icon": "https://i.postimg.cc/FRGqkKKr/IMG-1822.jpg",
+  "url": "https://t.me/AIxFlap_bot/AIxFlap?startapp=app_USR2UIRCPW0B",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+[
+{
+  "task_id": "tg_tonament",
+  "task_name": "Play Tonament",
+  "task_icon": "https://i.postimg.cc/nrrSM3wk/IMG-20250418-172143-228.jpg",
+  "url": "https://t.me/official_Tonament_bot/myapp?startapp=referralCode9VQ0vAxi_trackingKeyShare_trackingValueappLink",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+{
+  "task_id": "tg_bubblebattle",
+  "task_name": "Play Bubble Battle",
+  "task_icon": "https://i.postimg.cc/MGD8Qrd2/IMG-20250418-172553-495.jpg",
+  "url": "https://t.me/BubbleBattleBot/play?startapp=bb_oe3gvrp5yn",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+]
+
+{
+  "task_id": "tg_toncash",
+  "task_name": "TONCASH Earn 80% cashback",
+  "task_icon": "https://i.postimg.cc/Kzcq1F0B/TS-Logomark-Color-copy.png",
+  "url": "https://t.me/TONCashAppBot/shop?startapp=ref_20a8172f897472149926",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+https://t.me/RobuSnipeGameBot?start=7913885852
+{
+  "task_id": "tg_robusnipe",
+  "task_name": "Play Robusnipe",
+  "task_icon": "https://i.postimg.cc/0ymC3CjV/2025-04-19-16-13-14.jpg",
+  "url": "https://t.me/RobuSnipeGameBot?start=7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+https://t.me/nexusportalbot?start=5844650576
+{
+  "task_id": "tg_nexusportal",
+  "task_name": "Play Nexus",
+  "task_icon": "https://i.postimg.cc/sXcdgztn/IMG-20250420-150736-868.png",
+  "url": "https://t.me/nexusportalbot?start=5844650576",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+[
+{
+  "task_id": "tg_dungeondicer",
+  "task_name": "Play Dungeon Dicer",
+  "task_icon": "https://i.postimg.cc/6Q9vJ7sH/IMG-20250421-110916-856.jpg",
+  "url": "https://t.me/DungeonDicer_bot/game?startapp=tgOutmine",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+{
+  "task_id": "tg_babyton",
+  "task_name": "Join Babyton",
+  "task_icon": "https://i.postimg.cc/RZ3HMrqt/IMG-20250421-111024-499.jpg",
+  "url": "https://t.me/babytonmining_bot?start=7536996980",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+{
+  "task_id": "tg_moneytube",
+  "task_name": "Join MoneyTube",
+  "task_icon": "https://i.postimg.cc/wBrHgPy1/IMG-20250421-111211-220.jpg",
+  "url": "https://t.me/MoneyTube_bot?start=7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+{
+  "task_id": "tg_4metas",
+  "task_name": "Play 4Metas",
+  "task_icon": "https://i.postimg.cc/mZX3RyV0/IMG-20250421-112011-335.jpg",
+  "url": "https://t.me/The4Metas_bot/Ton_4Metas?startapp=inv_BB00AD17",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+{
+  "task_id": "tg_candydream",
+  "task_name": "Play Candy Dreams",
+  "task_icon": "https://i.postimg.cc/YSLqPgbK/20241031223506.jpg",
+  "url": "https://t.me/CandyDreamBot/gameapp?startapp=share_15265",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+{
+  "task_id": "tg_majyo",
+  "task_name": "Play Majyo Treasure",
+  "task_icon": "https://i.postimg.cc/dQhPjvHp/MJ-logo-1.png",
+  "url": "https://t.me/MajyoTreasureBot/gameapp?startapp=10096984",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+{
+  "task_id": "tg_donkeyhunt",
+  "task_name": "Play Donkey Hunt",
+  "task_icon": "https://i.postimg.cc/HnMTZC2w/Donkey-Hunt-1.png",
+  "url": "https://t.me/DonkeyHuntBot/gameapp?startapp=10001450",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+]
+
+[
+  {
+  "task_id": "tg_bitgame",
+  "task_name": "Play BitGame",
+  "task_icon": "https://i.postimg.cc/Y2W118HW/IMG-20250422-100701-835.jpg",
+  "url": "https://t.me/BitGame_Online_bot/MINER_Play2Earn?startapp=adj_share_invite_bGUYeyMSiU1",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+  {
+  "task_id": "tg_bitgameaxe",
+  "task_name": "Play AxeHash",
+  "task_icon": "https://i.postimg.cc/QdbG4pp8/IMG-20250422-100706-372.jpg",
+  "url": "https://t.me/BitGame_AXE_bot/AxeHash?startapp=adj_share_invite_bGUYeyMSiU1wJAU1",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+  {
+  "task_id": "tg_anomalyhunter",
+  "task_name": "Play Anomaly Hunter",
+  "task_icon": "https://i.postimg.cc/5yTNt8Pd/IMG-20250422-114733-788.jpg",
+  "url": "https://t.me/anomalyhunter_bot/anomalyhunter/?startapp=7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+]
+
+[
+{
+  "task_id": "tg_clickerfarm",
+  "task_name": "Play Farm Clicker",
+  "task_icon": "https://i.postimg.cc/DZfNMZqt/IMG-20250421-160043-146.png",
+  "url": "https://t.me/clicker_farm_bot/game?startapp=code_outmine_r_6150098197",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_akedo",
+  "task_name": "Play Akedo",
+  "task_icon": "https://i.postimg.cc/dVxmY0Pb/IMG-20250421-163739-575.jpg",
+  "url": "https://t.me/Akedo_Bot/AkedoPlatform?startapp=77309411856046_7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}]
+
+https://t.me/Deviants_FightClub_Bot?start=R1739186025950
+{
+  "task_id": "tg_deviantsfightclub",
+  "task_name": "Play Deviants Fight Club",
+  "task_icon": "https://i.postimg.cc/x1MPcv2y/Deviants-Sm-Red.png",
+  "url": "https://t.me/Deviants_FightClub_Bot?start=R1739186025950",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+https://t.me/MTmine_bot?start=ab365772-f66d-466a-b7d8-7f329934fcae
+{
+  "task_id": "tg_mtmine",
+  "task_name": "MT Mine",
+  "task_icon": "https://i.postimg.cc/cJRDvXFf/IMG-20250422-160516-038.png",
+  "url": "https://t.me/MTmine_bot?start=ab365772-f66d-466a-b7d8-7f329934fcae",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+//https://meganet.app/login?refcode=UIMJCQ
+{
+  "task_id": "tg_meganet",
+  "task_name": "Mining Meganet",
+  "task_icon": "https://i.postimg.cc/L55wgwQn/2025-04-22-14-01-28.jpg",
+  "url": "https://meganet.app/login?refcode=UIMJCQ",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+[
+  https://t.me/TradingBaseAI_official_bot?startapp=7QRTTc
+{
+  "task_id": "tg_tradingbase",
+  "task_name": "Start Trading Base AI",
+  "task_icon": "https://i.postimg.cc/D0zNhbvN/IMG-20250422-160257-553.jpg",
+  "url": "https://t.me/TradingBaseAI_official_bot?startapp=7QRTTc",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+{
+  "task_id": "tg_biztycoon",
+  "task_name": "Play Biz Tycoon",
+  "task_icon": "https://i.postimg.cc/BntMv0Gj/IMG-20250422-160252-062.jpg",
+  "url": "https://t.me/biztycoon_bot/?startapp=7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+]
+
+
+//https://t.me/Rhinox_game_bot?start=6850344341
+{
+  "task_id": "tg_rhinox",
+  "task_name": "Play Rhinox",
+  "task_icon": "https://i.postimg.cc/4NPgxtJX/IMG-20250424-130850-376.jpg",
+  "url": "https://t.me/Rhinox_game_bot?start=6850344341",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+[
+{
+  "task_id": "tg_raccoonline",
+  "task_name": "Play Raccoonline",
+  "task_icon": "https://i.postimg.cc/BZ5TBmRQ/IMG-20250424-152431-490.jpg",
+  "url": "https://t.me/RaccoonLineClickBot?start=eyJyZWZlcnJhbF9jb2RlIjoiTmFUZGtIMUEzIn0=",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_raccoonlinefollowx",
+  "task_name": "Follow Raccoonline on X",
+  "task_icon": "https://i.postimg.cc/BZ5TBmRQ/IMG-20250424-152431-490.jpg",
+  "url": "https://x.com/raccoonline_vpn",
+  "tg_link": false,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_raccoonlinelikex",
+  "task_name": "Like and reply pinned tweet Raccoonline",
+  "task_icon": "https://i.postimg.cc/BZ5TBmRQ/IMG-20250424-152431-490.jpg",
+  "url": "https://x.com/raccoonline_vpn",
+  "tg_link": false,
+  "reward": 10,
+  "outmine":false
+}
+]
+
+//https://t.me/ArcadeChampionBot/join?startapp=mM22LUMeBQEX
+{
+  "task_id": "tg_arcadechampion",
+  "task_name": "Play Arcade Champion",
+  "task_icon": "https://i.postimg.cc/tJJFDJkb/IMG-20250426-101905-290.jpg",
+  "url": "https://t.me/ArcadeChampionBot/join?startapp=mM22LUMeBQEX",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+//https://t.me/thegooduck_bot/app?startapp=ref_mr8Pqs6d
+
+{
+  "task_id": "tg_thegooduck",
+  "task_name": "Play Gooduck",
+  "task_icon": "https://i.postimg.cc/ZKgt8bzh/IMG-20250428-123202-444.jpg",
+  "url": "https://t.me/thegooduck_bot/app?startapp=ref_mr8Pqs6d",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+//https://t.me/SentismAIBot?startapp=ref_7901909466
+
+{
+  "task_id": "tg_sentism",
+  "task_name": "Join Sentism",
+  "task_icon": "https://i.postimg.cc/284fKvDG/Sentism-Logo-Bg-1.png",
+  "url": "https://t.me/SentismAIBot?startapp=ref_7901909466",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+//https://t.me/PandaFiT_bot?start=_tgr_RF8x1GBjYWY6
+
+{
+  "task_id": "tg_pandafit",
+  "task_name": "Play PandaFiT",
+  "task_icon": "https://i.postimg.cc/zf4tNtwg/IMG-20250428-154231-602.jpg",
+  "url": "https://t.me/PandaFiT_bot?start=_tgr_RF8x1GBjYWY6",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+//https://t.me/zenmoneyhunterbot?start=c8c4773351eab3f7e06c31685ea7138
+
+{
+  "task_id": "tg_zenmoneyhunter",
+  "task_name": "Play Zencoin Airdrop",
+  "task_icon": "https://i.postimg.cc/BvBqjVpd/IMG-20250428-203958-857.jpg",
+  "url": "https://t.me/zenmoneyhunterbot?start=c8c4773351eab3f7e06c31685ea7138",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+//https://t.me/Rewardoairdrop1_bot?start=1864742277
+{
+  "task_id": "tg_rewardo",
+  "task_name": "Play Rewardo",
+  "task_icon": "https://i.postimg.cc/7YN8M202/2025-04-28-17-13-29.jpg",
+  "url": "https://t.me/Rewardoairdrop1_bot?start=1864742277",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+[
+{
+  "task_id": "tg_llamapayday",
+  "task_name": "Play LlamaPayday",
+  "task_icon": "https://i.postimg.cc/9M2pqgW9/IMG-20250429-120940-773-1.jpg",
+  "url": "https://t.me/LlamaPaydayBot/game?startapp=qf43vesx-MTY0NTU=-invite",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_seesfun",
+  "task_name": "Play SeesFun",
+  "task_icon": "https://i.postimg.cc/kMfcByLV/IMG-20250429-124309-465.jpg",
+  "url": "https://t.me/SeesFunBot/app?startapp=ref_sY7hQJP",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_hexmine",
+  "task_name": "Play HexMine",
+  "task_icon": "https://i.postimg.cc/V64j0YZy/IMG-20250429-133301-568.png",
+  "url": "https://t.me/HexMine_bot/start?startapp=101831407",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_telominer",
+  "task_name": "Play Telominer",
+  "task_icon": "https://i.postimg.cc/4d4cgDfW/IMG-20250429-151736-752-1.jpg",
+  "url": "https://t.me/telominerbot?startapp=7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+]
+
+//https://t.me/TheEvobot?startapp=REF-C4F78B
+{
+  "task_id": "tg_theevobot",
+  "task_name": "Play Evobot",
+  "task_icon": "https://i.postimg.cc/qqsLXQJ5/Evobots-logo.png",
+  "url": "https://t.me/TheEvobot?startapp=REF-C4F78B",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+//https://t.me/PinGo_MiniBot/join?startapp=outmine
+
+{
+  "task_id": "tg_pingominibot",
+  "task_name": "Play PinGo Punny",
+  "task_icon": "https://i.postimg.cc/qv0m79kC/green-profile-1.png",
+  "url": "https://t.me/PinGo_MiniBot/join?startapp=outmine",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+[
+{
+  "task_id": "tg_ecotonproject",
+  "task_name": "Play ECO save the Planet",
+  "task_icon": "https://i.postimg.cc/SK5Sn3Nq/IMG-20250505-140019-203.jpg",
+  "url": "https://t.me/EcoTonProject_bot/app?startapp=13405",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_duriano",
+  "task_name": "Play Duriano",
+  "task_icon": "https://i.postimg.cc/Kj1tndtN/IMG-20250505-191747-751.jpg",
+  "url": "https://t.me/DurianoBot?startapp=Outmine",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_memex",
+  "task_name": "Play Memex",
+  "task_icon": "https://i.postimg.cc/rs5xn5Y0/IMG-20250505-192802-895.jpg",
+  "url": "https://t.me/memexglobalbot/memex?startapp=7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+]
+
+[
+{
+  "task_id": "tg_sunspacejump",
+  "task_name": "Play SunSpace JUMP",
+  "task_icon": "https://i.postimg.cc/xd50DvQ1/IMG-20250509-000809-891-1.png",
+  "url": "https://t.me/SunSpaceJump_bot/play?startapp=outmine",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_coinunk",
+  "task_name": "Play UnknownCoin",
+  "task_icon": "https://i.postimg.cc/DZz4tftR/IMG-20250509-105738-781-1.png",
+  "url": "https://t.me/coin_unk_bot/app?startapp=NzkxMzg4NTg1Mg==",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+]
+
+
+[
+{
+  "task_id": "tg_sclubearn1",
+  "task_name": "Play SCLUB",
+  "task_icon": "https://i.postimg.cc/pL6RrbGC/IMG-20250510-200334-153.png",
+  "url": "https://t.me/sclubearnbot/app?startapp=IKgXL4l0ch",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_walkcoin",
+  "task_name": "Play WalkCoin",
+  "task_icon": "https://i.postimg.cc/ZqQFKcy2/IMG-20250511-133608-875.jpg",
+  "url": "https://t.me/TheWalkCoinBot/WalkCoin?startapp=081",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+{
+  "task_id": "tg_slavesgame",
+  "task_name": "Play Slavery",
+  "task_icon": "https://i.postimg.cc/m2rYMJNJ/IMG-20250512-012323-416.jpg",
+  "url": "https://t.me/slaves_game_bot/app?startapp=ref_7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_aitech",
+  "task_name": "Explore AITech",
+  "task_icon": "https://i.postimg.cc/8Ct74PHS/IMG-20250512-125324-552-1.png",
+  "url": "https://t.me/AITech_Agents_bot/app?startapp=ref_9Lfmre4N",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_cryptonews195",
+  "task_name": "Crypto News 195",
+  "task_icon": "https://i.postimg.cc/pd6q7xWw/IMG-20250512-125455-856.jpg",
+  "url": "https://t.me/+1O4oceFXt0thMjQ0",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+]
+
+//https://t.me/OxygenHuntersBot/app
+[
+{
+  "task_id": "tg_oxygenhunters",
+  "task_name": "Play Oxygen Hunters",
+  "task_icon": "https://i.postimg.cc/6QnNyqJd/IMG-20250512-205734-679.jpg",
+  "url": "https://t.me/OxygenHuntersBot/app?startapp=ref_7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+{
+  "task_id": "tg_robon",
+  "task_name": "Play Roboton",
+  "task_icon": "https://i.postimg.cc/ryS3W3HL/IMG-20250512-212632-528-1.png",
+  "url": "https://t.me/Roboton_offcl_bot/app?startapp=ref_7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}]
+
+
+{
+  "task_id": "tg_voteoutmine",
+  "task_name": "Upvote Outmine",
+  "task_icon": "https://i.postimg.cc/hvJmDx2Q/2025-05-14-12-32-03.jpg",
+  "url": "https://t.me/tapps_bot/center?startapp=app_outmine",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
