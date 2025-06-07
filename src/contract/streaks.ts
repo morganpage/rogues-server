@@ -52,8 +52,9 @@ export async function getStreakStatus(address: Address) {
   const contract = new ethers.Contract(contractAddress, contractABI.abi, wallet);
   const timeUntilCanClaim = await contract.timeUntilCanClaim(address);
   const timeUntilStreakReset = await contract.timeUntilStreakReset(address);
+  const lastClaimed = await contract.lastClaimed(address);
   const streak = await contract.streak(address);
-  return { streak: Number(streak), timeUntilCanClaim: Number(timeUntilCanClaim), timeUntilStreakReset: Number(timeUntilStreakReset) };
+  return { streak: Number(streak), timeUntilCanClaim: Number(timeUntilCanClaim), timeUntilStreakReset: Number(timeUntilStreakReset), lastClaimed: Number(lastClaimed) };
 }
 
 export async function getStreakRewardContractAddress() {

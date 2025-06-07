@@ -1143,3 +1143,72 @@ https://t.me/MTmine_bot?start=ab365772-f66d-466a-b7d8-7f329934fcae
   "reward": 10,
   "outmine":false
 }
+
+
+//https://t.me/gottonmeme_bot/game?start=outmine
+{
+  "task_id": "tg_gottonmeme",
+  "task_name": "Play GOTTON",
+  "task_icon": "https://i.postimg.cc/wvvGfLnF/IMG-20250517-173142-281.jpg",
+  "url": "https://t.me/gottonmeme_bot/game?start=outmine",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+//https://t.me/xskill_bot/XSkill?startapp=cG49eHMudGcubm90Ym9yZWQ=
+{
+  "task_id": "tg_xskill",
+  "task_name": "Play XSkill",
+  "task_icon": "https://i.postimg.cc/brB5PtqT/IMG-20250520-125421-112-1.png",
+  "url": "https://t.me/xskill_bot/XSkill?startapp=cG49eHMudGcubm90Ym9yZWQ=",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+//https://t.me/fameverse_token_bot?startapp=ref-715736648
+{
+  "task_id": "tg_fameverse",
+  "task_name": "Join Fameverse",
+  "task_icon": "https://i.postimg.cc/bJdfk5vp/IMG-20250523-170129-871.jpg",
+  "url": "https://t.me/fameverse_token_bot?startapp=ref-715736648",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+[
+{
+  "task_id": "tg_botspacel",
+  "task_name": "Play Stars",
+  "task_icon": "https://iili.io/F9whjhG.th.jpg",
+  "url": "https://t.me/botspacelbot?start=00065v9wt8",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_bitsolara",
+  "task_name": "Play Bitsolara",
+  "task_icon": "https://iili.io/F9w8Fx1.th.png",
+  "url": "https://t.me/BitsolaraMiniApp_Bot/app?startapp=FD1B6C16",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+]
+
+
+// https://t.me/DragonLand_Official_Bot/dragonland_app?startapp=5204216393
+{
+  "task_id": "tg_dragonland",
+  "task_name": "Play Dragon Land",
+  "task_icon": "https://i.postimg.cc/63BgKnJZ/IMG-20250606-134612-757-1.png",
+  "url": "https://t.me/DragonLand_Official_Bot/dragonland_app?startapp=5204216393",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}

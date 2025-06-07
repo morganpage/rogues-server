@@ -8,6 +8,8 @@ const utils_1 = require("../utils/utils");
 const streaks_1 = require("../contract/streaks");
 const minting_1 = require("../contract/minting");
 const db_1 = require("../db/db");
+const streaksdb_1 = require("../contract/streaksdb");
+const streaks_reactive_1 = require("../contract/streaks-reactive");
 const validateSchema = zod_1.default.object({
     appPubKey: zod_1.default.string(),
 });
@@ -71,6 +73,36 @@ async function routes(fastify, options) {
             const address = req.query.address;
             if (address) {
                 let streakInfo = await (0, streaks_1.getStreakStatus)(address);
+                reply.code(200).send({ status: "ok", streakInfo });
+            }
+            else {
+                reply.code(400).send({ status: "error", message: "Address required" });
+            }
+        }
+        catch (e) {
+            reply.code(400).send({ status: "error", message: e.message });
+        }
+    });
+    fastify.get("/api/streak_info_reactive", async (req, reply) => {
+        try {
+            const address = req.query.address;
+            if (address) {
+                let streakInfo = await (0, streaks_reactive_1.getStreakStatusReactive)(address);
+                reply.code(200).send({ status: "ok", streakInfo });
+            }
+            else {
+                reply.code(400).send({ status: "error", message: "Address required" });
+            }
+        }
+        catch (e) {
+            reply.code(400).send({ status: "error", message: e.message });
+        }
+    });
+    fastify.get("/api/streak_info_db", async (req, reply) => {
+        try {
+            const address = req.query.address;
+            if (address) {
+                let streakInfo = await (0, streaksdb_1.getStreakStatusDB)(fastify, address);
                 reply.code(200).send({ status: "ok", streakInfo });
             }
             else {

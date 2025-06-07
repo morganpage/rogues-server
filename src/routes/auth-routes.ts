@@ -4,6 +4,8 @@ import { verify } from "../utils/utils";
 import { claimHoursAgo, claimStreakFor, getStreakMilestonesToTokensIds, getStreakRewardContractAddress, getStreakStatus } from "../contract/streaks";
 import { getURIFromTokenId, mintGameItemToAddress } from "../contract/minting";
 import { getAllStreakToPoints, getStreakToPoints, updateUserLastLogin } from "../db/db";
+import { getStreakStatusDB } from "../contract/streaksdb";
+import { getStreakStatusReactive } from "../contract/streaks-reactive";
 
 const validateSchema = zod.object({
   appPubKey: zod.string(),
@@ -65,6 +67,34 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
       const address = (req.query as { address?: string }).address as string;
       if (address) {
         let streakInfo = await getStreakStatus(address);
+        reply.code(200).send({ status: "ok", streakInfo });
+      } else {
+        reply.code(400).send({ status: "error", message: "Address required" });
+      }
+    } catch (e: any) {
+      reply.code(400).send({ status: "error", message: e.message });
+    }
+  });
+
+  fastify.get("/api/streak_info_reactive", async (req: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const address = (req.query as { address?: string }).address as string;
+      if (address) {
+        let streakInfo = await getStreakStatusReactive(address);
+        reply.code(200).send({ status: "ok", streakInfo });
+      } else {
+        reply.code(400).send({ status: "error", message: "Address required" });
+      }
+    } catch (e: any) {
+      reply.code(400).send({ status: "error", message: e.message });
+    }
+  });
+
+  fastify.get("/api/streak_info_db", async (req: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const address = (req.query as { address?: string }).address as string;
+      if (address) {
+        let streakInfo = await getStreakStatusDB(fastify, address);
         reply.code(200).send({ status: "ok", streakInfo });
       } else {
         reply.code(400).send({ status: "error", message: "Address required" });

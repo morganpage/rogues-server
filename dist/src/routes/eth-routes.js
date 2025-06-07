@@ -5,6 +5,9 @@ const zod_1 = require("zod");
 const telegram_1 = require("../utils/telegram");
 const eth_web3auth_1 = require("../utils/eth-web3auth");
 const streaks_1 = require("../contract/streaks");
+const streaksdb_1 = require("../contract/streaksdb");
+const db_1 = require("../db/db");
+const streaks_reactive_1 = require("../contract/streaks-reactive");
 const tgDataRequest = zod_1.z.object({
     tg_data: zod_1.z.string(),
 });
@@ -91,6 +94,55 @@ async function ethRoutes(fastify, options) {
                     else {
                         reply.code(401).send({ status: "error", message: "Validation Failed" });
                     }
+                }
+            }
+        }
+        catch (e) {
+            reply.code(400).send({ status: "error", message: e.message });
+        }
+    });
+    fastify.post("/api/tg/streak_claim_db", async (request, reply) => {
+        try {
+            const req = tgDataRequest.parse(request.body);
+            const telegramData = (0, telegram_1.processTelegramDataMultiToken)(req.tg_data);
+            if (telegramData.ok) {
+                const { id, first_name, last_name, username } = JSON.parse(telegramData.data.user);
+                const user_id = id.toString();
+                //Lookup user eth address from db
+                if (!fastify.mongo || !fastify.mongo.db)
+                    throw new Error("MongoDB is not configured properly");
+                const telegram_user = await fastify.mongo.db.collection("telegram_users").findOne({ user_id });
+                if (!telegram_user || !telegram_user.eth_address) {
+                    reply.code(401).send({ status: "error", message: "User not found or eth address not set" });
+                    return;
+                }
+                let { streak, timeUntilCanClaim, timeUntilStreakReset } = await (0, streaksdb_1.getStreakStatusDB)(fastify, telegram_user.eth_address);
+                if (timeUntilStreakReset <= 0) {
+                    // If timeUntilStreakReset is 0, it means the user has lost their streak or this is their first streak claim
+                    const now = new Date();
+                    const points = await (0, db_1.getStreakToPoints)(fastify, 1);
+                    await fastify.mongo.db.collection("rogues_users").updateOne({ address: telegram_user.eth_address }, { $set: { lastClaimed: now, streak: 1 }, $inc: { points } }, { upsert: true });
+                    let streakInfo = await (0, streaksdb_1.getStreakStatusDB)(fastify, telegram_user.eth_address);
+                    (0, streaks_reactive_1.syncReactive)(fastify, telegram_user.eth_address, streakInfo); // Sync with reactive system
+                    reply.code(200).send({ status: "ok", message: "Streak reset successfully", streakInfo });
+                    return;
+                }
+                if (timeUntilCanClaim > 0) {
+                    reply.code(400).send({ status: "error", message: "You can't claim yet", timeUntilCanClaim, streak, timeUntilStreakReset });
+                    return;
+                }
+                else {
+                    // Update lastClaimed and increment streak
+                    const now = new Date();
+                    // Get points from streak
+                    const points = await (0, db_1.getStreakToPoints)(fastify, streak);
+                    console.log("User ", telegram_user.eth_address, " claimed streak ", streak, " for ", points, " points");
+                    await fastify.mongo.db.collection("rogues_users").updateOne({ address: telegram_user.eth_address }, { $set: { lastClaimed: now }, $inc: { streak: 1, points } });
+                    let streakInfo = await (0, streaksdb_1.getStreakStatusDB)(fastify, telegram_user.eth_address);
+                    (0, streaks_reactive_1.syncReactive)(fastify, telegram_user.eth_address, streakInfo); // Sync with reactive system
+                    // streak += 1; // Increment the streak count
+                    reply.code(200).send({ status: "ok", message: "Streak claimed successfully", streakInfo });
+                    return;
                 }
             }
         }

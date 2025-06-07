@@ -3,7 +3,9 @@ import { z } from "zod";
 import { processTelegramDataMultiToken } from "../utils/telegram";
 import { generateJwtToken, getPrivateKey } from "../utils/eth-web3auth";
 import { claimStreakFor } from "../contract/streaks";
-import { startCooldown, startCooldownFor } from "../contract/cooldowns";
+import { getStreakStatusDB } from "../contract/streaksdb";
+import { getStreakToPoints } from "../db/db";
+import { syncReactive } from "../contract/streaks-reactive";
 
 const tgDataRequest = z.object({
   tg_data: z.string(),
@@ -88,6 +90,53 @@ export async function ethRoutes(fastify: FastifyInstance, options: FastifyPlugin
           } else {
             reply.code(401).send({ status: "error", message: "Validation Failed" });
           }
+        }
+      }
+    } catch (e: any) {
+      reply.code(400).send({ status: "error", message: e.message });
+    }
+  });
+
+  fastify.post("/api/tg/streak_claim_db", async (request: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const req = tgDataRequest.parse(request.body);
+      const telegramData = processTelegramDataMultiToken(req.tg_data);
+      if (telegramData.ok) {
+        const { id, first_name, last_name, username } = JSON.parse(telegramData.data.user);
+        const user_id = id.toString();
+        //Lookup user eth address from db
+        if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+        const telegram_user = await fastify.mongo.db.collection("telegram_users").findOne({ user_id });
+        if (!telegram_user || !telegram_user.eth_address) {
+          reply.code(401).send({ status: "error", message: "User not found or eth address not set" });
+          return;
+        }
+        let { streak = 0, timeUntilCanClaim = 0, timeUntilStreakReset = 0 } = await getStreakStatusDB(fastify, telegram_user.eth_address);
+        if (timeUntilStreakReset <= 0) {
+          // If timeUntilStreakReset is 0, it means the user has lost their streak or this is their first streak claim
+          const now = new Date();
+          const points: number = await getStreakToPoints(fastify, 1);
+          await fastify.mongo.db.collection("rogues_users").updateOne({ address: telegram_user.eth_address }, { $set: { lastClaimed: now, streak: 1 }, $inc: { points } }, { upsert: true });
+          let streakInfo = await getStreakStatusDB(fastify, telegram_user.eth_address);
+          syncReactive(fastify, telegram_user.eth_address, streakInfo); // Sync with reactive system
+          reply.code(200).send({ status: "ok", message: "Streak reset successfully", streakInfo });
+          return;
+        }
+        if (timeUntilCanClaim > 0) {
+          reply.code(400).send({ status: "error", message: "You can't claim yet", timeUntilCanClaim, streak, timeUntilStreakReset });
+          return;
+        } else {
+          // Update lastClaimed and increment streak
+          const now = new Date();
+          // Get points from streak
+          const points: number = await getStreakToPoints(fastify, streak);
+          console.log("User ", telegram_user.eth_address, " claimed streak ", streak, " for ", points, " points");
+          await fastify.mongo.db.collection("rogues_users").updateOne({ address: telegram_user.eth_address }, { $set: { lastClaimed: now }, $inc: { streak: 1, points } });
+          let streakInfo = await getStreakStatusDB(fastify, telegram_user.eth_address);
+          syncReactive(fastify, telegram_user.eth_address, streakInfo); // Sync with reactive system
+          // streak += 1; // Increment the streak count
+          reply.code(200).send({ status: "ok", message: "Streak claimed successfully", streakInfo });
+          return;
         }
       }
     } catch (e: any) {

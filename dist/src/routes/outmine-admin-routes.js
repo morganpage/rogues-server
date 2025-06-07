@@ -51,6 +51,21 @@ async function routes(fastify, options) {
         await fastify.mongo.db.collection("outmine_settings").updateOne({}, { $set: { message_send: new_value } });
         reply.code(200).send(new_value);
     });
+    //Toggle tasks hide
+    fastify.post("/api/tasks_hide_toggle/:task_id", async (req, reply) => {
+        if (!fastify.mongo || !fastify.mongo.db) {
+            throw new Error("MongoDB is not configured properly");
+        }
+        const task_id = req.params.task_id;
+        const data = await fastify.mongo.db.collection("tasks").findOne({ task_id });
+        if (!data) {
+            reply.code(404).send("No data found");
+            return;
+        }
+        const new_value = !data["hide"];
+        await fastify.mongo.db.collection("tasks").updateOne({ task_id }, { $set: { hide: new_value } });
+        reply.code(200).send(new_value);
+    });
     // fastify.get("/api/proxy", async (req: FastifyRequest, reply: FastifyReply) => {
     //   //Pass in json url to send request to
     //   const url = (req.query as { url: string }).url;

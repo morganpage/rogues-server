@@ -77,8 +77,21 @@ GET https://walrus-app-goxso.ondigitalocean.app/api/streak_to_points?streak=10
 
 
 ### GET Streak Info
-https://walrus-app-goxso.ondigitalocean.app/api/streak_info?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8df
+https://walrus-app-goxso.ondigitalocean.app/api/streak_info?address=0xcE6fF2Ad12F4A27d490FEd5A42b0fDDEf164D6F5
 
+
+### GET Streak Info
+https://walrus-app-goxso.ondigitalocean.app/api/streak_info?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8de
+
+### GET Streak Info
+http://localhost:8080/api/streak_info?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8de
+
+### GET Streak Info
+http://localhost:8080/api/streak_info?address=0xcE6fF2Ad12F4A27d490FEd5A42b0fDDEf164D6F5
+
+
+### GET Streak Info
+https://walrus-app-goxso.ondigitalocean.app/api/streak_info?address=0x5033ddc2523d1c58192d1496922238f780c9cc66
 
 
 ///api/rogues_users/:address
@@ -104,6 +117,52 @@ GET http://localhost:8080/api/rank
 ### GET All Rogues Users
 GET https://walrus-app-goxso.ondigitalocean.app/api/rank
 
+
+
+### POST eth_auth
+POST http://localhost:8080/api/eth_auth
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}"
+}
+
+### STREAK
+POST http://localhost:8080/api/tg/streak
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}"
+}
+
+
+### STREAK
+POST http://localhost:8080/api/tg/streak_claim_db
+Content-Type: application/json
+
+{
+  "tg_data":"{{$dotenv tg_data_live}}"
+}
+
+
+### GET Streak Info
+GET http://localhost:8080/api/streak_info?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8de
+
+### GET Streak Info DB
+GET http://localhost:8080/api/streak_info_db?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8de
+
+### GET Streak Info DB
+GET http://localhost:8080/api/streak_info_db?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8dd
+
+
+### GET Streak Info
+GET http://localhost:8080/api/streak_info_reactive?address=0xb2F9531bfe0C742135C7D3ad9038d298616a65A9
+
+### GET Streak Info
+GET http://localhost:8080/api/streak_info_reactive?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8dd
+
+### GET Streak Info
+GET http://localhost:8080/api/streak_info_reactive?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8de
 
 
 # ### POST cooldown NOT NEEDED!!!

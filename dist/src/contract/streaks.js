@@ -58,8 +58,9 @@ async function getStreakStatus(address) {
     const contract = new ethers_1.ethers.Contract(contractAddress, DailyStreakSystem_json_1.default.abi, wallet);
     const timeUntilCanClaim = await contract.timeUntilCanClaim(address);
     const timeUntilStreakReset = await contract.timeUntilStreakReset(address);
+    const lastClaimed = await contract.lastClaimed(address);
     const streak = await contract.streak(address);
-    return { streak: Number(streak), timeUntilCanClaim: Number(timeUntilCanClaim), timeUntilStreakReset: Number(timeUntilStreakReset) };
+    return { streak: Number(streak), timeUntilCanClaim: Number(timeUntilCanClaim), timeUntilStreakReset: Number(timeUntilStreakReset), lastClaimed: Number(lastClaimed) };
 }
 async function getStreakRewardContractAddress() {
     const provider = new ethers_1.JsonRpcProvider(rpcProvider);
