@@ -70,14 +70,14 @@ export async function getStreakRewardContractAddress() {
 }
 
 //streak_milestones_to_tokenIds
-export async function getStreakMilestonesToTokensIds() {
-  const provider = new JsonRpcProvider(rpcProvider);
-  const privateKey = process.env.MINTER_PRIVATE_KEY;
-  if (!privateKey) {
-    throw new Error("MINTER_PRIVATE_KEY is not defined");
-  }
-  const wallet = new ethers.Wallet(privateKey, provider);
-  const contract = new ethers.Contract(contractAddress, contractABI.abi, wallet);
-  const milestones = await contract.getTokenMilestones();
-  return milestones;
-}
+// export async function getStreakMilestonesToTokensIds() {
+//   const provider = new JsonRpcProvider(rpcProvider);
+//   const privateKey = process.env.MINTER_PRIVATE_KEY;
+//   if (!privateKey) {
+//     throw new Error("MINTER_PRIVATE_KEY is not defined");
+//   }
+//   const wallet = new ethers.Wallet(privateKey, provider);
+//   const contract = new ethers.Contract(contractAddress, contractABI.abi, wallet);
+//   const milestones = await contract.getTokenMilestones();
+//   return milestones;
+// }

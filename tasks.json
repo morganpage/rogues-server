@@ -1212,3 +1212,15 @@ https://t.me/MTmine_bot?start=ab365772-f66d-466a-b7d8-7f329934fcae
   "reward": 10,
   "outmine":false
 }
+
+
+//https://t.me/cirque_flow_bot?startapp=8073820071
+{
+  "task_id": "tg_cirqueflow",
+  "task_name": "Play Cirque Flow",
+  "task_icon": "https://i.postimg.cc/MpvRNkF0/IMG-20250607-192102-687.jpg",
+  "url": "https://t.me/cirque_flow_bot?startapp=8073820071",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}

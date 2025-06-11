@@ -1,11 +1,12 @@
 import { FastifyRequest, FastifyReply, FastifyInstance, FastifyPluginOptions } from "fastify";
 import zod from "zod";
 import { verify } from "../utils/utils";
-import { claimHoursAgo, claimStreakFor, getStreakMilestonesToTokensIds, getStreakRewardContractAddress, getStreakStatus } from "../contract/streaks";
+import { claimHoursAgo, claimStreakFor, getStreakStatus } from "../contract/streaks";
 import { getURIFromTokenId, mintGameItemToAddress } from "../contract/minting";
 import { getAllStreakToPoints, getStreakToPoints, updateUserLastLogin } from "../db/db";
 import { getStreakStatusDB } from "../contract/streaksdb";
-import { getStreakStatusReactive } from "../contract/streaks-reactive";
+import { getStreakStatusReactive, getStreakMilestonesToTokensIds } from "../contract/streaks-reactive";
+import { getItemsFromAddress } from "../contract/rogues-items-reactive";
 
 const validateSchema = zod.object({
   appPubKey: zod.string(),
@@ -122,20 +123,20 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
   });
 
   //Get all the token milestone mappings - getStreakTokenMilestones
-  fastify.get("/api/streak_milestones_to_tokenIds", async (req: FastifyRequest, reply: FastifyReply) => {
-    try {
-      let milestones_tokens = await getStreakMilestonesToTokensIds();
-      let milestones = milestones_tokens[0].map((milestone: any) => parseInt(milestone));
-      let tokens = milestones_tokens[1].map((token: any) => parseInt(token));
-      let mapping_array = [];
-      for (let i = 0; i < milestones.length; i++) {
-        mapping_array.push({ milestone: milestones[i], tokenId: tokens[i] });
-      }
-      reply.code(200).send(mapping_array);
-    } catch (e: any) {
-      reply.code(400).send({ status: "error", message: e.message });
-    }
-  });
+  // fastify.get("/api/streak_milestones_to_tokenIds", async (req: FastifyRequest, reply: FastifyReply) => {
+  //   try {
+  //     let milestones_tokens = await getStreakMilestonesToTokensIds();
+  //     let milestones = milestones_tokens[0].map((milestone: any) => parseInt(milestone));
+  //     let tokens = milestones_tokens[1].map((token: any) => parseInt(token));
+  //     let mapping_array = [];
+  //     for (let i = 0; i < milestones.length; i++) {
+  //       mapping_array.push({ milestone: milestones[i], tokenId: tokens[i] });
+  //     }
+  //     reply.code(200).send(mapping_array);
+  //   } catch (e: any) {
+  //     reply.code(400).send({ status: "error", message: e.message });
+  //   }
+  // });
 
   //getStreakRewardContractAddress
   // fastify.get("/api/streak_reward_contract", async (req: FastifyRequest, reply: FastifyReply) => {
@@ -194,6 +195,26 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
       } else {
         reply.code(401).send({ status: "error", message: "Validation Failed" });
       }
+    } catch (e: any) {
+      reply.code(400).send({ status: "error", message: e.message });
+    }
+  });
+
+  //Get all the token milestone mappings - getStreakTokenMilestones
+  fastify.get("/api/game_items", async (req: FastifyRequest, reply: FastifyReply) => {
+    try {
+      const address = (req.query as { address?: string }).address as string;
+
+      let gameItems = await getItemsFromAddress(address);
+
+      // let milestones_tokens = await getStreakMilestonesToTokensIds();
+      // let milestones = milestones_tokens[0].map((milestone: any) => parseInt(milestone));
+      // let tokens = milestones_tokens[1].map((token: any) => parseInt(token));
+      // let mapping_array = [];
+      // for (let i = 0; i < milestones.length; i++) {
+      //   mapping_array.push({ milestone: milestones[i], tokenId: tokens[i] });
+      // }
+      reply.code(200).send(gameItems);
     } catch (e: any) {
       reply.code(400).send({ status: "error", message: e.message });
     }

@@ -164,6 +164,17 @@ GET http://localhost:8080/api/streak_info_reactive?address=0x7990ec7597e6215958c
 ### GET Streak Info
 GET http://localhost:8080/api/streak_info_reactive?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8de
 
+### GET Reactive Game Items
+GET http://localhost:8080/api/game_items?address=0xcE6fF2Ad12F4A27d490FEd5A42b0fDDEf164D6F5
+
+### GET Reactive Game Items
+GET http://localhost:8080/api/game_items?address=0x7990ec7597e6215958c9bbef7d555f7b72f6b8de
+
+
+# ### GET Reactive Game Items
+# GET http://localhost:8080/api/streak_milestones_to_tokenIds
+
+
 
 # ### POST cooldown NOT NEEDED!!!
 # POST http://localhost:8080/api/tg/cooldown

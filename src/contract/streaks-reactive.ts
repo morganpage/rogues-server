@@ -6,8 +6,8 @@ import { FastifyInstance } from "fastify";
 dotenv.config();
 
 import contractABI from "../../reactive/out/StreakSystem.sol/StreakSystem.json";
-const contractAddress: Address = process.env.STREAKSYSTEM_CONTRACT_ADDRESS || "";
-const rpcProvider = "https://kopli-rpc.rnk.dev";
+const contractAddress: Address = "0x2eB75a1429F6fE2d60F783c73d656D977AbdfCf9";
+const rpcProvider = "https://mainnet-rpc.rnk.dev";
 const adminPrivateKey = process.env.ADMIN_PRIVATE_KEY;
 
 export async function syncReactive(fastify: FastifyInstance, address: Address, streakInfoDB: any) {
@@ -73,4 +73,15 @@ export async function setStreakForReactive(address: Address, streak: number) {
   } catch (e: any) {
     return { status: "error", message: e.shortMessage };
   }
+}
+
+export async function getStreakMilestonesToTokensIds() {
+  const provider = new JsonRpcProvider(rpcProvider);
+  if (!adminPrivateKey) {
+    throw new Error("ADMIN_PRIVATE_KEY is not defined");
+  }
+  const wallet = new ethers.Wallet(adminPrivateKey, provider);
+  const contract = new ethers.Contract(contractAddress, contractABI.abi, wallet);
+  const milestones = await contract.milestoneToTokenId;
+  return milestones;
 }

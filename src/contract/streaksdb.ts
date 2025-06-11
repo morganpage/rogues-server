@@ -29,7 +29,7 @@ export async function getStreakStatusDB(fastify: FastifyInstance, address: Addre
   }
   if (debug) console.log("getStreakStatusDB - address:", address, "lastClaimed:", rogues_user.lastClaimed, "streak:", rogues_user.streak);
   // const streakResetTime = 60 * 60 * 24 * 2; // 2 days in seconds
-  // const streakIncrementTime = 60 * 60 * 24 * 1; // 24 hours in seconds
+  //const streakIncrementTime = 60; // 24 hours in seconds
   const now = new Date();
   const diffInSeconds = Math.floor((now.getTime() - rogues_user.lastClaimed.getTime()) / 1000);
   const timeUntilCanClaim = streak_increment_time - diffInSeconds > 0 ? streak_increment_time - diffInSeconds : 0;
