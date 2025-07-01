@@ -4,7 +4,7 @@ import { processTelegramDataMultiToken } from "../utils/telegram";
 import { generateJwtToken, getPrivateKey } from "../utils/eth-web3auth";
 import { claimStreakFor } from "../contract/streaks";
 import { getStreakStatusDB } from "../contract/streaksdb";
-import { getStreakToPoints } from "../db/db";
+import { EventLog, getStreakToPoints } from "../db/db";
 import { syncReactive } from "../contract/streaks-reactive";
 
 const tgDataRequest = z.object({
@@ -58,6 +58,10 @@ export async function ethRoutes(fastify: FastifyInstance, options: FastifyPlugin
           //console.log("ethData", ethData);
           const eth_address = (ethData as { ethPublicAddress: string[] }).ethPublicAddress[0];
           await fastify.mongo.db.collection("telegram_users").updateOne({ user_id }, { $set: { eth_address, first_name, last_name, username } }, { upsert: true });
+
+          const eventLog: EventLog = { user_id, event_type: "eth_address_added", username, first_name, last_name, start_param: "", createdAt: new Date(), extraData: { eth_address } };
+          await fastify.mongo.db.collection("events").insertOne(eventLog);
+
           reply.send({ result: "success", user, JWTtoken, ethData });
         }
       }

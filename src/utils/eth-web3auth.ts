@@ -13,6 +13,18 @@ if (!clientId) throw new Error("WEB3AUTH_CLIENT_ID is not set");
 const W3A_VERIFIER_NAME = "web3auth-tg-verifier_1742824075";
 
 const chainConfig = {
+  chainId: "0x504",
+  displayName: "Moonbeam",
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  tickerName: "Glimmer",
+  ticker: "GLMR",
+  decimals: 18,
+  rpcTarget: "https://moonbeam.gateway.tenderly.co/32cGW6KHk2y8iNGIapuVO1",
+  blockExplorerUrl: "https://moonscan.io/",
+  logo: "https://cryptologos.cc/logos/ethereum-eth-logo.png",
+};
+
+const chainConfigBoba = {
   chainId: "0x120",
   displayName: "Boba Ethereum",
   chainNamespace: CHAIN_NAMESPACES.EIP155,
