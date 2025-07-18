@@ -1,4 +1,4 @@
-import { createHmac } from "crypto";
+import { createHmac, createHash } from "crypto";
 
 function hmac(data: string, key: string | Buffer): Buffer {
   return createHmac("sha256", key).update(data).digest();
@@ -24,12 +24,53 @@ function processTelegramData(qs: string, token: string): { ok: false } | { ok: t
 }
 
 export function processTelegramDataMultiToken(qs: string): { ok: false } | { ok: true; data: Record<string, string> } {
-  let p1 = processTelegramData(qs, process.env.TELEGRAM_BOT_TOKEN!);
-  if (p1.ok) return p1;
-  if (!process.env.TELEGRAM_BOT_TOKEN_2) return p1;
-  let p2 = processTelegramData(qs, process.env.TELEGRAM_BOT_TOKEN_2!);
-  if (p2.ok) return p2;
-  if (!process.env.TELEGRAM_BOT_TOKEN_3) return p2;
-  let p3 = processTelegramData(qs, process.env.TELEGRAM_BOT_TOKEN_3!);
-  return p3;
+  if (qs.startsWith("webuser=")) {
+    let p1 = processTelegramDataWebAuth(qs, process.env.TELEGRAM_BOT_TOKEN!);
+    if (p1.ok) return p1;
+    if (!process.env.TELEGRAM_BOT_TOKEN_2) return p1;
+    let p2 = processTelegramDataWebAuth(qs, process.env.TELEGRAM_BOT_TOKEN_2!);
+    if (p2.ok) return p2;
+    if (!process.env.TELEGRAM_BOT_TOKEN_3) return p2;
+    let p3 = processTelegramDataWebAuth(qs, process.env.TELEGRAM_BOT_TOKEN_3!);
+    return p3;
+  } else {
+    let p1 = processTelegramData(qs, process.env.TELEGRAM_BOT_TOKEN!);
+    if (p1.ok) return p1;
+    if (!process.env.TELEGRAM_BOT_TOKEN_2) return p1;
+    let p2 = processTelegramData(qs, process.env.TELEGRAM_BOT_TOKEN_2!);
+    if (p2.ok) return p2;
+    if (!process.env.TELEGRAM_BOT_TOKEN_3) return p2;
+    let p3 = processTelegramData(qs, process.env.TELEGRAM_BOT_TOKEN_3!);
+    return p3;
+  }
+}
+
+export function processTelegramDataWebAuth(qs: string, token: string): { ok: false } | { ok: true; data: Record<string, string> } {
+  try {
+    //remove the "webuser=" prefix if it exists
+    if (qs.startsWith("webuser=")) {
+      qs = qs.substring("webuser=".length);
+    }
+    const decoded_tg_data = decodeURIComponent(qs);
+    const userData = JSON.parse(decoded_tg_data);
+    const receivedHash = userData.hash;
+    const dataCheckString = Object.keys(userData)
+      .sort()
+      .filter((key) => key !== "hash")
+      .map((key) => `${key}=${userData[key]}`)
+      .join("\n");
+    //console.log("Data check string:", dataCheckString);
+    const secretKey = createHash("sha256").update(token).digest(); //Generate the secret_key (SHA256 hash of the bot's token) [1]
+    const hmac = createHmac("sha256", secretKey); //Calculate the HMAC-SHA-256 signature [1]
+    hmac.update(dataCheckString);
+    const calculatedHash = hmac.digest("hex"); // Get hexadecimal representation [1]
+    //console.log("Calculated hash:", calculatedHash + " | Received hash: " + receivedHash);
+    if (calculatedHash !== receivedHash) {
+      return { ok: false };
+    }
+    return { ok: true, data: { user: JSON.stringify(userData), auth_date: userData.auth_date.toString() } };
+  } catch (e) {
+    console.error("Error processing Telegram data:", e);
+    return { ok: false };
+  }
 }

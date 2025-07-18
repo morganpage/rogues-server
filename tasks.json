@@ -1439,3 +1439,91 @@ https://t.me/MTmine_bot?start=ab365772-f66d-466a-b7d8-7f329934fcae
   "reward": 10,
   "outmine":false
 }
+
+
+[
+{
+  "task_id": "tg_onlytwins",
+  "task_name": "Talk with AI buddy",
+  "task_icon": "https://i.postimg.cc/v8XkDtJz/IMG-20250630-135232-430.jpg",
+  "url": "https://t.me/onlytwins_app_bot?start=outmine",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_drftparty",
+  "task_name": "Join DRFT Party Now",
+  "task_icon": "https://i.postimg.cc/1ts738M2/IMG-20250630-140602-720.jpg",
+  "url": "https://t.me/drft_party_bot/game?startapp=outmine",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_trueminers",
+  "task_name": "Play True Miners",
+  "task_icon": "https://i.postimg.cc/Vs7ZzLtZ/IMG-20250701-161912-467.jpg",
+  "url": "https://t.me/TrueMiner_bot/true_miner?startapp=PMGid",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_brickwalls",
+  "task_name": "Join Brickwalls",
+  "task_icon": "https://i.postimg.cc/hGqp2JFv/IMG-20250701-205644-433.jpg",
+  "url": "https://t.me/brickwalls_bot/brickapp?startapp=hBxNZFc",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+]
+
+
+//https://t.me/FlutterBees_bot?startapp=KDJQIHBR
+{
+  "task_id": "tg_flutterbees",
+  "task_name": "Join Flutter Bees",
+  "task_icon": "https://i.postimg.cc/28Td4kpD/IMG-20250702-112926-277.jpg",
+  "url": "https://t.me/FlutterBees_bot?startapp=KDJQIHBR",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+//https://t.me/PoombSpaceBot?startapp=ref20
+{
+  "task_id": "tg_poombspace",
+  "task_name": "Play Poomb Space",
+  "task_icon": "https://i.postimg.cc/FzqN4fbx/IMG-20250707-155615-010-1.png",
+  "url": "https://t.me/PoombSpaceBot?startapp=ref20",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+
+[
+  {
+  "task_id": "tg_civilizationton",
+  "task_name": "Play Civilization Ton",
+  "task_icon": "https://i.postimg.cc/7L6D9ttJ/IMG-20250708-210411-554-1.jpg",
+  "url": "https://t.me/CivilizationTon_bot/app?startapp=131020203298",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+  },
+  {
+  "task_id": "tg_telemafia",
+  "task_name": "Play TeleMafia",
+  "task_icon": "https://i.postimg.cc/YS4Zj5yR/IMG-20250709-102207-920.jpg",
+  "url": "https://t.me/TelemafiaGameBot/TeleMafia?startapp=JRYANN-98185",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+  }
+]
