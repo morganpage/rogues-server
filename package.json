@@ -9,7 +9,8 @@
     "build": "tsc",
     "dev": "tsnd --respawn ./src/index.ts",
     "resetstreak": "ts-node src/resetstreak.ts",
-    "testcooldown": "node dist/src/testcooldown.js"
+    "testcooldown": "node dist/src/testcooldown.js",
+    "testeth": "ts-node src/txns/txnsEthToCoins.ts"
   },
   "keywords": [],
   "author": "",

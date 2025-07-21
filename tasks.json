@@ -1527,3 +1527,36 @@ https://t.me/MTmine_bot?start=ab365772-f66d-466a-b7d8-7f329934fcae
   "outmine":false
   }
 ]
+
+
+
+[
+{
+  "task_id": "tg_lejyon",
+  "task_name": "Play Lejyonmining",
+  "task_icon": "https://i.postimg.cc/NF7SRNgt/IMG-20250717-141830-615.jpg",
+  "url": "https://t.me/lejyonminingbot?start=7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_gearrunner",
+  "task_name": "Play Gear Runner",
+  "task_icon": "https://i.postimg.cc/CKz39H4C/IMG-20250717-155154-233.jpg",
+  "url": "https://t.me/gearrunner_bot/app?startapp=5847248517",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,
+{
+  "task_id": "tg_satoshiminers",
+  "task_name": "Play Satoshi Miners",
+  "task_icon": "https://i.postimg.cc/vTkgLvXP/IMG-20250717-155420-805.jpg",
+  "url": "https://t.me/SatoshiMiner_Hq_Bot/miner?startapp=7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+]

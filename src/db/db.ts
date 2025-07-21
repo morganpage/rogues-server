@@ -44,6 +44,18 @@ export const TGDataRequest = z.object({
   cooldown_sub_id: z.string(),
 });
 
+export type Invoice = {
+  user_id: string;
+  payment_id: string;
+  product: string;
+  amount: number;
+  username: string;
+  createdAt: Date;
+  currency?: string;
+  coins_pre?: number;
+  coins_post?: number;
+};
+
 export type TGDataRequest = z.infer<typeof TGDataRequest>;
 
 //Cooldowns
@@ -255,4 +267,98 @@ export async function getOutmineSettings(fastify: FastifyInstance) {
   if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
   const settings = await fastify.mongo.db.collection("outmine_settings").findOne();
   return settings;
+}
+
+export async function buyCoins(fastify: FastifyInstance, user_id: string, product_id: string, amount: number, currencyName: string, username: string = "") {
+  if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+  //Check if product exists
+  const coin_product = await fastify.mongo.db.collection("coin_products").findOne({ product_id });
+  if (!coin_product) {
+    console.error(`Product not found for product_id: ${product_id}`);
+    return { ok: false, error: `Product not found for product_id: ${product_id}` }; // Skip if product not found
+  }
+  //Check if amount matches the product price, for USDT cryptoPrice is 1:1, for others we need to get the crypto price
+  if (currencyName != "USDT") {
+    const cryptoPrice = await getCryptoPrice(currencyName);
+    if (!cryptoPrice) {
+      console.error(`Crypto price not found for currency: ${currencyName}`);
+      return { ok: false, error: `Crypto price not found for currency: ${currencyName}` }; // Skip if crypto price not found
+    }
+    // Calculate the expected amount based on the product price and crypto price
+    const expectedAmount = currencyName === "USDT" ? coin_product.price : coin_product.price / cryptoPrice;
+    // If there is more than 5% difference, skip the transaction
+    if (Math.abs(expectedAmount - amount) / expectedAmount > 0.2) {
+      console.error(`Amount mismatch for user_id: ${user_id}, product_id: ${product_id}, amount: ${amount}, expected: ${expectedAmount}`);
+      return { ok: false, error: `Amount mismatch amount: ${amount}, expected: ${expectedAmount}` }; // Skip if amount does not match the product price
+    }
+  } else {
+    // For USDT, we can directly compare the amount with the product price
+    if (amount !== coin_product.price) {
+      console.error(`Amount mismatch for user_id: ${user_id}, product_id: ${product_id}, amount: ${amount}, expected: ${coin_product.price}`);
+      return { ok: false, error: `Amount mismatch amount: ${amount}, expected: ${coin_product.price}` }; // Skip if amount does not match the product price
+    }
+  }
+  // If everything is fine, proceed with the purchase
+  console.log(`Purchasing coins for user_id: ${user_id}, product_id: ${product_id}, amount: ${amount}, currency: ${currencyName}`);
+  // Update user's coins
+  const user = await fastify.mongo.db.collection("telegramgems").findOne({ user_id });
+  const coins_pre = user ? user.coins || 0 : 0; // Get existing coins or default to 0
+  const telegramcoin = await fastify.mongo.db.collection("telegramgems").updateOne(
+    {
+      user_id: user_id,
+    },
+    {
+      $inc: { coins: coin_product.quantity },
+    },
+    { upsert: true }
+  );
+  //Now get the coins after the update from telegramgems collection
+  const user_updated = await fastify.mongo.db.collection("telegramgems").findOne({ user_id });
+  const coins_post = user_updated ? user_updated.coins || 0 : 0;
+  // Now add invoice to db
+  const newInvoice: Invoice = {
+    user_id: user_id,
+    payment_id: `coin_purchase_with_${currencyName}_${product_id}`,
+    product: product_id,
+    amount,
+    username: username,
+    createdAt: new Date(),
+    currency: currencyName,
+    coins_pre: coins_pre,
+    coins_post: coins_post,
+  };
+  await addInvoice(fastify, newInvoice);
+  console.log(`Coins purchased successfully for user_id: ${user_id}, product_id: ${product_id}, amount: ${amount}, currency: ${currencyName}`);
+  return { ok: true, message: `Coins purchased successfully for user_id: ${user_id}, product_id: ${product_id}, amount: ${amount}, currency: ${currencyName}` };
+}
+
+export async function getCryptoPrice(crypto: string): Promise<number | null> {
+  try {
+    //https://api.binance.com/api/v3/ticker/price?symbol=${crypto}USDT
+    //https://api.binance.com/api/v3/avgPrice?symbol=${crypto}USDT
+    // https://api.huobi.pro/market/trade?symbol=${crypto}usdt
+    //https://api.bybit.com/v5/market/tickers?category=spot&symbol=${crypto}USDT
+    const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?symbols=${crypto.toLowerCase()}&vs_currencies=usd`, {
+      method: "GET",
+      headers: { accept: "application/json", "x-cg-demo-api-key": "CG-U8Hc5mKxUtBmt8VMNKKvuWpY" },
+    });
+    if (!response.ok) {
+      console.error(`Error1 fetching price for ${crypto}`, JSON.stringify(response));
+      return null;
+    }
+    const data = await response.json();
+    return data[crypto.toLowerCase()]?.usd || null;
+  } catch (error) {
+    console.error(`Error2 fetching price for ${crypto}:`, error);
+    return null;
+  }
+}
+
+export async function addInvoice(fastify: FastifyInstance, invoice: Invoice) {
+  if (!fastify.mongo || !fastify.mongo.db) {
+    throw new Error("MongoDB is not configured properly");
+  }
+  const newInvoice = await fastify.mongo.db.collection("invoices").insertOne(invoice);
+  //console.log(newInvoice);
+  return newInvoice;
 }
