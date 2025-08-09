@@ -124,7 +124,8 @@ POST http://localhost:8080/api/eth_auth
 Content-Type: application/json
 
 {
-  "tg_data":"{{$dotenv tg_data_live}}"
+  "tg_data":"{{$dotenv tg_data_live}}",
+  "outmine": true
 }
 
 ### STREAK

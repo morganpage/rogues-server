@@ -9,6 +9,7 @@ import { syncReactive } from "../contract/streaks-reactive";
 
 const tgDataRequest = z.object({
   tg_data: z.string(),
+  outmine: z.boolean().optional(),
 });
 
 const tgDataCooldownRequest = z.object({
@@ -52,6 +53,14 @@ export async function ethRoutes(fastify: FastifyInstance, options: FastifyPlugin
           await fastify.mongo.db.collection("rogues_users").updateOne({ address: telegram_user.eth_address }, { $set: { first_name, last_name, username, user_id, lastLogin: new Date() } });
           reply.send({ result: "success", user, ethData: { ethPublicAddress: [telegram_user.eth_address] } });
         } else {
+          // Only generate if they have bothered to do the tutorial ie tutorial_seen exists and is true
+          const tutorialSeen = telegram_user?.tutorial_seen || false;
+          if (req?.outmine && !tutorialSeen) {
+            console.log("User has not completed the tutorial, cannot generate eth address");
+            reply.code(401).send({ result: "error", message: "Please complete the tutorial first" });
+            return;
+          }
+
           const JWTtoken = await generateJwtToken(user);
           //console.log("JWTtoken", JWTtoken);
           const ethData = await getPrivateKey(JWTtoken, user_id);
