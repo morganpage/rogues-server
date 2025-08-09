@@ -56,7 +56,7 @@ export async function ethRoutes(fastify: FastifyInstance, options: FastifyPlugin
           // Only generate if they have bothered to do the tutorial ie tutorial_seen exists and is true
           const tutorialSeen = telegram_user?.tutorial_seen || false;
           if (req?.outmine && !tutorialSeen) {
-            console.log("User has not completed the tutorial, cannot generate eth address");
+            console.log(`User has not completed the tutorial, havent generated eth address: ${user_id}`);
             reply.code(401).send({ result: "error", message: "Please complete the tutorial first" });
             return;
           }
