@@ -1,4 +1,5 @@
 import { createHmac, createHash } from "crypto";
+import { ethers } from "ethers";
 
 function hmac(data: string, key: string | Buffer): Buffer {
   return createHmac("sha256", key).update(data).digest();
@@ -24,6 +25,11 @@ function processTelegramData(qs: string, token: string): { ok: false } | { ok: t
 }
 
 export function processTelegramDataMultiToken(qs: string): { ok: false } | { ok: true; data: Record<string, string> } {
+  if (qs.startsWith("farcasteruser=")) {
+    let p1 = processFarcasterData(qs);
+    return p1;
+  }
+
   if (qs.startsWith("webuser=")) {
     let p1 = processTelegramDataWebAuth(qs, process.env.TELEGRAM_BOT_TOKEN!);
     if (p1.ok) return p1;
@@ -73,4 +79,23 @@ export function processTelegramDataWebAuth(qs: string, token: string): { ok: fal
     console.error("Error processing Telegram data:", e);
     return { ok: false };
   }
+}
+
+export function processFarcasterData(qs: string): { ok: false; error?: string } | { ok: true; data: Record<string, string> } {
+  if (qs.startsWith("farcasteruser=")) {
+    qs = qs.substring("farcasteruser=".length);
+    const decoded_tg_data = decodeURIComponent(qs);
+    const userData = JSON.parse(decoded_tg_data);
+    const { fid, custody, message, signature } = userData;
+    if (!fid || !custody) return { ok: false, error: "Missing fid or custody" };
+    const signer = ethers.verifyMessage(message, signature);
+    if (!signer) return { ok: false, error: "Invalid signature" };
+    if (signer !== custody) return { ok: false, error: "Signature does not match custody" };
+    //console.log("Farcaster data processed successfully:", signer, custody);
+    userData.id = "farcaster_" + fid;
+    if (userData?.user?.displayName) userData.first_name = userData.user.displayName;
+    if (userData?.user?.pfpUrl) userData.photo_url = userData.user.pfpUrl;
+    return { ok: true, data: { user: JSON.stringify(userData) } };
+  }
+  return { ok: false };
 }

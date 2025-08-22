@@ -1772,3 +1772,14 @@ https://t.me/MTmine_bot?start=ab365772-f66d-466a-b7d8-7f329934fcae
   "reward": 10,
   "outmine":false
 }
+
+//https://t.me/memerockBot/playrock?startapp=OutmineBot
+{
+  "task_id": "tg_memerock",
+  "task_name": "Play Meme Rock",
+  "task_icon": "https://i.postimg.cc/SQdppwpY/IMG-20250814-141327-090-1.jpg",
+  "url": "https://t.me/memerockBot/playrock?startapp=OutmineBot",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
