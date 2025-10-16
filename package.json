@@ -10,7 +10,8 @@
     "dev": "tsnd --respawn ./src/index.ts",
     "resetstreak": "ts-node src/resetstreak.ts",
     "testcooldown": "node dist/src/testcooldown.js",
-    "testeth": "ts-node src/txns/txnsEthToCoins.ts"
+    "testeth": "ts-node src/txns/txnsEthToCoins.ts",
+    "testpolygon": "ts-node src/txns/txnsPolygonToCoins.ts"
   },
   "keywords": [],
   "author": "",

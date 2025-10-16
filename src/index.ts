@@ -15,6 +15,7 @@ import { ethRoutes } from "./routes/eth-routes";
 import roguesMissionsRoutes from "./routes/rogues-missions-routes";
 import itemsRoutes from "./routes/items-routes";
 import { processGamePaymentEvents } from "./txns/txnsEthToCoins";
+import { processPolygonGamePaymentEvents } from "./txns/txnsPolygonToCoins";
 
 dotenv.config();
 
@@ -43,6 +44,7 @@ fastify.after(() => {
   console.log("Connected to MongoDB");
   if (!RUNNING_LOCAL) processStreakEvents(fastify);
   if (!RUNNING_LOCAL) processGamePaymentEvents(fastify);
+  if (!RUNNING_LOCAL) processPolygonGamePaymentEvents(fastify);
 });
 
 fastify.register(authRoutes);

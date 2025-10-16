@@ -285,7 +285,7 @@ export async function buyCoins(fastify: FastifyInstance, user_id: string, produc
       return { ok: false, error: `Crypto price not found for currency: ${currencyName}` }; // Skip if crypto price not found
     }
     // Calculate the expected amount based on the product price and crypto price
-    const expectedAmount = currencyName === "USDT" ? coin_product.price : coin_product.price / cryptoPrice;
+    const expectedAmount = currencyName.startsWith("USD") ? coin_product.price : coin_product.price / cryptoPrice;
     // If there is more than 5% difference, skip the transaction
     if (Math.abs(expectedAmount - amount) / expectedAmount > 0.2) {
       console.error(`Amount mismatch for user_id: ${user_id}, product_id: ${product_id}, amount: ${amount}, expected: ${expectedAmount}`);
@@ -361,4 +361,34 @@ export async function addInvoice(fastify: FastifyInstance, invoice: Invoice) {
   const newInvoice = await fastify.mongo.db.collection("invoices").insertOne(invoice);
   //console.log(newInvoice);
   return newInvoice;
+}
+
+export async function processGamePaymentEvent(fastify: FastifyInstance, sender: Address, product_id: string, user_id: string, amount: number, blockNumber: bigint, currencyName: string, contractAddress: Address) {
+  if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+  const timestamp = new Date().toISOString();
+  const block_number = blockNumber.toString();
+  const user = await fastify.mongo.db.collection("telegram_users").findOne({ user_id });
+  const coin_product = await fastify.mongo.db.collection("coin_products").findOne({ product_id });
+  if (!user || !coin_product) {
+    console.error("Invalid user or product");
+    await fastify.mongo.db.collection("eth_payment_transactions").insertOne({ user_id, product_id, amount, sender, timestamp, block_number, success: false, message: "Invalid user or product" });
+    return; // Skip if user or product is not valid
+  }
+  const username = user.username || user.first_name || "Unknown User";
+  const buyCoinsResponse = await buyCoins(fastify, user_id, product_id, amount, currencyName, username);
+  const transaction = {
+    user_id,
+    product_id,
+    username,
+    amount,
+    currency: currencyName,
+    sender,
+    timestamp,
+    block_number,
+    contract_address: contractAddress,
+    success: buyCoinsResponse.ok,
+    message: buyCoinsResponse.error || buyCoinsResponse.message,
+  };
+  await fastify.mongo.db.collection("eth_payment_transactions").insertOne(transaction);
+  console.log(`Processed payment event for ${sender} purchasing item ${product_id} for ${amount} ${currencyName} (userId: ${user_id})`);
 }

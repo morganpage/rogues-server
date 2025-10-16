@@ -1783,3 +1783,117 @@ https://t.me/MTmine_bot?start=ab365772-f66d-466a-b7d8-7f329934fcae
   "reward": 10,
   "outmine":false
 }
+
+
+
+[
+  {
+    "task_id": "tg_bionapp",
+    "task_name": "Join Bion",
+    "task_icon": "https://i.postimg.cc/VNXpP6KB/IMG-20250825-202202-845.jpg",
+    "url": "https://t.me/bionapp_bot?startapp=ref_862780270",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_money_mcats",
+    "task_name": "Join Money Cats",
+    "task_icon": "https://i.postimg.cc/9M6BmtzD/IMG-20250825-202128-586.jpg",
+    "url": "https://t.me/money_mcatsbot/mcats?startapp=7800256288",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_litrbull",
+    "task_name": "Play LitrBull",
+    "task_icon": "https://i.postimg.cc/PqhJjLtd/IMG-20250825-202018-223.jpg",
+    "url": "https://t.me/litrbullbot?start=inviteCode=deu06ogh8ybug1fbtlbuk0x6",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_villainpepe",
+    "task_name": "FARM Vpepe",
+    "task_icon": "https://i.postimg.cc/qB8kkJ5R/IMG-20250826-105401-396.jpg",
+    "url": "https://t.me/villainpepe_bot/app?startapp=ref_7913885852",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_cropandrob",
+    "task_name": "Play Crop And Rob",
+    "task_icon": "https://i.postimg.cc/y8fRvXmw/IMG-20250826-110126-660.jpg",
+    "url": "https://t.me/CropAndRob_bot/app?startapp=r7913885852",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  },
+  {
+    "task_id": "tg_towerton",
+    "task_name": "Play Tower Ton",
+    "task_icon": "https://i.postimg.cc/QxFZFj61/IMG-20250826-114154-390.png",
+    "url": "https://t.me/TowerTon_bot?start=7913885852",
+    "tg_link": true,
+    "reward": 10,
+    "outmine":false
+  }
+
+]
+
+//https://t.me/+2h-5MNY20AxmNDZl - money cats
+{
+  "task_id": "tg_money_cats_channel",
+  "task_name": "Join Money Cats Channel",
+  "task_icon": "https://i.postimg.cc/9M6BmtzD/IMG-20250825-202128-586.jpg",
+  "url": "https://t.me/+2h-5MNY20AxmNDZl",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+
+//https://t.me/TheWalkCoinBot/WalkCoin?startapp=7758276409
+[
+{
+  "task_id": "tg_walkcoin",
+  "task_name": "Play WalkCoin",
+  "task_icon": "https://i.postimg.cc/sfPH3QRs/IMG-20250828-184729-891.jpg",
+  "url": "https://t.me/TheWalkCoinBot/WalkCoin?startapp=7758276409",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+},
+{
+  "task_id": "tg_getsucoin",
+  "task_name": "Discover Getsu X",
+  "task_icon": "https://i.postimg.cc/sDQBpSDR/IMG-20250830-105219-538.jpg",
+  "url": "https://t.me/getsucoin_bot?start=ABgAAAA2ODk0Y2RmODA2Mjk1ZGFkMDlkY2VlM2M%3D",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}]
+
+
+[
+{
+  "task_id": "tg_dopeeibot",
+  "task_name": "Join DopeeAI Bot",
+  "task_icon": "https://i.postimg.cc/cHFdf30y/IMG-20250904-111512-741.jpg",
+  "url": "https://t.me/Dopeeibot?startapp=7913885852",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+,{
+  "task_id": "tg_hamsterdraft",
+  "task_name": "Join Hamster Draft",
+  "task_icon": "https://i.postimg.cc/C1Sjz3Lr/IMG-20250904-111612-765.jpg",
+  "url": "https://t.me/+O6WcSlHwHRkwNWYy",
+  "tg_link": true,
+  "reward": 10,
+  "outmine":false
+}
+]
