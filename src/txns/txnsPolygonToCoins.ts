@@ -6,7 +6,7 @@ import { processGamePaymentEvent } from "../db/db";
 
 dotenv.config();
 
-const provider = "https://polygon-rpc.com";
+const provider = "https://polygon-mainnet.g.alchemy.com/v2/IP3bobOrgYiAVJUF4O3EH"; //"wss://polygon-bor-rpc.publicnode.com"; // https://polygon.drpc.org,https://polygon-rpc.com
 const web3 = new Web3(provider);
 const abi = contractABI.abi;
 const contractAddress: Address = process.env.GAME_PAYMENT_CONTRACT_ADDRESS_POLYGON || ""; //GamePayment contract address;
@@ -20,6 +20,13 @@ console.log("Using Polygon GamePayment contract at address:", contractAddress);
 
 const fnLastProcessedBlockNumber = async (fastify: FastifyInstance): Promise<bigint> => {
   if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+
+  const syncCollection = fastify.mongo.db.collection("sync_state");
+  const state = await syncCollection.findOne({ contract_address: contractAddress });
+  if (state && state.last_processed_block) {
+    return BigInt(state.last_processed_block);
+  }
+
   // Get the last block we processed from MongoDB
   const lastTransaction = await fastify.mongo?.db.collection("eth_payment_transactions").findOne({ contract_address: contractAddress }, { sort: { timestamp: -1 } });
   let lastBlockNumberProcessed: bigint = lastTransaction ? BigInt(lastTransaction.block_number) : 0n;
@@ -36,7 +43,7 @@ const fnLastProcessedBlockNumber = async (fastify: FastifyInstance): Promise<big
 export async function processPolygonGamePaymentEvents(fastify: FastifyInstance) {
   if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
   console.log("Processing Polygon Game Payment events for contract:", contractAddress);
-  const BATCH_SIZE = 64n;
+  const BATCH_SIZE = 10n;
   let lastBlockNumberProcessed: bigint = await fnLastProcessedBlockNumber(fastify);
   console.log("Starting from block number:", lastBlockNumberProcessed);
   while (true) {
@@ -70,6 +77,7 @@ export async function processPolygonGamePaymentEvents(fastify: FastifyInstance) 
           console.log(`${paymentReceivedEvents.length} events processed`);
         }
         lastBlockNumberProcessed = toBlock;
+        await saveLastProcessedBlock(fastify, Number(toBlock));
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -80,5 +88,11 @@ export async function processPolygonGamePaymentEvents(fastify: FastifyInstance) 
     }
 
     await new Promise((resolve) => setTimeout(resolve, 10000)); // Wait 10 seconds before polling again
+  }
+
+  async function saveLastProcessedBlock(fastify: FastifyInstance, blockNumber: number) {
+    if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+    const syncCollection = fastify.mongo.db.collection("sync_state");
+    await syncCollection.updateOne({ contract_address: contractAddress }, { $set: { last_processed_block: blockNumber } }, { upsert: true });
   }
 }
