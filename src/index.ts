@@ -32,11 +32,21 @@ fastify.register(cors, {
   origin: "*",
 });
 console.log("MONGODB", process.env.MONGODB);
+const mongoURL = process.env.MONGODB || "mongodb://localhost:27017/outmine";
 
 fastify.register(fastifyMongo, {
   forceClose: true,
-  url: process.env.MONGODB,
+  url: mongoURL,
 });
+
+const mydbMongoURL = mongoURL.replace("/admin", "/mydb") + "&replicaSet=db-mongodb-nyc3-04768"; //Connection string for mydb database
+
+fastify.register(fastifyMongo, {
+  forceClose: true,
+  url: mydbMongoURL,
+  name: "mydb",
+});
+
 fastify.after(() => {
   if (!fastify.mongo) {
     throw new Error("MongoDB is not configured properly");

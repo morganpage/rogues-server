@@ -358,9 +358,17 @@ export async function addInvoice(fastify: FastifyInstance, invoice: Invoice) {
   if (!fastify.mongo || !fastify.mongo.db) {
     throw new Error("MongoDB is not configured properly");
   }
-  const newInvoice = await fastify.mongo.db.collection("invoices").insertOne(invoice);
-  //console.log(newInvoice);
-  return newInvoice;
+  try {
+    const newInvoice = await fastify.mongo.db.collection("invoices").insertOne(invoice);
+    //Also add to mydb invoices collection just for the watcher service
+    const mydb = fastify.mongo.client.db("mydb");
+    await mydb.collection("invoices").insertOne(invoice);
+    //console.log(newInvoice);
+    return newInvoice;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 }
 
 export async function processGamePaymentEvent(fastify: FastifyInstance, sender: Address, product_id: string, user_id: string, amount: number, blockNumber: bigint, currencyName: string, contractAddress: Address) {
