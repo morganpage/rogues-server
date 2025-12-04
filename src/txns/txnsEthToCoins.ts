@@ -61,6 +61,14 @@ export async function processGamePaymentEvents(fastify: FastifyInstance) {
     console.log("Last processed block number:", lastBlockNumberProcessed);
   }
   while (true) {
+    const outmineSettings = await fastify.mongo.db.collection("outmine_settings").findOne({});
+
+    if (!outmineSettings || !outmineSettings.moonbeam_game_payments_enabled) {
+      console.log("Moonbeam game payments processing is disabled in outmine_settings. Waiting...");
+      await new Promise((resolve) => setTimeout(resolve, 30000)); // Wait 30 seconds before checking again
+      continue;
+    }
+
     try {
       const latestBlock = BigInt(await web3.eth.getBlockNumber());
 
