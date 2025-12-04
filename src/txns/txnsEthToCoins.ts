@@ -16,15 +16,22 @@ if (contractAddress == "") {
 
 const contract = new web3.eth.Contract(abi, contractAddress);
 
-async function processGamePaymentEvent(fastify: FastifyInstance, sender: Address, product_id: string, user_id: string, amount: number, blockNumber: bigint) {
+async function processGamePaymentEvent(fastify: FastifyInstance, sender: Address, product_id: string, user_id: string, amount: number, blockNumber: bigint, unique_key: string) {
   if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+  //Check eth_payment_transactions to see if this unique_key has already been processed
+  const existingTransaction = await fastify.mongo.db.collection("eth_payment_transactions").findOne({ unique_key });
+  if (existingTransaction) {
+    console.log("Transaction with unique_key", unique_key, "has already been processed. Skipping.");
+    return;
+  }
+
   const timestamp = new Date().toISOString();
   const block_number = blockNumber.toString();
   const user = await fastify.mongo.db.collection("telegram_users").findOne({ user_id });
   const coin_product = await fastify.mongo.db.collection("coin_products").findOne({ product_id });
   if (!user || !coin_product) {
     console.error("Invalid user or product");
-    await fastify.mongo.db.collection("eth_payment_transactions").insertOne({ user_id, product_id, amount, sender, timestamp, block_number, success: false, message: "Invalid user or product" });
+    await fastify.mongo.db.collection("eth_payment_transactions").insertOne({ user_id, product_id, amount, sender, timestamp, block_number, success: false, message: "Invalid user or product", unique_key });
     return; // Skip if user or product is not valid
   }
   const username = user.username || user.first_name || "Unknown User";
@@ -41,6 +48,7 @@ async function processGamePaymentEvent(fastify: FastifyInstance, sender: Address
     contract_address: contractAddress,
     success: buyCoinsResponse.ok,
     message: buyCoinsResponse.error || buyCoinsResponse.message,
+    unique_key,
   };
   await fastify.mongo.db.collection("eth_payment_transactions").insertOne(transaction);
   console.log(`Processed payment event for ${sender} purchasing item ${product_id} for ${amount} GLMR (userId: ${user_id})`);
@@ -62,13 +70,11 @@ export async function processGamePaymentEvents(fastify: FastifyInstance) {
   }
   while (true) {
     const outmineSettings = await fastify.mongo.db.collection("outmine_settings").findOne({});
-
     if (!outmineSettings || !outmineSettings.moonbeam_game_payments_enabled) {
       console.log("Moonbeam game payments processing is disabled in outmine_settings. Waiting...");
       await new Promise((resolve) => setTimeout(resolve, 30000)); // Wait 30 seconds before checking again
       continue;
     }
-
     try {
       const latestBlock = BigInt(await web3.eth.getBlockNumber());
 
@@ -82,6 +88,8 @@ export async function processGamePaymentEvents(fastify: FastifyInstance) {
         });
         const paymentReceivedEvents = allEvents.filter((e): e is EventLog => typeof e !== "string" && e.event === "PaymentReceived");
         for (let e of paymentReceivedEvents) {
+          //console.log("Processing event:", e);
+          const unique_key = `${e.transactionHash}-${e.logIndex}`;
           const returnValues = e.returnValues as { itemId: string; userId: string; amount: bigint; payer: string };
           const itemId: string = returnValues.itemId;
           const userId: string = returnValues.userId;
@@ -90,7 +98,7 @@ export async function processGamePaymentEvents(fastify: FastifyInstance) {
           const blockNumber = e.blockNumber ? BigInt(e.blockNumber) : lastBlockNumberProcessed;
           const amountInGLMR: number = parseFloat(web3.utils.fromWei(amount.toString(), "ether"));
           console.log(`Payer ${payer} purchased item ${itemId} for ${amountInGLMR} GLMR (userId: ${userId})`);
-          await processGamePaymentEvent(fastify, payer, itemId, userId, amountInGLMR, blockNumber);
+          await processGamePaymentEvent(fastify, payer, itemId, userId, amountInGLMR, blockNumber, unique_key);
         }
         if (paymentReceivedEvents.length > 0) {
           console.log(`${paymentReceivedEvents.length} events processed`);
