@@ -24,6 +24,10 @@ GET https://walrus-app-goxso.ondigitalocean.app/api/tasks_users
 GET  http://127.0.0.1:5001/api/invoices
 
 ### get invoices
+GET  https://walrus-app-goxso.ondigitalocean.app/api/invoices_revenue
+
+
+### get invoices
 GET  http://127.0.0.1:5001/api/invoices_revenue
 
 ###daily summary
@@ -32,7 +36,8 @@ GET  http://127.0.0.1:5001/api/invoices_daily_summary
 ###daily summary
 GET  http://127.0.0.1:5001/api/invoices_daily_summary_2
 
-
+###weekly summary
+GET  http://127.0.0.1:5001/api/invoices_weekly_summary
 
 ### get number of unsent messages
 GET  http://127.0.0.1:8080/api/message_queue_unsent
