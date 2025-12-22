@@ -6,7 +6,7 @@ import { buyCoins } from "../db/db";
 
 dotenv.config();
 
-const provider = "https://rpc.api.moonbeam.network";
+const provider = "https://moonbeam-rpc.publicnode.com";
 const web3 = new Web3(provider);
 const abi = contractABI.abi;
 const contractAddress: Address = process.env.GAME_PAYMENT_CONTRACT_ADDRESS_MOONBEAM || ""; //GamePayment contract address;
@@ -54,10 +54,15 @@ async function processGamePaymentEvent(fastify: FastifyInstance, sender: Address
   console.log(`Processed payment event for ${sender} purchasing item ${product_id} for ${amount} GLMR (userId: ${user_id})`);
 }
 
-export async function processGamePaymentEvents(fastify: FastifyInstance) {
+const fnLastProcessedBlockNumber = async (fastify: FastifyInstance): Promise<bigint> => {
   if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
-  console.log("Processing Game Payment events for contract:", contractAddress);
-  const BATCH_SIZE = 1024n;
+
+  const syncCollection = fastify.mongo.db.collection("sync_state");
+  const state = await syncCollection.findOne({ contract_address: contractAddress });
+  if (state && state.last_processed_block) {
+    return BigInt(state.last_processed_block);
+  }
+
   // Get the last block we processed from MongoDB
   const lastTransaction = await fastify.mongo?.db.collection("eth_payment_transactions").findOne({ contract_address: contractAddress }, { sort: { timestamp: -1 } });
   let lastBlockNumberProcessed: bigint = lastTransaction ? BigInt(lastTransaction.block_number) : 0n;
@@ -68,6 +73,27 @@ export async function processGamePaymentEvents(fastify: FastifyInstance) {
   } else {
     console.log("Last processed block number:", lastBlockNumberProcessed);
   }
+  return lastBlockNumberProcessed;
+};
+
+export async function processGamePaymentEvents(fastify: FastifyInstance) {
+  if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+  console.log("Processing Game Payment events for contract:", contractAddress);
+  const BATCH_SIZE = 1024n;
+
+  let lastBlockNumberProcessed: bigint = await fnLastProcessedBlockNumber(fastify);
+  console.log("Starting from block number:", lastBlockNumberProcessed);
+
+  // Get the last block we processed from MongoDB
+  //const lastTransaction = await fastify.mongo?.db.collection("eth_payment_transactions").findOne({ contract_address: contractAddress }, { sort: { timestamp: -1 } });
+  //let lastBlockNumberProcessed: bigint = lastTransaction ? BigInt(lastTransaction.block_number) : 0n;
+  // If last block number is not found, start from the latest block
+  // if (lastBlockNumberProcessed === 0n) {
+  //   lastBlockNumberProcessed = BigInt(await web3.eth.getBlockNumber());
+  //   console.log("No previous transactions found, starting from latest block:", lastBlockNumberProcessed);
+  // } else {
+  //   console.log("Last processed block number:", lastBlockNumberProcessed);
+  // }
   while (true) {
     const outmineSettings = await fastify.mongo.db.collection("outmine_settings").findOne({});
     if (!outmineSettings || !outmineSettings.moonbeam_game_payments_enabled) {
@@ -76,10 +102,13 @@ export async function processGamePaymentEvents(fastify: FastifyInstance) {
       continue;
     }
     try {
+      //console.log("Checking for new Game Payment events from block", lastBlockNumberProcessed + 1n);
       const latestBlock = BigInt(await web3.eth.getBlockNumber());
+      //console.log("Latest block number:", latestBlock);
 
       while (lastBlockNumberProcessed < latestBlock) {
         const fromBlock = lastBlockNumberProcessed + 1n;
+        //console.log(`Fetching events from block ${fromBlock} to ${fromBlock + BATCH_SIZE - 1n > latestBlock ? latestBlock : fromBlock + BATCH_SIZE - 1n}`);
         const toBlock = fromBlock + BATCH_SIZE - 1n > latestBlock ? latestBlock : fromBlock + BATCH_SIZE - 1n;
         const allEvents = await contract.getPastEvents("ALLEVENTS", {
           filter: {},
@@ -88,7 +117,7 @@ export async function processGamePaymentEvents(fastify: FastifyInstance) {
         });
         const paymentReceivedEvents = allEvents.filter((e): e is EventLog => typeof e !== "string" && e.event === "PaymentReceived");
         for (let e of paymentReceivedEvents) {
-          //console.log("Processing event:", e);
+          console.log("Processing event:", e);
           const unique_key = `${e.transactionHash}-${e.logIndex}`;
           const returnValues = e.returnValues as { itemId: string; userId: string; amount: bigint; payer: string };
           const itemId: string = returnValues.itemId;
@@ -104,6 +133,7 @@ export async function processGamePaymentEvents(fastify: FastifyInstance) {
           console.log(`${paymentReceivedEvents.length} events processed`);
         }
         lastBlockNumberProcessed = toBlock;
+        await saveLastProcessedBlock(fastify, Number(toBlock));
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -113,6 +143,12 @@ export async function processGamePaymentEvents(fastify: FastifyInstance) {
       }
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 10000)); // Wait 10 seconds before polling again
+    await new Promise((resolve) => setTimeout(resolve, 3000)); // Wait 10 seconds before polling again
   }
+}
+
+async function saveLastProcessedBlock(fastify: FastifyInstance, blockNumber: number) {
+  if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
+  const syncCollection = fastify.mongo.db.collection("sync_state");
+  await syncCollection.updateOne({ contract_address: contractAddress }, { $set: { last_processed_block: blockNumber } }, { upsert: true });
 }
