@@ -143,7 +143,7 @@ export async function processGamePaymentEvents(fastify: FastifyInstance) {
       }
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 3000)); // Wait 10 seconds before polling again
+    await new Promise((resolve) => setTimeout(resolve, 10000)); // Wait 10 seconds before polling again
   }
 }
 
