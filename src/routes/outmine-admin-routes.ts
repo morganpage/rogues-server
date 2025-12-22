@@ -17,19 +17,78 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     reply.code(200).send(data);
   });
 
+  // fastify.get("/api/invoices_daily_summary", async (req: FastifyRequest, reply: FastifyReply) => {
+  //   if (!fastify.mongo || !fastify.mongo.db) {
+  //     throw new Error("MongoDB is not configured properly");
+  //   }
+  //   const data = await fastify.mongo.db.collection("InvoicesGroupedByDaySumAmount").find().toArray();
+  //   reply.code(200).send(data);
+  // });
+
   fastify.get("/api/invoices_daily_summary", async (req: FastifyRequest, reply: FastifyReply) => {
     if (!fastify.mongo || !fastify.mongo.db) {
       throw new Error("MongoDB is not configured properly");
     }
-    const data = await fastify.mongo.db.collection("InvoicesGroupedByDaySumAmount").find().toArray();
-    reply.code(200).send(data);
+    //Get all coinproducts
+    const coin_products = await fastify.mongo.db.collection("coin_products").find().toArray();
+    const coin_product_ids = coin_products.map((product) => product.product_id);
+    //Create a lookup product_id to price map
+    const product_price_map: { [key: string]: number } = {};
+    coin_products.forEach((product) => {
+      product_price_map[product.product_id] = product.price;
+    });
+    //Just top 100 invoices sorted by most recent
+    const data = await fastify.mongo.db
+      .collection("invoices")
+      .find({ product: { $in: coin_product_ids } })
+      .sort({ _id: -1 })
+      .limit(100)
+      .toArray();
+    //Aggregate by day and sum amount
+    const daily_summary: { [key: string]: number } = {};
+    data.forEach((invoice) => {
+      const date = new Date(invoice.createdAt);
+      const day = date.toISOString().split("T")[0];
+      if (!daily_summary[day]) {
+        daily_summary[day] = 0;
+      }
+      //console.log("invoice.product", day, invoice.product, product_price_map[invoice.product]);
+      daily_summary[day] += product_price_map[invoice.product] || 0;
+    });
+    //return as an array _id, totalAmount to 2 decimal places
+    const daily_summary_array = Object.keys(daily_summary).map((day) => {
+      return { _id: day, totalAmount: parseFloat(daily_summary[day].toFixed(2)) };
+    });
+    reply.code(200).send(daily_summary_array);
   });
 
   fastify.get("/api/invoices", async (req: FastifyRequest, reply: FastifyReply) => {
     if (!fastify.mongo || !fastify.mongo.db) {
       throw new Error("MongoDB is not configured properly");
     }
-    const data = await fastify.mongo.db.collection("invoices").find().sort({ _id: -1 }).toArray();
+    //Just top 100 invoices sorted by most recent
+    const data = await fastify.mongo.db.collection("invoices").find().sort({ _id: -1 }).limit(100).toArray();
+    reply.code(200).send(data);
+  });
+
+  fastify.get("/api/invoices_revenue", async (req: FastifyRequest, reply: FastifyReply) => {
+    //Invoices that are actually for items that generate revenue
+    if (!fastify.mongo || !fastify.mongo.db) {
+      throw new Error("MongoDB is not configured properly");
+    }
+    //Get all coinproducts
+    const coin_products = await fastify.mongo.db.collection("coin_products").find().toArray();
+    const coin_product_ids = coin_products.map((product) => product.product_id);
+    //Just top 100 invoices sorted by most recent
+    const data = await fastify.mongo.db
+      .collection("invoices")
+      .find({ product: { $in: coin_product_ids } })
+      .sort({ _id: -1 })
+      .limit(100)
+      .toArray();
+
+    //Just top 100 invoices sorted by most recent
+    //const data = await fastify.mongo.db.collection("invoices").find().sort({ _id: -1 }).limit(100).toArray();
     reply.code(200).send(data);
   });
 
