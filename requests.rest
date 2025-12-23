@@ -81,6 +81,11 @@ GET https://walrus-app-goxso.ondigitalocean.app/api/streak_milestones_to_tokenId
 ### GET Outmine Partner counts
 GET http://localhost:8080/api/partners
 
+
+### GET
+GET http://localhost:5001/api/message_queue_count_unsent
+
+
 ### GET Outmine Proxy
 GET http://localhost:8080/api/proxy/gift/scaredcat-3408.json
 Content-Type: application/json

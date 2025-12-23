@@ -45,6 +45,14 @@ async function dailyInvoicesSummary(fastify: FastifyInstance, limit: number = 10
 }
 
 async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
+  fastify.get("/api/message_queue_count_unsent", async (req: FastifyRequest, reply: FastifyReply) => {
+    if (!fastify.mongo || !fastify.mongo.db) {
+      throw new Error("MongoDB is not configured properly");
+    }
+    const data = await fastify.mongo.db.collection("MessageQueueCountUnsent").find().toArray();
+    reply.code(200).send(data);
+  });
+
   fastify.get("/api/partners", async (req: FastifyRequest, reply: FastifyReply) => {
     if (!fastify.mongo || !fastify.mongo.db) {
       throw new Error("MongoDB is not configured properly");
