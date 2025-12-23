@@ -55,3 +55,5 @@ POST http://127.0.0.1:8080/api/message_send_toggle
 ### POST Toggle message_send in outmine_settings
 POST http://127.0.0.1:8080/api/tasks_hide_toggle/tg_seesfun
 
+### DELETE message_queue_delete_batch
+DELETE http://127.0.0.1:5001/api/message_queue_delete_batch/12345

@@ -198,6 +198,16 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     reply.code(200).send(new_value);
   });
 
+  // DELETE all in message_queue collection with message_batch equal to batch_id and sent equal to false
+  fastify.delete("/api/message_queue_delete_batch/:batch_id", async (req: FastifyRequest<{ Params: { batch_id: string } }>, reply: FastifyReply) => {
+    if (!fastify.mongo || !fastify.mongo.db) {
+      throw new Error("MongoDB is not configured properly");
+    }
+    const batch_id = Number(req.params.batch_id); //Convert to number
+    const result = await fastify.mongo.db.collection("message_queue").deleteMany({ message_batch: batch_id, sent: false });
+    reply.code(200).send({ deletedCount: result.deletedCount });
+  });
+
   // fastify.get("/api/proxy", async (req: FastifyRequest, reply: FastifyReply) => {
   //   //Pass in json url to send request to
   //   const url = (req.query as { url: string }).url;
