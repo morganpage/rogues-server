@@ -188,7 +188,7 @@ async function updateTelegramGems(fastify: FastifyInstance, telegramGems: Telegr
       {
         $inc: { gems: telegramGems.gems },
       },
-      { upsert: true }
+      { upsert: true },
     );
     return telegramgem;
   } catch (e) {
@@ -310,7 +310,7 @@ export async function buyCoins(fastify: FastifyInstance, user_id: string, produc
     {
       $inc: { coins: coin_product.quantity },
     },
-    { upsert: true }
+    { upsert: true },
   );
   //Now get the coins after the update from telegramgems collection
   const user_updated = await fastify.mongo.db.collection("telegramgems").findOne({ user_id });
@@ -338,10 +338,13 @@ export async function getCryptoPrice(crypto: string): Promise<number | null> {
     //https://api.binance.com/api/v3/avgPrice?symbol=${crypto}USDT
     // https://api.huobi.pro/market/trade?symbol=${crypto}usdt
     //https://api.bybit.com/v5/market/tickers?category=spot&symbol=${crypto}USDT
-    const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?symbols=${crypto.toLowerCase()}&vs_currencies=usd`, {
-      method: "GET",
-      headers: { accept: "application/json", "x-cg-demo-api-key": "CG-U8Hc5mKxUtBmt8VMNKKvuWpY" },
-    });
+    // const response = await fetch(`https://api.coingecko.com/api/v3/simple/price?symbols=${crypto.toLowerCase()}&vs_currencies=usd`, {
+    //   method: "GET",
+    //   headers: { accept: "application/json", "x-cg-demo-api-key": "CG-U8Hc5mKxUtBmt8VMNKKvuWpY" },
+    // });
+    //GET https://pro-api.coingecko.com/api/v3/simple/price?symbols=NOT&vs_currencies=usd&x_cg_pro_api_key=CG-U8Hc5mKxUtBmt8VMNKKvuWpY
+    const response = await fetch(`https://pro-api.coingecko.com/api/v3/simple/price?symbols=${crypto.toLowerCase()}&vs_currencies=usd&x_cg_pro_api_key=CG-U8Hc5mKxUtBmt8VMNKKvuWpY`);
+
     if (!response.ok) {
       console.error(`Error1 fetching price for ${crypto}`, JSON.stringify(response));
       return null;
