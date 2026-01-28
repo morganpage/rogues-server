@@ -54,7 +54,7 @@ fastify.after(() => {
   console.log("Connected to MongoDB");
   if (!RUNNING_LOCAL) processStreakEvents(fastify);
   if (!RUNNING_LOCAL) processGamePaymentEvents(fastify);
-  if (!RUNNING_LOCAL) processPolygonGamePaymentEvents(fastify);
+  //if (!RUNNING_LOCAL) processPolygonGamePaymentEvents(fastify);
 });
 
 fastify.register(authRoutes);
