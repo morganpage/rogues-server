@@ -47,6 +47,14 @@ export async function processPolygonGamePaymentEvents(fastify: FastifyInstance) 
   let lastBlockNumberProcessed: bigint = await fnLastProcessedBlockNumber(fastify);
   console.log("Starting from block number:", lastBlockNumberProcessed);
   while (true) {
+    const outmineSettings = await fastify.mongo.db.collection("outmine_settings").findOne({});
+    if (!outmineSettings || !outmineSettings.polygon_game_payments_enabled) {
+      lastBlockNumberProcessed = await fnLastProcessedBlockNumber(fastify); //So I can set it back if transaction messes up
+      console.log("Polygon game payments processing is disabled in outmine_settings. Waiting...", lastBlockNumberProcessed);
+      await new Promise((resolve) => setTimeout(resolve, 30000)); // Wait 30 seconds before checking again
+      continue;
+    }
+
     try {
       const latestBlock = BigInt(await web3.eth.getBlockNumber());
       //console.log("Latest block number:", latestBlock);
