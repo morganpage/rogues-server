@@ -6,7 +6,7 @@ import { buyCoins } from "../db/db";
 
 dotenv.config();
 
-const provider = "https://moonbeam-rpc.publicnode.com";
+const provider = process.env.MOONBEAM_RPC_URL || "https://rpc.api.moonbeam.network";
 const web3 = new Web3(provider);
 const abi = contractABI.abi;
 const contractAddress: Address = process.env.GAME_PAYMENT_CONTRACT_ADDRESS_MOONBEAM || ""; //GamePayment contract address;
