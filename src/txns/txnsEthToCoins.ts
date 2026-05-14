@@ -16,6 +16,8 @@ if (contractAddress == "") {
 
 const contract = new web3.eth.Contract(abi, contractAddress);
 
+const CONFIRMATIONS = 5n;
+
 async function processGamePaymentEvent(fastify: FastifyInstance, sender: Address, product_id: string, user_id: string, amount: number, blockNumber: bigint, unique_key: string) {
   if (!fastify.mongo || !fastify.mongo.db) throw new Error("MongoDB is not configured properly");
   //Check eth_payment_transactions to see if this unique_key has already been processed
@@ -104,12 +106,13 @@ export async function processGamePaymentEvents(fastify: FastifyInstance) {
     try {
       //console.log("Checking for new Game Payment events from block", lastBlockNumberProcessed + 1n);
       const latestBlock = BigInt(await web3.eth.getBlockNumber());
+      const safeBlock = latestBlock > CONFIRMATIONS ? latestBlock - CONFIRMATIONS : 0n;
       //console.log("Latest block number:", latestBlock);
 
-      while (lastBlockNumberProcessed < latestBlock) {
+      while (lastBlockNumberProcessed < safeBlock) {
         const fromBlock = lastBlockNumberProcessed + 1n;
-        //console.log(`Fetching events from block ${fromBlock} to ${fromBlock + BATCH_SIZE - 1n > latestBlock ? latestBlock : fromBlock + BATCH_SIZE - 1n}`);
-        const toBlock = fromBlock + BATCH_SIZE - 1n > latestBlock ? latestBlock : fromBlock + BATCH_SIZE - 1n;
+        //console.log(`Fetching events from block ${fromBlock} to ${fromBlock + BATCH_SIZE - 1n > safeBlock ? safeBlock : fromBlock + BATCH_SIZE - 1n}`);
+        const toBlock = fromBlock + BATCH_SIZE - 1n > safeBlock ? safeBlock : fromBlock + BATCH_SIZE - 1n;
         const allEvents = await contract.getPastEvents("ALLEVENTS", {
           filter: {},
           fromBlock: Number(fromBlock),
