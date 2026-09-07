@@ -81,7 +81,7 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
     if (!fastify.mongo || !fastify.mongo.db) {
       throw new Error("MongoDB is not configured properly");
     }
-    const data = await dailyInvoicesSummary(fastify, 200);
+    const data = await dailyInvoicesSummary(fastify, 2000);
     const weeklyTotals = data.reduce((acc: any, { _id, totalAmount }) => {
       const weekStart = getWeekStart(_id);
       acc[weekStart] = (acc[weekStart] || 0) + totalAmount;
@@ -108,7 +108,7 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
       .collection("invoices")
       .find({ product: { $in: coin_product_ids } })
       .sort({ _id: -1 })
-      .limit(100)
+      .limit(2000)
       .toArray();
     //Aggregate by day and sum amount
     const daily_summary: { [key: string]: number } = {};
@@ -150,7 +150,7 @@ async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
       .collection("invoices")
       .find({ product: { $in: coin_product_ids } })
       .sort({ _id: -1 })
-      .limit(100)
+      .limit(2000)
       .toArray();
 
     //Just top 100 invoices sorted by most recent
